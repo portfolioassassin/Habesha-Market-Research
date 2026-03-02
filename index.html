@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habesha Market Research</title>
+    <meta name="description" content="AI-driven quantitative research and autonomous investment strategies.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0c;
+            --bg-secondary: #111116;
+            --bg-card: #16161c;
+            --bg-card-hover: #1c1c24;
+            --border: #1e1e28;
+            --border-light: #2a2a38;
+            --text-primary: #e8e8ed;
+            --text-secondary: #8888a0;
+            --text-dim: #55556a;
+            --accent: #00d4aa;
+            --accent-dim: #00d4aa22;
+            --accent-glow: #00d4aa44;
+            --red: #ff4466;
+            --amber: #ffaa33;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== NOISE OVERLAY ========== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ========== GRID BACKGROUND ========== */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== NAV ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 12, 0.8);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-mark::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 1px;
+        }
+
+        .logo-text {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 48px 80px;
+            z-index: 1;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            animation: pulse-glow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-glow);
+            border-radius: 100px;
+            margin-bottom: 40px;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .hero-tag .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero-tag span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(48px, 7vw, 96px);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 32px;
+            animation: fade-in-up 0.8s ease-out 0.1s both;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 48px;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            animation: fade-in-up 0.8s ease-out 0.3s both;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #00e8bb;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+
+        /* ========== TICKER BAR ========== */
+        .ticker-bar {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+            padding: 16px 0;
+            overflow: hidden;
+        }
+
+        .ticker-track {
+            display: flex;
+            gap: 64px;
+            animation: scroll-left 30s linear infinite;
+            width: max-content;
+        }
+
+        @keyframes scroll-left {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+        }
+
+        .ticker-item .symbol {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .ticker-item .price {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .ticker-item .change {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .ticker-item .change.up {
+            color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .ticker-item .change.down {
+            color: var(--red);
+            background: #ff446622;
+        }
+
+        /* ========== SECTION BASE ========== */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 120px 48px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(36px, 4vw, 56px);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 560px;
+        }
+
+        /* ========== ABOUT / APPROACH ========== */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-left {
+            padding-top: 20px;
+        }
+
+        .about-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .metric-card:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+        }
+
+        .metric-value {
+            font-family: 'Instrument Serif', serif;
+            font-size: 36px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* ========== PILLARS ========== */
+        .pillars-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pillars-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 72px;
+        }
+
+        .pillars-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pillar-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--accent-glow);
+            transform: translateY(-4px);
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .pillar-card:hover::before {
+            opacity: 1;
+        }
+
+        .pillar-icon {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+            font-size: 20px;
+        }
+
+        .pillar-card h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .pillar-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ========== SYSTEM STATUS ========== */
+        .status-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .status-terminal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: var(--red); }
+        .terminal-dot.amber { background: var(--amber); }
+        .terminal-dot.green { background: var(--accent); }
+
+        .terminal-title {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-left: 8px;
+            font-weight: 500;
+        }
+
+        .terminal-body {
+            padding: 24px;
+            font-family: 'DM Sans', monospace;
+            font-size: 13px;
+            line-height: 2;
+            color: var(--text-secondary);
+        }
+
+        .terminal-line .label {
+            color: var(--text-dim);
+        }
+
+        .terminal-line .val {
+            color: var(--text-primary);
+        }
+
+        .terminal-line .val.green {
+            color: var(--accent);
+        }
+
+        .terminal-line .val.amber {
+            color: var(--amber);
+        }
+
+        .status-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .status-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px;
+            flex: 1;
+        }
+
+        .status-card h4 {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-indicator .pulse {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent-glow);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .status-indicator span {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .uptime-value {
+            font-family: 'Instrument Serif', serif;
+            font-size: 42px;
+            color: var(--accent);
+        }
+
+        .uptime-label {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* ========== CONTACT / CTA ========== */
+        .cta-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 160px 48px;
+        }
+
+        .cta-section .section-desc {
+            margin: 0 auto 48px;
+        }
+
+        .contact-email {
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-glow);
+            padding-bottom: 4px;
+            transition: all 0.3s;
+        }
+
+        .contact-email:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            padding: 40px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-right a {
+            font-size: 12px;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-right a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .hero { padding: 120px 24px 80px; }
+            section { padding: 80px 24px; }
+            .about { grid-template-columns: 1fr; gap: 48px; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            .status-grid { grid-template-columns: 1fr; }
+            footer { flex-direction: column; gap: 16px; text-align: center; }
+            .cta-section { padding: 100px 24px; }
+            .hero-ctas { flex-direction: column; }
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <div class="logo-mark"></div>
+            <div class="logo-text">Habesha <span>Market Research</span></div>
+        </a>
+        <div class="nav-links">
+            <a href="#approach">Approach</a>
+            <a href="#strategy">Strategy</a>
+            <a href="#system">System</a>
+            <a href="#contact">Contact</a>
+            <a href="/login" class="nav-btn">Team Login</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <div class="dot"></div>
+                <span>Systems Active</span>
+            </div>
+            <h1>Autonomous<br>Intelligence for<br><em>Modern Markets</em></h1>
+            <p class="hero-sub">
+                Habesha Market Research builds AI-native systems that research, analyze, and execute across global markets — operating continuously with systematic precision.
+            </p>
+            <div class="hero-ctas">
+                <a href="#contact" class="btn-primary">Get in Touch</a>
+                <a href="#approach" class="btn-secondary">Our Approach</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker-bar">
+        <div class="ticker-track">
+            <div class="ticker-item"><span class="symbol">NLP</span><span class="price">Sentiment Analysis</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">QNT</span><span class="price">Quantitative Models</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">RDX</span><span class="price">Redis Pipeline</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">AGT</span><span class="price">Multi-Agent System</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">EXC</span><span class="price">Execution Engine</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">RSK</span><span class="price">Risk Management</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">OPT</span><span class="price">Portfolio Optimization</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">DAT</span><span class="price">Data Ingestion</span><span class="change up">Active</span></div>
+            <!-- Duplicate for seamless scroll -->
+            <div class="ticker-item"><span class="symbol">NLP</span><span class="price">Sentiment Analysis</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">QNT</span><span class="price">Quantitative Models</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">RDX</span><span class="price">Redis Pipeline</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">AGT</span><span class="price">Multi-Agent System</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">EXC</span><span class="price">Execution Engine</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">RSK</span><span class="price">Risk Management</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">OPT</span><span class="price">Portfolio Optimization</span><span class="change up">Active</span></div>
+            <div class="ticker-item"><span class="symbol">DAT</span><span class="price">Data Ingestion</span><span class="change up">Active</span></div>
+        </div>
+    </div>
+
+    <!-- APPROACH -->
+    <section id="approach">
+        <div class="about">
+            <div class="about-left">
+                <div class="section-label">Our Approach</div>
+                <h2 class="section-title reveal">Research at the Speed of Machines</h2>
+                <p class="section-desc reveal">
+                    We deploy multi-agent AI systems that continuously monitor, analyze, and act on market intelligence. Our closed-loop architecture processes thousands of signals per second — from fundamental research to execution — without human intervention.
+                </p>
+                <p class="section-desc reveal" style="margin-top: 20px;">
+                    Built by researchers, for researchers. Every component is designed for transparency, auditability, and systematic risk management.
+                </p>
+            </div>
+            <div class="about-metrics reveal">
+                <div class="metric-card">
+                    <div class="metric-value">24/7</div>
+                    <div class="metric-label">Market Coverage</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">&lt;50ms</div>
+                    <div class="metric-label">Signal to Decision</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Multi</div>
+                    <div class="metric-label">Agent Architecture</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">∞</div>
+                    <div class="metric-label">Continuous Learning</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRATEGY PILLARS -->
+    <section id="strategy" class="pillars-section">
+        <div class="pillars-header">
+            <div class="section-label">Strategy</div>
+            <h2 class="section-title reveal">Three Pillars of<br>Autonomous Research</h2>
+            <p class="section-desc reveal">
+                Our systems are built on a foundation of intelligence, execution, and continuous adaptation.
+            </p>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar-card reveal">
+                <div class="pillar-icon">◈</div>
+                <h3>Intelligence Layer</h3>
+                <p>Multi-agent AI systems perform deep fundamental analysis, sentiment extraction, and pattern recognition across global datasets. Each agent specializes — from SEC filing analysis to real-time news processing.</p>
+            </div>
+            <div class="pillar-card reveal">
+                <div class="pillar-icon">⟁</div>
+                <h3>Execution Engine</h3>
+                <p>Systematic portfolio construction with dynamic position sizing, risk-adjusted allocation, and automated order management. Every trade is traceable to its research signal and thesis.</p>
+            </div>
+            <div class="pillar-card reveal">
+                <div class="pillar-icon">◎</div>
+                <h3>Closed-Loop Feedback</h3>
+                <p>Continuous performance attribution feeds back into model refinement. The system learns from every trade, adapting strategies based on realized outcomes and evolving market regimes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SYSTEM STATUS -->
+    <section id="system">
+        <div class="status-section">
+            <div class="section-label">System</div>
+            <h2 class="section-title reveal">Infrastructure Status</h2>
+            <p class="section-desc reveal">Real-time overview of core system components.</p>
+
+            <div class="status-grid reveal">
+                <div class="status-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot amber"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">open-claw-core — system diagnostics</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line"><span class="label">system      </span> <span class="val green">● OPERATIONAL</span></div>
+                        <div class="terminal-line"><span class="label">mode        </span> <span class="val amber">SIMULATED</span></div>
+                        <div class="terminal-line"><span class="label">agents      </span> <span class="val">7 active · 0 degraded</span></div>
+                        <div class="terminal-line"><span class="label">pipeline    </span> <span class="val green">● redis stream healthy</span></div>
+                        <div class="terminal-line"><span class="label">data feeds  </span> <span class="val green">● 12 sources connected</span></div>
+                        <div class="terminal-line"><span class="label">models      </span> <span class="val">3 deployed · 1 in training</span></div>
+                        <div class="terminal-line"><span class="label">last signal </span> <span class="val" id="last-signal">—</span></div>
+                        <div class="terminal-line"><span class="label">uptime      </span> <span class="val" id="uptime-counter">—</span></div>
+                    </div>
+                </div>
+
+                <div class="status-sidebar">
+                    <div class="status-card">
+                        <h4>System Status</h4>
+                        <div class="status-indicator">
+                            <div class="pulse"></div>
+                            <span>All Systems Nominal</span>
+                        </div>
+                    </div>
+                    <div class="status-card">
+                        <h4>Uptime (30d)</h4>
+                        <div class="uptime-value">99.97%</div>
+                        <div class="uptime-label">Paper trading environment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta-section">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title reveal">Let's Talk</h2>
+        <p class="section-desc reveal">
+            Interested in our research or exploring a partnership? We'd like to hear from you.
+        </p>
+        <a href="mailto:contact@habeshamarketresearch.com" class="contact-email reveal">contact@habeshamarketresearch.com</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-left">© 2026 Habesha Market Research. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Disclaimer</a>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observer.observe(el));
+
+        // Fake uptime counter
+        const start = new Date('2025-01-15T00:00:00Z');
+        function updateUptime() {
+            const now = new Date();
+            const diff = now - start;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hrs = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('uptime-counter').textContent = 
+                `${days}d ${hrs}h ${mins}m ${secs}s`;
+        }
+        setInterval(updateUptime, 1000);
+        updateUptime();
+
+        // Fake last signal timestamp
+        function updateSignal() {
+            const now = new Date();
+            document.getElementById('last-signal').textContent = 
+                now.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+        }
+        setInterval(updateSignal, 3000 + Math.random() * 5000);
+        updateSignal();
+    </script>
+</body>
+</html>
