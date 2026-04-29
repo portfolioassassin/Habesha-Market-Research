@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login · Habesha Market Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg-primary: #0a0a0c;
+  --bg-secondary: #111116;
+  --bg-card: #16161c;
+  --border: #1e1e28;
+  --border-light: #2a2a38;
+  --text-primary: #e8e8ed;
+  --text-secondary: #8888a0;
+  --text-dim: #55556a;
+  --accent: #00d4aa;
+  --accent-dim: #00d4aa22;
+  --accent-glow: #00d4aa44;
+  --red: #ff4466;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: grid; place-items: center;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.15;
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pulse-glow 8s ease-in-out infinite;
+  z-index: 0;
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+.login-shell {
+  position: relative; z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  padding: 0 24px;
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 40px; justify-content: center;
+}
+.logo-mark {
+  width: 36px; height: 36px;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.logo-mark::after {
+  content: '';
+  width: 10px; height: 10px;
+  background: var(--accent); border-radius: 1px;
+}
+.brand-text {
+  font-weight: 700; font-size: 16px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.brand-text span {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--accent);
+  margin-left: 8px;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 40px 36px;
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.4);
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px; font-style: italic;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.title em { color: var(--accent); }
+.sub {
+  font-size: 14px; color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+form { display: flex; flex-direction: column; gap: 14px; }
+label {
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-dim);
+  font-weight: 700;
+}
+input[type="email"] {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  padding: 14px 16px;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type="email"]:focus { border-color: var(--accent); }
+button {
+  background: var(--accent); color: var(--bg-primary);
+  border: none; border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+button:hover:not(:disabled) {
+  background: #00e8bb;
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+.foot {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 11px; color: var(--text-dim);
+  line-height: 1.6;
+}
+.foot a { color: var(--text-secondary); text-decoration: none; }
+.foot a:hover { color: var(--accent); }
+.status {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.status.success {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--accent-glow);
+}
+.status.error {
+  background: rgba(255, 68, 102, 0.08);
+  color: var(--red);
+  border: 1px solid rgba(255, 68, 102, 0.3);
+}
+.disabled-notice {
+  margin-top: 24px;
+  padding: 14px;
+  background: rgba(255, 170, 51, 0.06);
+  border: 1px solid rgba(255, 170, 51, 0.25);
+  border-radius: 4px;
+  font-size: 11px;
+  color: #ffaa33;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+<div class="login-shell">
+  <a href="/" class="brand" style="text-decoration: none; color: inherit;">
+    <div class="logo-mark"></div>
+    <div class="brand-text">HABESHA<span>market research</span></div>
+  </a>
+
+  <div class="card">
+    <div class="eyebrow">Team Login</div>
+    <h1 class="title">Welcome <em>back.</em></h1>
+    <p class="sub">Enter the email on the invite list. We'll send a magic link — no password.</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@firm.com" autofocus/>
+      <button type="submit" id="submit">Send magic link</button>
+    </form>
+    <div id="status" class="status" style="display: none;"></div>
+    <div id="disabledNotice" class="disabled-notice" style="display: none;">
+      Magic-link auth not configured yet. Edit <code>login.html</code> and fill in the
+      <code>SUPABASE_CONFIG</code> object with your Supabase project URL + anon key,
+      then commit + redeploy.
+    </div>
+    <div class="foot">
+      Not invited? Reach out via the <a href="/#contact">contact page</a>.<br>
+      © 2026 Habesha Market Research
+    </div>
+  </div>
+</div>
+
+<script type="module">
+// Phase 10c.2 — Supabase Auth wiring. The page works whether Supabase is
+// configured or not: when configured, it sends a real magic link; when
+// not, it shows the orange "auth not configured" notice. This keeps the
+// local single-user mode usable while we set up Supabase.
+const form = document.getElementById('loginForm');
+const status = document.getElementById('status');
+const submit = document.getElementById('submit');
+const disabledNotice = document.getElementById('disabledNotice');
+
+// Habesha is a static-only site — no backend to call /api/auth/config.
+// Hardcode the Supabase project values below once you've created one
+// (Supabase URL and anon key are public — safe to ship in client JS).
+// To wire up auth: replace the two empty strings with your project values,
+// then add nathanielasefa@gmail.com (and any other invitees) to Supabase
+// Auth → Users via the dashboard.
+const SUPABASE_CONFIG = {
+  url: '',     // e.g. 'https://abc123.supabase.co'
+  anonKey: '', // e.g. 'eyJhbGciOi...' (public anon key, NOT service-role key)
+};
+
+let supa = null;
+if (SUPABASE_CONFIG.url && SUPABASE_CONFIG.anonKey) {
+  const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+  supa = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+  });
+} else {
+  disabledNotice.style.display = 'block';
+}
+
+// If we land here with a magic-link hash, exchange it and redirect
+if (location.hash.includes('access_token=') && supa) {
+  const { data, error } = await supa.auth.getSession();
+  if (data?.session) {
+    localStorage.setItem('habesha.session', JSON.stringify(data.session));
+    location.href = '/';
+    throw new Error('redirecting');
+  }
+  if (error) showStatus('error', error.message);
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  if (!email) return;
+
+  if (!supa) {
+    showStatus('error', 'Auth is not configured on this server. Use /dashboard for local mode.');
+    return;
+  }
+
+  submit.disabled = true; submit.textContent = 'Sending…';
+  try {
+    const { error } = await supa.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: location.origin + '/login.html' },
+    });
+    if (error) throw error;
+    showStatus('success', `Magic link sent to ${email}. Check your inbox — clicking the link will return you here, signed in.`);
+    form.style.display = 'none';
+  } catch (err) {
+    showStatus('error', err.message || 'Failed to send. Confirm the email is on the invite list.');
+  } finally {
+    submit.disabled = false; submit.textContent = 'Send magic link';
+  }
+});
+
+function showStatus(kind, text) {
+  status.className = `status ${kind}`;
+  status.textContent = text;
+  status.style.display = 'block';
+}
+</script>
+</body>
+</html>
