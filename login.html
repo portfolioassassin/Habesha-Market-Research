@@ -121,7 +121,7 @@ label {
   text-transform: uppercase; color: var(--text-dim);
   font-weight: 700;
 }
-input[type="email"] {
+input[type="email"], input[type="password"] {
   background: var(--bg-secondary);
   border: 1px solid var(--border-light);
   color: var(--text-primary);
@@ -132,7 +132,7 @@ input[type="email"] {
   outline: none;
   transition: border-color 0.2s;
 }
-input[type="email"]:focus { border-color: var(--accent); }
+input[type="email"]:focus, input[type="password"]:focus { border-color: var(--accent); }
 button {
   background: var(--accent); color: var(--bg-primary);
   border: none; border-radius: 4px;
@@ -196,20 +196,22 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   <div class="card">
     <div class="eyebrow">Team Login</div>
     <h1 class="title">Welcome <em>back.</em></h1>
-    <p class="sub">Enter the email on the invite list. We'll send a magic link — no password.</p>
+    <p class="sub">Invite-only. Sign in with the credentials set in Supabase.</p>
     <form id="loginForm">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@firm.com" autofocus/>
-      <button type="submit" id="submit">Send magic link</button>
+      <label for="password" style="margin-top: 4px;">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="••••••••"/>
+      <button type="submit" id="submit">Sign in</button>
     </form>
     <div id="status" class="status" style="display: none;"></div>
     <div id="disabledNotice" class="disabled-notice" style="display: none;">
-      Magic-link auth not configured yet. Edit <code>login.html</code> and fill in the
+      Auth not configured yet. Edit <code>login.html</code> and fill in the
       <code>SUPABASE_CONFIG</code> object with your Supabase project URL + anon key,
       then commit + redeploy.
     </div>
     <div class="foot">
-      Not invited? Reach out via the <a href="/#contact">contact page</a>.<br>
+      Not invited? This dashboard is private.<br>
       © 2026 Habesha Market Research
     </div>
   </div>
@@ -246,40 +248,32 @@ if (SUPABASE_CONFIG.url && SUPABASE_CONFIG.anonKey) {
   disabledNotice.style.display = 'block';
 }
 
-// If we land here with a magic-link hash, exchange it and redirect
-if (location.hash.includes('access_token=') && supa) {
-  const { data, error } = await supa.auth.getSession();
-  if (data?.session) {
-    localStorage.setItem('habesha.session', JSON.stringify(data.session));
-    location.href = '/';
-    throw new Error('redirecting');
-  }
-  if (error) showStatus('error', error.message);
-}
-
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('email').value.trim();
-  if (!email) return;
+  const password = document.getElementById('password').value;
+  if (!email || !password) return;
 
   if (!supa) {
-    showStatus('error', 'Auth is not configured on this server. Use /dashboard for local mode.');
+    showStatus('error', 'Auth is not configured on this server.');
     return;
   }
 
-  submit.disabled = true; submit.textContent = 'Sending…';
+  submit.disabled = true; submit.textContent = 'Signing in…';
   try {
-    const { error } = await supa.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: location.origin + '/login.html' },
-    });
+    const { data, error } = await supa.auth.signInWithPassword({ email, password });
     if (error) throw error;
-    showStatus('success', `Magic link sent to ${email}. Check your inbox — clicking the link will return you here, signed in.`);
-    form.style.display = 'none';
+    if (data?.session) {
+      localStorage.setItem('habesha.session', JSON.stringify(data.session));
+      showStatus('success', 'Signed in. Loading…');
+      location.href = '/';
+      return;
+    }
+    showStatus('error', 'Sign-in succeeded but no session was returned.');
   } catch (err) {
-    showStatus('error', err.message || 'Failed to send. Confirm the email is on the invite list.');
+    showStatus('error', err.message || 'Sign-in failed. Check email/password.');
   } finally {
-    submit.disabled = false; submit.textContent = 'Send magic link';
+    submit.disabled = false; submit.textContent = 'Sign in';
   }
 });
 
