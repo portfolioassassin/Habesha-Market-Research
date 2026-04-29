@@ -1,945 +1,899 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habesha Market Research</title>
-    <meta name="description" content="The Habesha Investor — independent equity research published weekly on Substack, paired with live positions in the Tibeb AI trading terminal.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0a0a0c;
-            --bg-secondary: #111116;
-            --bg-card: #16161c;
-            --bg-card-hover: #1c1c24;
-            --border: #1e1e28;
-            --border-light: #2a2a38;
-            --text-primary: #e8e8ed;
-            --text-secondary: #8888a0;
-            --text-dim: #55556a;
-            --accent: #00d4aa;
-            --accent-dim: #00d4aa22;
-            --accent-glow: #00d4aa44;
-            --red: #ff4466;
-            --amber: #ffaa33;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ========== NOISE OVERLAY ========== */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* ========== GRID BACKGROUND ========== */
-        .grid-bg {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 80px 80px;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ========== NAV ========== */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            padding: 20px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            background: rgba(10, 10, 12, 0.8);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-mark {
-            width: 32px;
-            height: 32px;
-            border: 2px solid var(--accent);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .logo-mark::after {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 1px;
-        }
-
-        .logo-text {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--text-primary);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .logo-text span {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 36px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-btn {
-            padding: 8px 20px;
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .nav-btn:hover {
-            background: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        /* ========== HERO ========== */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 48px 80px;
-            z-index: 1;
-        }
-
-        .hero-glow {
-            position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
-            animation: pulse-glow 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
-        }
-
-        .hero-content {
-            max-width: 900px;
-            position: relative;
-        }
-
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            background: var(--accent-dim);
-            border: 1px solid var(--accent-glow);
-            border-radius: 100px;
-            margin-bottom: 40px;
-            animation: fade-in-up 0.8s ease-out;
-        }
-
-        .hero-tag .dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: blink 2s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .hero-tag span {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(48px, 7vw, 96px);
-            font-weight: 400;
-            line-height: 1.05;
-            margin-bottom: 32px;
-            animation: fade-in-up 0.8s ease-out 0.1s both;
-        }
-
-        .hero h1 em {
-            font-style: italic;
-            color: var(--accent);
-        }
-
-        .hero-sub {
-            font-size: 18px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 600px;
-            margin-bottom: 48px;
-            animation: fade-in-up 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-ctas {
-            display: flex;
-            gap: 16px;
-            animation: fade-in-up 0.8s ease-out 0.3s both;
-        }
-
-        .btn-primary {
-            padding: 14px 32px;
-            background: var(--accent);
-            color: var(--bg-primary);
-            border: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            background: #00e8bb;
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        .btn-secondary {
-            padding: 14px 32px;
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-secondary);
-            background: var(--bg-card);
-        }
-
-        /* ========== TICKER BAR ========== */
-        .ticker-bar {
-            position: relative;
-            z-index: 1;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            background: var(--bg-secondary);
-            padding: 16px 0;
-            overflow: hidden;
-        }
-
-        .ticker-track {
-            display: flex;
-            gap: 64px;
-            animation: scroll-left 30s linear infinite;
-            width: max-content;
-        }
-
-        @keyframes scroll-left {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        .ticker-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            white-space: nowrap;
-        }
-
-        .ticker-item .symbol {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: 0.5px;
-        }
-
-        .ticker-item .price {
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .ticker-item .change {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 3px;
-        }
-
-        .ticker-item .change.up {
-            color: var(--accent);
-            background: var(--accent-dim);
-        }
-
-        .ticker-item .change.down {
-            color: var(--red);
-            background: #ff446622;
-        }
-
-        /* ========== SECTION BASE ========== */
-        section {
-            position: relative;
-            z-index: 1;
-            padding: 120px 48px;
-        }
-
-        .section-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(36px, 4vw, 56px);
-            font-weight: 400;
-            line-height: 1.15;
-            margin-bottom: 24px;
-        }
-
-        .section-desc {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 560px;
-        }
-
-        /* ========== ABOUT / APPROACH ========== */
-        .about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .about-left {
-            padding-top: 20px;
-        }
-
-        .about-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 56px;
-        }
-
-        .metric-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 28px;
-            transition: all 0.3s;
-        }
-
-        .metric-card:hover {
-            border-color: var(--border-light);
-            background: var(--bg-card-hover);
-        }
-
-        .metric-value {
-            font-family: 'Instrument Serif', serif;
-            font-size: 36px;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-
-        .metric-label {
-            font-size: 12px;
-            color: var(--text-dim);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        /* ========== PILLARS ========== */
-        .pillars-section {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .pillars-header {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 72px;
-        }
-
-        .pillars-header .section-desc {
-            margin: 0 auto;
-        }
-
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pillar-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 40px 32px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s;
-        }
-
-        .pillar-card:hover {
-            border-color: var(--accent-glow);
-            transform: translateY(-4px);
-        }
-
-        .pillar-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .pillar-card:hover::before {
-            opacity: 1;
-        }
-
-        .pillar-icon {
-            width: 48px;
-            height: 48px;
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 28px;
-            font-size: 20px;
-        }
-
-        .pillar-card h3 {
-            font-family: 'Instrument Serif', serif;
-            font-size: 24px;
-            font-weight: 400;
-            margin-bottom: 16px;
-        }
-
-        .pillar-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* ========== SYSTEM STATUS ========== */
-        .status-section {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .status-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-            margin-top: 56px;
-        }
-
-        .status-terminal {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .terminal-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 20px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .terminal-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .terminal-dot.red { background: var(--red); }
-        .terminal-dot.amber { background: var(--amber); }
-        .terminal-dot.green { background: var(--accent); }
-
-        .terminal-title {
-            font-size: 12px;
-            color: var(--text-dim);
-            margin-left: 8px;
-            font-weight: 500;
-        }
-
-        .terminal-body {
-            padding: 24px;
-            font-family: 'DM Sans', monospace;
-            font-size: 13px;
-            line-height: 2;
-            color: var(--text-secondary);
-        }
-
-        .terminal-line .label {
-            color: var(--text-dim);
-        }
-
-        .terminal-line .val {
-            color: var(--text-primary);
-        }
-
-        .terminal-line .val.green {
-            color: var(--accent);
-        }
-
-        .terminal-line .val.amber {
-            color: var(--amber);
-        }
-
-        .status-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .status-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 28px;
-            flex: 1;
-        }
-
-        .status-card h4 {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-indicator .pulse {
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--accent-glow);
-            animation: blink 2s ease-in-out infinite;
-        }
-
-        .status-indicator span {
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .uptime-value {
-            font-family: 'Instrument Serif', serif;
-            font-size: 42px;
-            color: var(--accent);
-        }
-
-        .uptime-label {
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-top: 4px;
-        }
-
-        /* ========== CONTACT / CTA ========== */
-        .cta-section {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 160px 48px;
-        }
-
-        .cta-section .section-desc {
-            margin: 0 auto 48px;
-        }
-
-        .contact-email {
-            font-family: 'Instrument Serif', serif;
-            font-size: 28px;
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid var(--accent-glow);
-            padding-bottom: 4px;
-            transition: all 0.3s;
-        }
-
-        .contact-email:hover {
-            border-bottom-color: var(--accent);
-        }
-
-        /* ========== FOOTER ========== */
-        footer {
-            position: relative;
-            z-index: 1;
-            border-top: 1px solid var(--border);
-            padding: 40px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-left {
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-
-        .footer-right {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-right a {
-            font-size: 12px;
-            color: var(--text-dim);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-right a:hover {
-            color: var(--text-secondary);
-        }
-
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 900px) {
-            nav { padding: 16px 24px; }
-            .nav-links { display: none; }
-            .hero { padding: 120px 24px 80px; }
-            section { padding: 80px 24px; }
-            .about { grid-template-columns: 1fr; gap: 48px; }
-            .pillars-grid { grid-template-columns: 1fr; }
-            .status-grid { grid-template-columns: 1fr; }
-            footer { flex-direction: column; gap: 16px; text-align: center; }
-            .cta-section { padding: 100px 24px; }
-            .hero-ctas { flex-direction: column; }
-        }
-
-        /* ========== SCROLL ANIMATIONS ========== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Habesha Market Research — The Habesha Investor</title>
+<meta name="description" content="The Habesha Investor — independent equity research published weekly on Substack, paired with live positions in the Tibeb AI trading terminal."/>
+<meta name="theme-color" content="#0a0a0c"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg-0: #07070a;
+  --bg-1: #0a0a0c;
+  --bg-2: #111116;
+  --bg-3: #16161c;
+  --line: #1e1e28;
+  --line-2: #2a2a38;
+  --text-0: #ffffff;
+  --text-1: #e8e8ed;
+  --text-2: #8888a0;
+  --text-3: #55556a;
+  --accent: #00d4aa;
+  --accent-2: #00d4aa22;
+  --accent-3: #00d4aa44;
+  --amber: #ffaa33;
+  --red: #ff4466;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg-1);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+a { color: inherit; }
+
+/* ══════════ Background ambient ══════════ */
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+.ambient::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.18;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+.ambient::after {
+  content: '';
+  position: absolute;
+  width: 70vw; height: 70vw; max-width: 900px; max-height: 900px;
+  top: -25vw; right: -25vw;
+  background: radial-gradient(circle, var(--accent-3) 0%, transparent 60%);
+  filter: blur(60px);
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+@keyframes ambient-drift {
+  0%   { transform: translate(0, 0)     scale(1); opacity: 0.55; }
+  100% { transform: translate(-80px, 60px) scale(1.15); opacity: 0.85; }
+}
+
+/* ══════════ Nav ══════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(10, 10, 12, 0.62);
+  border-bottom: 1px solid transparent;
+  transition: border-color 220ms, background 220ms;
+}
+nav.scrolled { border-bottom-color: var(--line); background: rgba(10, 10, 12, 0.86); }
+
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text-1);
+}
+.brand .mark {
+  width: 28px; height: 28px;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  display: grid; place-items: center;
+  position: relative;
+}
+.brand .mark::after {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--accent); border-radius: 1px;
+}
+.brand .name {
+  font-weight: 700; font-size: 14px; letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.brand .name span {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--accent);
+  margin-left: 8px;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 4px;
+}
+.nav-links a {
+  font-size: 13px; padding: 8px 14px; border-radius: 999px;
+  text-decoration: none; color: var(--text-2);
+  transition: color 160ms, background 160ms;
+}
+.nav-links a:hover { color: var(--text-1); background: rgba(255,255,255,0.04); }
+.nav-cta {
+  margin-left: 8px !important;
+  background: var(--accent) !important;
+  color: var(--bg-1) !important;
+  font-weight: 700;
+  padding: 8px 18px !important;
+  letter-spacing: 0.5px;
+}
+.nav-cta:hover {
+  background: #00e8bb !important;
+  box-shadow: 0 0 20px var(--accent-3);
+}
+.nav-burger {
+  display: none;
+  background: none; border: 1px solid var(--line-2); border-radius: 6px;
+  padding: 8px; cursor: pointer;
+}
+.nav-burger svg { display: block; }
+
+/* ══════════ Hero (centered, mesh as atmospheric backdrop) ══════════ */
+.hero {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: grid; place-items: center;
+  padding: 140px 32px 110px;
+  max-width: 1440px; margin: 0 auto;
+  text-align: left;
+}
+.hero-copy {
+  position: relative; z-index: 5;
+  max-width: 880px;
+}
+/* Mesh sits absolutely behind the hero copy, large + recessed */
+.mesh-stage {
+  position: absolute;
+  top: 50%; right: -8%;
+  transform: translateY(-50%);
+  width: 720px; height: 720px;
+  max-width: 80vw; max-height: 80vw;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.85;
+  filter: saturate(0.9);
+}
+@media (min-width: 1100px) {
+  .hero-copy { max-width: 760px; }
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 999px;
+  background: var(--accent-2); border: 1px solid var(--accent-3);
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-tag .pulse-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); position: relative;
+}
+.hero-tag .pulse-dot::after {
+  content: ''; position: absolute; inset: -4px;
+  border-radius: 50%; background: var(--accent);
+  opacity: 0.4; animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring { from { transform: scale(0.6); opacity: 0.5; } to { transform: scale(2.4); opacity: 0; } }
+
+.hero h1 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: clamp(40px, 5.6vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--text-0);
+  margin-bottom: 24px;
+}
+.hero h1 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 1.05em;
+  letter-spacing: -0.015em;
+}
+.hero p.lede {
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 540px;
+  margin-bottom: 32px;
+}
+.hero p.lede a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+.cta-row {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px; border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  transition: all 200ms;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: var(--bg-1); }
+.btn-primary:hover { background: #00e8bb; box-shadow: 0 0 24px var(--accent-3); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text-1); border-color: var(--line-2); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn .arrow { transition: transform 200ms; }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* ══════════ Animated mesh — atmospheric backdrop ══════════ */
+.mesh-stage::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle, var(--accent-3) 0%, transparent 65%);
+  filter: blur(40px);
+  opacity: 0.6;
+  animation: glow-breathe 6s ease-in-out infinite alternate;
+}
+@keyframes glow-breathe { from { opacity: 0.4; transform: scale(0.9); } to { opacity: 0.85; transform: scale(1.05); } }
+.mesh-svg { width: 100%; height: 100%; position: relative; z-index: 2; }
+.mesh-svg .ring {
+  fill: none; stroke: var(--accent); stroke-width: 0.6;
+  opacity: 0.18;
+}
+.mesh-svg .node {
+  fill: var(--accent);
+  filter: drop-shadow(0 0 4px var(--accent));
+}
+.mesh-svg .node.hub { filter: drop-shadow(0 0 10px var(--accent)); }
+.mesh-svg .edge {
+  stroke: var(--accent); stroke-width: 0.4; opacity: 0.32;
+}
+.mesh-svg .orbit { transform-origin: 50% 50%; }
+.mesh-svg .orbit-1 { animation: spin 60s linear infinite; }
+.mesh-svg .orbit-2 { animation: spin 90s linear infinite reverse; }
+.mesh-svg .orbit-3 { animation: spin 120s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.mesh-svg .twinkle { animation: twinkle 3s ease-in-out infinite; }
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.mesh-svg .twinkle-2 { animation: twinkle 4.5s ease-in-out 0.7s infinite; }
+.mesh-svg .twinkle-3 { animation: twinkle 5.5s ease-in-out 1.5s infinite; }
+
+/* ══════════ Marquee ticker ══════════ */
+.marquee {
+  position: relative; z-index: 2;
+  border-block: 1px solid var(--line);
+  background: rgba(10, 10, 12, 0.5);
+  overflow: hidden;
+  padding: 14px 0;
+}
+.marquee-track {
+  display: flex; gap: 56px;
+  animation: marquee 50s linear infinite;
+  width: max-content;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.mq-item {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.mq-item .sym { color: var(--accent); font-weight: 700; }
+.mq-item .dot { color: var(--text-3); }
+
+/* ══════════ Sections ══════════ */
+section {
+  position: relative; z-index: 2;
+  padding: 96px 64px;
+  max-width: 1280px; margin: 0 auto;
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 2.4px; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+h2.section-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-0);
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+h2.section-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic; font-weight: 400;
+  color: var(--accent);
+  font-size: 1.06em;
+}
+.section-lede {
+  font-size: 16px; color: var(--text-2);
+  max-width: 640px; line-height: 1.65;
+  margin-bottom: 56px;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal.delay-1 { transition-delay: 80ms; }
+.reveal.delay-2 { transition-delay: 160ms; }
+.reveal.delay-3 { transition-delay: 240ms; }
+
+/* Process cards */
+.process-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.process-card {
+  position: relative;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 32px 28px;
+  transition: border-color 240ms, transform 240ms, background 240ms;
+  overflow: hidden;
+}
+.process-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--accent-2), transparent 50%);
+  opacity: 0; transition: opacity 240ms;
+  pointer-events: none;
+}
+.process-card:hover {
+  border-color: var(--accent-3);
+  transform: translateY(-3px);
+  background: var(--bg-3);
+}
+.process-card:hover::before { opacity: 1; }
+.process-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.process-icon {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  font-size: 22px; color: var(--accent);
+  margin-bottom: 20px;
+}
+.process-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic; font-weight: 400;
+  font-size: 24px;
+  color: var(--text-0);
+  margin-bottom: 12px;
+}
+.process-card p {
+  font-size: 14px; color: var(--text-2); line-height: 1.65;
+}
+
+/* ══════════ Latest reports ══════════ */
+.reports-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.report-card {
+  display: block;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+  text-decoration: none;
+  transition: all 240ms;
+  position: relative;
+  overflow: hidden;
+}
+.report-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 24px 48px -24px rgba(0, 212, 170, 0.15);
+}
+.report-card .report-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 1.6px;
+  text-transform: uppercase; color: var(--text-3);
+  display: flex; gap: 14px; align-items: center;
+  margin-bottom: 18px;
+}
+.report-card .report-meta .ticker {
+  color: var(--accent); font-weight: 700;
+  padding: 2px 8px; border-radius: 3px;
+  background: var(--accent-2);
+}
+.report-card h4 {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic; font-weight: 400;
+  font-size: 22px; line-height: 1.25;
+  color: var(--text-0);
+  margin-bottom: 14px;
+  letter-spacing: -0.005em;
+}
+.report-card p {
+  font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+  margin-bottom: 24px;
+}
+.report-link {
+  display: inline-flex; gap: 6px; align-items: center;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--accent);
+}
+.reports-bar {
+  margin-top: 36px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 28px; border-top: 1px solid var(--line);
+}
+.reports-bar p { color: var(--text-2); font-size: 14px; }
+
+/* ══════════ Tibeb terminal feature ══════════ */
+.terminal-section {
+  display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 56px;
+  align-items: center;
+}
+.terminal {
+  background: var(--bg-3);
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--accent-3);
+}
+.terminal-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-3);
+}
+.terminal-bar .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.terminal-bar .dot.r { background: #ff5f57; }
+.terminal-bar .dot.y { background: #ffbd2e; }
+.terminal-bar .dot.g { background: #28c93f; }
+.terminal-bar .title { margin-left: 10px; }
+.terminal-body {
+  padding: 24px; font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px; line-height: 2;
+}
+.t-line { display: grid; grid-template-columns: 130px 1fr; gap: 8px; }
+.t-line .key { color: var(--text-3); }
+.t-line .val { color: var(--text-1); }
+.t-line .val .ok::before { content: '● '; color: var(--accent); }
+.t-line .val .pend::before { content: '◌ '; color: var(--amber); }
+.t-line .val .strong { color: var(--accent); font-weight: 500; }
+
+.terminal-side h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  color: var(--text-1);
+  margin-bottom: 6px;
+}
+.terminal-side p {
+  font-size: 14px; color: var(--text-2); line-height: 1.65;
+  margin-bottom: 24px;
+}
+.terminal-side ul { list-style: none; }
+.terminal-side ul li {
+  font-size: 14px; color: var(--text-1); line-height: 1.6;
+  padding: 12px 0; padding-left: 28px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.terminal-side ul li::before {
+  content: '◇'; position: absolute; left: 0; top: 12px;
+  color: var(--accent); font-size: 12px;
+}
+.terminal-side ul li:last-child { border-bottom: 0; }
+.terminal-side .terminal-cta { margin-top: 28px; }
+
+/* ══════════ Final CTA ══════════ */
+.final-cta {
+  text-align: center;
+  padding-top: 60px; padding-bottom: 60px;
+  border-top: 1px solid var(--line);
+}
+.final-cta h2 { margin-inline: auto; }
+.final-cta p { margin-inline: auto; }
+.final-cta .cta-row { justify-content: center; }
+.email-link {
+  display: block; margin-top: 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; letter-spacing: 0.4px;
+  color: var(--text-2);
+  text-decoration: none; transition: color 160ms;
+}
+.email-link:hover { color: var(--accent); }
+
+/* ══════════ Footer ══════════ */
+footer {
+  position: relative; z-index: 2;
+  padding: 32px 64px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+  font-size: 12px; color: var(--text-3);
+}
+footer a { text-decoration: none; color: var(--text-3); margin-left: 18px; }
+footer a:hover { color: var(--text-1); }
+
+/* ══════════ Mobile ══════════ */
+@media (max-width: 960px) {
+  nav { padding: 12px 18px; }
+  .nav-links { display: none; }
+  .nav-burger { display: inline-flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column; gap: 4px;
+    position: absolute; top: 100%; left: 12px; right: 12px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 8px;
+  }
+  .nav-links.open a { padding: 12px 14px; width: 100%; }
+  .nav-links.open .nav-cta { margin: 4px 0 0 !important; text-align: center; }
+
+  .hero {
+    padding: 110px 22px 80px;
+    min-height: auto;
+  }
+  .hero h1 { font-size: clamp(34px, 9vw, 52px); }
+  .mesh-stage {
+    width: 92vw; height: 92vw;
+    top: 60%; right: -30%;
+    opacity: 0.55;
+  }
+
+  section { padding: 72px 22px; }
+  h2.section-title { font-size: clamp(28px, 7vw, 44px); }
+
+  .process-grid, .reports-grid { grid-template-columns: 1fr; }
+  .terminal-section { grid-template-columns: 1fr; gap: 32px; }
+  .terminal-body { font-size: 11.5px; padding: 18px; }
+  .t-line { grid-template-columns: 100px 1fr; }
+
+  footer { padding: 24px 22px; flex-direction: column; align-items: flex-start; }
+  footer a { margin-left: 0; margin-right: 14px; }
+}
+
+@media (max-width: 480px) {
+  .hero-tag { font-size: 10px; padding: 5px 12px; }
+  .btn { padding: 12px 18px; font-size: 12px; }
+  .reports-bar { flex-direction: column; gap: 16px; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
 </head>
 <body>
-    <div class="grid-bg"></div>
+<div class="ambient"></div>
 
-    <!-- NAV -->
-    <nav>
-        <a href="#" class="nav-logo">
-            <div class="logo-mark"></div>
-            <div class="logo-text">Habesha <span>Market Research</span></div>
-        </a>
-        <div class="nav-links">
-            <a href="#research">Research</a>
-            <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">Substack</a>
-            <a href="#tibeb">Tibeb</a>
-            <a href="#contact">Contact</a>
-            <a href="https://www.tibeb.trade/login.html" class="nav-btn">Team Login</a>
-        </div>
-    </nav>
+<nav id="nav">
+  <a href="#" class="brand">
+    <div class="mark"></div>
+    <div class="name">Habesha<span>Market Research</span></div>
+  </a>
+  <button class="nav-burger" id="navBurger" aria-label="Open menu">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <path d="M3 6h14M3 10h14M3 14h14"/>
+    </svg>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="#research">Research</a>
+    <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">Substack</a>
+    <a href="#tibeb">Tibeb</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.tibeb.trade/login.html" class="nav-cta">Sign in →</a>
+  </div>
+</nav>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-glow"></div>
-        <div class="hero-content">
-            <div class="hero-tag">
-                <div class="dot"></div>
-                <span>The Habesha Investor · weekly research</span>
-            </div>
-            <h1>Independent<br>Equity Research,<br><em>Published Weekly.</em></h1>
-            <p class="hero-sub">
-                Deep-dive thesis writeups, sector frameworks, and live trade ideas — delivered to your inbox via <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">The Habesha Investor</a> on Substack. Every report is paired with a position in <strong>Tibeb</strong>, our AI-native trading terminal.
-            </p>
-            <div class="hero-ctas">
-                <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn-primary">Read the Substack</a>
-                <a href="#tibeb" class="btn-secondary">Open Tibeb</a>
-            </div>
-        </div>
-    </section>
+<!-- ════════════ HERO ════════════ -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="hero-tag">
+      <span class="pulse-dot"></span>
+      <span>The Habesha Investor · weekly</span>
+    </div>
+    <h1>Independent equity<br>research, published<br><em>weekly.</em></h1>
+    <p class="lede">
+      Deep-dive thesis writeups, sector frameworks, and live trade ideas — delivered to your inbox via
+      <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">The Habesha Investor</a> on Substack.
+      Every report is paired with a position in <strong style="color: var(--text-1);">Tibeb</strong>, our AI-native trading terminal.
+    </p>
+    <div class="cta-row">
+      <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">
+        Read the Substack <span class="arrow">→</span>
+      </a>
+      <a href="#tibeb" class="btn btn-ghost">
+        Open Tibeb
+      </a>
+    </div>
+  </div>
 
-    <!-- TICKER -->
-    <div class="ticker-bar">
-        <div class="ticker-track">
-            <div class="ticker-item"><span class="symbol">SUB</span><span class="price">Weekly Substack drop</span><span class="change up">Sundays</span></div>
-            <div class="ticker-item"><span class="symbol">DD</span><span class="price">Single-name deep dives</span><span class="change up">Live</span></div>
-            <div class="ticker-item"><span class="symbol">PB</span><span class="price">Position book pairing</span><span class="change up">Open</span></div>
-            <div class="ticker-item"><span class="symbol">SEC</span><span class="price">10-K + transcript primary sources</span><span class="change up">Verified</span></div>
-            <div class="ticker-item"><span class="symbol">AI</span><span class="price">Claude Opus 4.7 research team</span><span class="change up">Active</span></div>
-            <div class="ticker-item"><span class="symbol">VAULT</span><span class="price">Markdown brain · Obsidian</span><span class="change up">Indexed</span></div>
-            <div class="ticker-item"><span class="symbol">PAPER</span><span class="price">Alpaca paper · L3 options</span><span class="change up">Hard-locked</span></div>
-            <div class="ticker-item"><span class="symbol">VOICE</span><span class="price">ElevenLabs · push-to-talk</span><span class="change up">Online</span></div>
-            <!-- Duplicate for seamless scroll -->
-            <div class="ticker-item"><span class="symbol">SUB</span><span class="price">Weekly Substack drop</span><span class="change up">Sundays</span></div>
-            <div class="ticker-item"><span class="symbol">DD</span><span class="price">Single-name deep dives</span><span class="change up">Live</span></div>
-            <div class="ticker-item"><span class="symbol">PB</span><span class="price">Position book pairing</span><span class="change up">Open</span></div>
-            <div class="ticker-item"><span class="symbol">SEC</span><span class="price">10-K + transcript primary sources</span><span class="change up">Verified</span></div>
-            <div class="ticker-item"><span class="symbol">AI</span><span class="price">Claude Opus 4.7 research team</span><span class="change up">Active</span></div>
-            <div class="ticker-item"><span class="symbol">VAULT</span><span class="price">Markdown brain · Obsidian</span><span class="change up">Indexed</span></div>
-            <div class="ticker-item"><span class="symbol">PAPER</span><span class="price">Alpaca paper · L3 options</span><span class="change up">Hard-locked</span></div>
-            <div class="ticker-item"><span class="symbol">VOICE</span><span class="price">ElevenLabs · push-to-talk</span><span class="change up">Online</span></div>
-        </div>
+  <!-- Animated network mesh — pure SVG, ~50 nodes, layered orbits -->
+  <div class="mesh-stage" aria-hidden="true">
+    <svg class="mesh-svg" viewBox="0 0 400 400">
+      <!-- subtle outer rings -->
+      <g class="orbit orbit-3">
+        <circle class="ring" cx="200" cy="200" r="190"/>
+        <circle class="ring" cx="200" cy="200" r="155"/>
+      </g>
+      <g class="orbit orbit-1">
+        <circle class="ring" cx="200" cy="200" r="115" stroke-dasharray="2 6"/>
+      </g>
+
+      <!-- inner orbiting layer (counter-rotates) -->
+      <g class="orbit orbit-2">
+        <line class="edge" x1="115" y1="98"  x2="200" y2="200"/>
+        <line class="edge" x1="285" y1="98"  x2="200" y2="200"/>
+        <line class="edge" x1="115" y1="302" x2="200" y2="200"/>
+        <line class="edge" x1="285" y1="302" x2="200" y2="200"/>
+        <line class="edge" x1="60"  y1="200" x2="200" y2="200"/>
+        <line class="edge" x1="340" y1="200" x2="200" y2="200"/>
+        <line class="edge" x1="115" y1="98"  x2="285" y2="98"/>
+        <line class="edge" x1="115" y1="302" x2="285" y2="302"/>
+        <line class="edge" x1="60"  y1="200" x2="115" y2="98"/>
+        <line class="edge" x1="60"  y1="200" x2="115" y2="302"/>
+        <line class="edge" x1="340" y1="200" x2="285" y2="98"/>
+        <line class="edge" x1="340" y1="200" x2="285" y2="302"/>
+
+        <circle class="node hub" cx="200" cy="200" r="6"/>
+        <circle class="node twinkle"   cx="115" cy="98"  r="3"/>
+        <circle class="node twinkle-2" cx="285" cy="98"  r="3"/>
+        <circle class="node twinkle-3" cx="115" cy="302" r="3"/>
+        <circle class="node twinkle"   cx="285" cy="302" r="3"/>
+        <circle class="node twinkle-2" cx="60"  cy="200" r="2.5"/>
+        <circle class="node twinkle-3" cx="340" cy="200" r="2.5"/>
+      </g>
+
+      <!-- outer satellite layer -->
+      <g class="orbit orbit-1">
+        <line class="edge" x1="200" y1="20"  x2="200" y2="200" opacity="0.18"/>
+        <line class="edge" x1="200" y1="380" x2="200" y2="200" opacity="0.18"/>
+        <line class="edge" x1="34"  y1="100" x2="200" y2="200" opacity="0.12"/>
+        <line class="edge" x1="366" y1="100" x2="200" y2="200" opacity="0.12"/>
+        <line class="edge" x1="34"  y1="300" x2="200" y2="200" opacity="0.12"/>
+        <line class="edge" x1="366" y1="300" x2="200" y2="200" opacity="0.12"/>
+
+        <circle class="node twinkle-3" cx="200" cy="20"  r="2"/>
+        <circle class="node twinkle"   cx="200" cy="380" r="2"/>
+        <circle class="node twinkle-2" cx="34"  cy="100" r="1.7"/>
+        <circle class="node twinkle-3" cx="366" cy="100" r="1.7"/>
+        <circle class="node twinkle"   cx="34"  cy="300" r="1.7"/>
+        <circle class="node twinkle-2" cx="366" cy="300" r="1.7"/>
+        <circle class="node twinkle"   cx="80"  cy="50"  r="1.4"/>
+        <circle class="node twinkle-3" cx="320" cy="50"  r="1.4"/>
+        <circle class="node twinkle-2" cx="80"  cy="350" r="1.4"/>
+        <circle class="node twinkle"   cx="320" cy="350" r="1.4"/>
+        <circle class="node twinkle-3" cx="160" cy="50"  r="1.2"/>
+        <circle class="node twinkle"   cx="240" cy="350" r="1.2"/>
+        <circle class="node twinkle-2" cx="50"  cy="240" r="1.2"/>
+        <circle class="node twinkle-3" cx="350" cy="160" r="1.2"/>
+      </g>
+
+      <!-- focal hub glow ring (static) -->
+      <circle cx="200" cy="200" r="14" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.5">
+        <animate attributeName="r" from="14" to="42" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.5" to="0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="200" cy="200" r="14" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.5">
+        <animate attributeName="r" from="14" to="42" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.5" to="0" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════ MARQUEE ════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq-item"><span class="sym">SUB</span><span class="dot">·</span>Weekly Substack drop</span>
+    <span class="mq-item"><span class="sym">DD</span><span class="dot">·</span>Single-name deep dives</span>
+    <span class="mq-item"><span class="sym">PB</span><span class="dot">·</span>Position book pairing</span>
+    <span class="mq-item"><span class="sym">SEC</span><span class="dot">·</span>10-K + transcript primary sources</span>
+    <span class="mq-item"><span class="sym">AI</span><span class="dot">·</span>Claude Opus 4.7 research team</span>
+    <span class="mq-item"><span class="sym">VAULT</span><span class="dot">·</span>Markdown brain · Obsidian</span>
+    <span class="mq-item"><span class="sym">PAPER</span><span class="dot">·</span>Alpaca paper · L3 options</span>
+    <span class="mq-item"><span class="sym">VOICE</span><span class="dot">·</span>ElevenLabs · push-to-talk</span>
+
+    <!-- duplicate for seamless loop -->
+    <span class="mq-item"><span class="sym">SUB</span><span class="dot">·</span>Weekly Substack drop</span>
+    <span class="mq-item"><span class="sym">DD</span><span class="dot">·</span>Single-name deep dives</span>
+    <span class="mq-item"><span class="sym">PB</span><span class="dot">·</span>Position book pairing</span>
+    <span class="mq-item"><span class="sym">SEC</span><span class="dot">·</span>10-K + transcript primary sources</span>
+    <span class="mq-item"><span class="sym">AI</span><span class="dot">·</span>Claude Opus 4.7 research team</span>
+    <span class="mq-item"><span class="sym">VAULT</span><span class="dot">·</span>Markdown brain · Obsidian</span>
+    <span class="mq-item"><span class="sym">PAPER</span><span class="dot">·</span>Alpaca paper · L3 options</span>
+    <span class="mq-item"><span class="sym">VOICE</span><span class="dot">·</span>ElevenLabs · push-to-talk</span>
+  </div>
+</div>
+
+<!-- ════════════ METHODOLOGY (process) ════════════ -->
+<section id="research">
+  <div class="eyebrow reveal">Methodology</div>
+  <h2 class="section-title reveal">How a thesis<br><em>gets written.</em></h2>
+  <p class="section-lede reveal">
+    Each Substack report is the visible tip of a deeper research process — three stages, weeks of compounding before publication. Numbers come before narrative.
+  </p>
+  <div class="process-grid">
+    <div class="process-card reveal delay-1">
+      <div class="process-num">01 / FRAME</div>
+      <div class="process-icon">◈</div>
+      <h3>Frame the sector</h3>
+      <p>Start at the sector level — secular drivers, capital cycle, where supply and demand are about to dislocate. The frame decides which names are worth a deep dive at all.</p>
+    </div>
+    <div class="process-card reveal delay-2">
+      <div class="process-num">02 / BUILD</div>
+      <div class="process-icon">⟁</div>
+      <h3>Build the model</h3>
+      <p>From SEC filings, transcripts, channel checks, and unit-economics math — what does the next three to five years actually look like, and where is consensus wrong?</p>
+    </div>
+    <div class="process-card reveal delay-3">
+      <div class="process-num">03 / SHIP</div>
+      <div class="process-icon">◎</div>
+      <h3>Open the position</h3>
+      <p>The thesis only ships after a sized position is live in the paper book — entries, stops, catalyst calendar, exit triggers all written down. The trade IS the receipt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ LATEST REPORTS ════════════ -->
+<section id="reports">
+  <div class="eyebrow reveal">Latest reports</div>
+  <h2 class="section-title reveal">Theses live <em>now.</em></h2>
+  <p class="section-lede reveal">
+    Public posts arrive Sundays. Paid posts add the live position book + sizing logic. Click through for the full writeup.
+  </p>
+  <div class="reports-grid">
+    <a class="report-card reveal delay-1" href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">
+      <div class="report-meta"><span class="ticker">SEMIS</span><span>Sector</span><span>Latest</span></div>
+      <h4>The next leg of the AI compute build-out.</h4>
+      <p>Where the bottleneck moves from GPUs to power, packaging, and HBM — and which names are positioned for the next 18 months.</p>
+      <div class="report-link">Read on Substack →</div>
+    </a>
+    <a class="report-card reveal delay-2" href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">
+      <div class="report-meta"><span class="ticker">DEEP</span><span>Single-name</span><span>Recent</span></div>
+      <h4>A misread on inventory cyclicality.</h4>
+      <p>Consensus is anchoring on the wrong cycle period. The unit economics inflect 2 quarters before the Street's model — here's the math.</p>
+      <div class="report-link">Read on Substack →</div>
+    </a>
+    <a class="report-card reveal delay-3" href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">
+      <div class="report-meta"><span class="ticker">MACRO</span><span>Hedge frame</span><span>Recent</span></div>
+      <h4>Hedging tech-heavy books in a steepening curve.</h4>
+      <p>Which structures pay for themselves in a soft-landing scenario and which only earn in the tail. A practical playbook with sizing.</p>
+      <div class="report-link">Read on Substack →</div>
+    </a>
+  </div>
+  <div class="reports-bar reveal">
+    <p>Subscribe free for the full archive — three years of single-name research.</p>
+    <a href="https://thehabeshainvestor.substack.com/archive" target="_blank" rel="noopener" class="btn btn-ghost">View archive</a>
+  </div>
+</section>
+
+<!-- ════════════ TIBEB TERMINAL ════════════ -->
+<section id="tibeb">
+  <div class="eyebrow reveal">Tibeb</div>
+  <h2 class="section-title reveal">The trading terminal<br><em>behind the Substack.</em></h2>
+  <p class="section-lede reveal">
+    Tibeb is the live, AI-native dashboard where every thesis is researched, sized, and executed. Voice-first, Markdown-brain, paper-only. Invite-only access.
+  </p>
+
+  <div class="terminal-section">
+    <div class="terminal reveal delay-1">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="title">tibeb · live status</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="key">broker</span>      <span class="val"><span class="ok">alpaca paper · L3 options</span></span></div>
+        <div class="t-line"><span class="key">agent</span>       <span class="val"><span class="ok">claude opus 4.7</span></span></div>
+        <div class="t-line"><span class="key">brain</span>       <span class="val"><span class="strong">obsidian vault</span> · markdown</span></div>
+        <div class="t-line"><span class="key">research</span>    <span class="val"><span class="ok">anthropic web_search</span></span></div>
+        <div class="t-line"><span class="key">market data</span> <span class="val"><span class="ok">massive (polygon)</span></span></div>
+        <div class="t-line"><span class="key">voice</span>       <span class="val">elevenlabs · scribe + flash</span></div>
+        <div class="t-line"><span class="key">access</span>      <span class="val"><span class="pend">invite-only</span></span></div>
+        <div class="t-line"><span class="key">mode</span>        <span class="val"><span class="pend">paper trading · hard locked</span></span></div>
+      </div>
     </div>
 
-    <!-- RESEARCH (Substack feature) -->
-    <section id="research">
-        <div class="about">
-            <div class="about-left">
-                <div class="section-label">Research</div>
-                <h2 class="section-title reveal">Theses That Pair with Trades</h2>
-                <p class="section-desc reveal">
-                    Every report on <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" style="color: var(--accent);">The Habesha Investor</a> Substack walks through a single equity thesis — what's mispriced, why it's mispriced, the catalyst path, and the risk envelope. Public posts arrive Sundays. Paid posts add the live position book + sizing logic.
-                </p>
-                <p class="section-desc reveal" style="margin-top: 20px;">
-                    The notes that anchor each writeup live inside <strong>Tibeb</strong> — readable as Markdown, queryable by the AI agents, and linked directly to open positions in the paper book.
-                </p>
-                <div class="hero-ctas reveal" style="margin-top: 28px;">
-                    <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn-primary">Subscribe Free</a>
-                    <a href="https://thehabeshainvestor.substack.com/archive" target="_blank" rel="noopener" class="btn-secondary">Archive</a>
-                </div>
-            </div>
-            <div class="about-metrics reveal">
-                <div class="metric-card">
-                    <div class="metric-value">Weekly</div>
-                    <div class="metric-label">Cadence</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">Equity</div>
-                    <div class="metric-label">Single-name focus</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">Live</div>
-                    <div class="metric-label">Paired position</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">Free</div>
-                    <div class="metric-label">Public tier</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="terminal-side reveal delay-2">
+      <h3>Live dashboard</h3>
+      <p>Voice queries → multi-agent research team → vault writes → paper-trade execution → position book that mirrors the Substack.</p>
+      <ul>
+        <li>Open positions auto-pair with the thesis note in the brain.</li>
+        <li>Mad Max research stress-tests every idea with real citations.</li>
+        <li>Push-to-talk + Brian voice replies for hands-free reasoning.</li>
+        <li>Single sign-in covers Substack reading + Tibeb terminal.</li>
+      </ul>
+      <div class="terminal-cta">
+        <a href="https://www.tibeb.trade/login.html" class="btn btn-primary">Sign in to Tibeb <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- METHODOLOGY -->
-    <section id="strategy" class="pillars-section">
-        <div class="pillars-header">
-            <div class="section-label">Methodology</div>
-            <h2 class="section-title reveal">How a Thesis<br>Gets Written.</h2>
-            <p class="section-desc reveal">
-                Each Substack report is the visible tip of a deeper research process — three stages, weeks of compounding before publication.
-            </p>
-        </div>
-        <div class="pillars-grid">
-            <div class="pillar-card reveal">
-                <div class="pillar-icon">◈</div>
-                <h3>Frame the Sector</h3>
-                <p>Start at the sector level — secular drivers, capital cycle, where supply and demand are about to dislocate. The frame decides which names are worth a deep dive at all.</p>
-            </div>
-            <div class="pillar-card reveal">
-                <div class="pillar-icon">⟁</div>
-                <h3>Build the Model</h3>
-                <p>From SEC filings, transcripts, channel checks, and unit-economics math — what does the next three to five years actually look like, and where is the consensus wrong? Numbers come before narrative.</p>
-            </div>
-            <div class="pillar-card reveal">
-                <div class="pillar-icon">◎</div>
-                <h3>Open the Position</h3>
-                <p>The thesis only ships after a sized position is live in the paper book — entries, stops, catalyst calendar, and exit triggers all written down. No hidden conviction; the trade IS the receipt.</p>
-            </div>
-        </div>
-    </section>
+<!-- ════════════ FINAL CTA ════════════ -->
+<section id="contact" class="final-cta">
+  <div class="eyebrow reveal">Contact</div>
+  <h2 class="section-title reveal">Read the <em>reports.</em></h2>
+  <p class="section-lede reveal">
+    Free public posts every Sunday. Paid tier unlocks the position book, sizing notes, and weekly market debriefs. For partnerships or feedback, the inbox below is open.
+  </p>
+  <div class="cta-row reveal">
+    <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe on Substack <span class="arrow">→</span></a>
+    <a href="https://www.tibeb.trade/login.html" class="btn btn-ghost">Sign in to Tibeb</a>
+  </div>
+  <a href="mailto:nateasefa@habeshamarketresearch.com" class="email-link reveal">nateasefa@habeshamarketresearch.com</a>
+</section>
 
-    <!-- TIBEB -->
-    <section id="tibeb">
-        <div class="status-section">
-            <div class="section-label">Tibeb</div>
-            <h2 class="section-title reveal">The Trading Terminal<br>Behind the Substack.</h2>
-            <p class="section-desc reveal">Tibeb is the live, AI-native dashboard where every thesis is researched, sized, and executed. Voice-first, Markdown-brain, paper-only. Invite-only access at <a href="https://www.tibeb.trade" target="_blank" rel="noopener" style="color: var(--accent);">www.tibeb.trade</a>.</p>
+<footer>
+  <div>© 2026 Habesha Market Research. All rights reserved.</div>
+  <div>
+    <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">Substack</a>
+    <a href="https://www.tibeb.trade">Tibeb</a>
+    <a href="mailto:nateasefa@habeshamarketresearch.com">Contact</a>
+  </div>
+</footer>
 
-            <div class="status-grid reveal">
-                <div class="status-terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dot red"></div>
-                        <div class="terminal-dot amber"></div>
-                        <div class="terminal-dot green"></div>
-                        <span class="terminal-title">tibeb · live status</span>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="terminal-line"><span class="label">broker      </span> <span class="val green">● alpaca paper · L3 options</span></div>
-                        <div class="terminal-line"><span class="label">agent       </span> <span class="val green">● claude opus 4.7</span></div>
-                        <div class="terminal-line"><span class="label">brain       </span> <span class="val">obsidian vault · markdown</span></div>
-                        <div class="terminal-line"><span class="label">research    </span> <span class="val green">● anthropic web_search</span></div>
-                        <div class="terminal-line"><span class="label">market data </span> <span class="val green">● massive (polygon)</span></div>
-                        <div class="terminal-line"><span class="label">voice       </span> <span class="val">elevenlabs · scribe + flash</span></div>
-                        <div class="terminal-line"><span class="label">access      </span> <span class="val amber">invite-only</span></div>
-                        <div class="terminal-line"><span class="label">mode        </span> <span class="val amber">paper trading · hard locked</span></div>
-                    </div>
-                </div>
+<script>
+// ══════════ Scroll reveal ══════════
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-                <div class="status-sidebar">
-                    <div class="status-card">
-                        <h4>Live Dashboard</h4>
-                        <div class="status-indicator">
-                            <div class="pulse"></div>
-                            <span>www.tibeb.trade</span>
-                        </div>
-                        <a href="https://www.tibeb.trade/login.html" class="btn-primary" style="margin-top: 16px; display: inline-block; text-align: center; width: 100%;">Sign In</a>
-                    </div>
-                    <div class="status-card">
-                        <h4>What It Does</h4>
-                        <div class="uptime-label" style="font-size: 13px; line-height: 1.6;">Voice queries → multi-agent research team → vault writes → paper trade execution → position book that mirrors the Substack.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// ══════════ Nav scroll state ══════════
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-    <!-- CTA -->
-    <section id="contact" class="cta-section">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title reveal">Read the Reports.</h2>
-        <p class="section-desc reveal">
-            Free public posts every Sunday. Paid tier unlocks the position book, sizing notes, and weekly market debriefs. For partnerships or feedback, the inbox below is open.
-        </p>
-        <div class="hero-ctas reveal" style="justify-content: center; margin-top: 28px;">
-            <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn-primary">Subscribe on Substack</a>
-            <a href="https://www.tibeb.trade/login.html" class="btn-secondary">Sign in to Tibeb</a>
-        </div>
-        <a href="mailto:nateasefa@habeshamarketresearch.com" class="contact-email reveal" style="margin-top: 32px;">nateasefa@habeshamarketresearch.com</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-left">© 2026 Habesha Market Research. All rights reserved.</div>
-        <div class="footer-right">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Disclaimer</a>
-        </div>
-    </footer>
-
-    <script>
-        // Scroll reveal
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-        reveals.forEach(el => observer.observe(el));
-
-        // Removed fake uptime + signal counters that referenced
-        // elements no longer in the DOM (the Tibeb section reframed
-        // the terminal to show real, static capability rows instead
-        // of fake "agents 7 active" telemetry).
-    </script>
+// ══════════ Mobile burger ══════════
+const burger = document.getElementById('navBurger');
+const links = document.getElementById('navLinks');
+burger.addEventListener('click', () => links.classList.toggle('open'));
+// Close menu when a link is tapped
+links.addEventListener('click', e => {
+  if (e.target.tagName === 'A') links.classList.remove('open');
+});
+</script>
 </body>
 </html>
