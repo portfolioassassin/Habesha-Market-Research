@@ -1,0 +1,10 @@
+# Don't bake repo metadata or macOS junk into the image. The Dockerfile only
+# COPYs index.html + login.html explicitly, but excluding here as well keeps
+# the build context tiny so `docker build` uploads in milliseconds.
+.git
+.gitignore
+.github
+.DS_Store
+*.md
+Dockerfile
+.dockerignore
