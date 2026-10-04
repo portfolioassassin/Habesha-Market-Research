@@ -4,14 +4,19 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Habesha Market Research — The Habesha Investor</title>
-<meta name="description" content="Habesha Market Research builds Tibeb, an AI research terminal for new technology, and publishes The Habesha Investor on Substack. Follow what changed, write a thesis, put it through diligence. Ticker ideas come last."/>
+<meta name="description" content="Habesha Market Research builds Tibeb, an AI research terminal for new technology, and publishes The Habesha Investor on Substack. Follow what changed, write a thesis, put it through diligence. Companies come last."/>
 <meta property="og:title" content="Habesha Market Research"/>
-<meta property="og:description" content="Research on new technology, done in order: what changed, a thesis, diligence, and only then the tickers."/>
+<meta property="og:description" content="Research on new technology, done in order: what changed, a thesis, diligence, and only then the companies exposed to it."/>
+<meta property="og:image" content="https://habeshamarketresearch.com/assets/og-logo.png"/>
 <meta property="og:type" content="website"/>
-<meta name="theme-color" content="#0a0a0c"/>
+<meta name="theme-color" content="#FBF0D4"/>
+<link rel="icon" href="/favicon.ico" sizes="48x48"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
 <script>
 /* The hero plays once on load. Without this class (no script, or the
    visitor asked for reduced motion) the page shows the finished state. */
@@ -23,72 +28,70 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
 /* ══════════════════════════════════════════════════════════════════════
    Habesha Market Research
 
-   One motif: a thread with diamond knots — the four steps of the path,
-   the eight checks of the gate, the rules between sections. Colour means
-   something and nothing else: teal is for / passed, amber is open, red is
-   against. Same system as the Tibeb terminal this page leads to.
+   The Habesha Market Research logo, as a page: cream paper, navy ink, the
+   wordmark's serif, and the tibeb — the woven border on Ethiopian cloth
+   that Tibeb is named for. The tibeb appears twice: along the top edge,
+   and as the thread of the four steps, which weaves itself as the path
+   plays. Colour means something and nothing else: green is for / passed,
+   red is against / hurt, ochre is open. Navy is for words and actions.
+   Same system as the terminal itself.
    ══════════════════════════════════════════════════════════════════════ */
 :root {
-  --ink:      #0a0a0c;
-  --ink-2:    #111116;
-  --ink-3:    #16161c;
-  --line:     #1e1e28;
-  --line-2:   #2a2a38;
-  --text:     #e8e8ed;
-  --text-2:   #a2a2b8;
-  --text-3:   #82829c;
-  --for:      #00d4aa;
-  --pending:  #ffaa33;
-  --against:  #ff5c7a;
-  --ink-on-accent: #06110e;
+  --paper:     #FBF0D4;   /* the logo's ground */
+  --raised:    #FFF8E8;
+  --inset:     #F3E4BE;
+  --line:      #E2D2A9;
+  --line-2:    #CDBA8C;
+  --line-3:    #8C7F5C;   /* control outlines, 3:1 on paper */
+  --ink:       #0C2044;   /* the wordmark's navy */
+  --ink-2:     #3B4763;
+  --ink-3:     #5A637A;
+  --ink-hover: #22407A;
+  --green:     #11654E;
+  --red:       #BB2B2D;
+  --ochre:     #AB9B3B;
+  --ochre-ink: #705E0C;
 
-  --display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --body:    'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --body:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --tibeb:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%230C2044'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23BB2B2D'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23FBF0D4'/%3E%3Crect y='5.6' width='24' height='1' fill='%23AB9B3B'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23BB2B2D'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%2311654E'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%235C2530'/%3E%3C/svg%3E");
+  --tibeb-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24' viewBox='0 0 16 24'%3E%3Cg transform='translate%2816 0%29 rotate%2890%29'%3E%3Crect width='24' height='16' fill='%230C2044'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23BB2B2D'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23FBF0D4'/%3E%3Crect y='5.6' width='24' height='1' fill='%23AB9B3B'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23BB2B2D'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%2311654E'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%235C2530'/%3E%3C/g%3E%3C/svg%3E");
 
   --gutter: 40px;
   --wrap:   1200px;
 }
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--body);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.6;
-  background: var(--ink);
-  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  background: var(--paper);
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
-/* A faint drafting grid, the same one the terminal sits on. It stays still. */
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 80px 80px;
-  opacity: 0.22;
-}
 a { color: inherit; }
-::selection { background: rgba(0, 212, 170, 0.28); }
-:focus-visible { outline: 2px solid var(--for); outline-offset: 3px; }
+::selection { background: rgba(12, 32, 68, 0.16); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-.wrap { position: relative; z-index: 1; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.wrap { position: relative; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 .skip {
   position: absolute; left: 12px; top: -60px; z-index: 200;
-  padding: 10px 14px; background: var(--for); color: var(--ink-on-accent);
-  font-weight: 600; font-size: 14px; text-decoration: none; border-radius: 4px;
+  padding: 10px 14px; background: var(--ink); color: var(--paper);
+  font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 4px;
 }
-.skip:focus { top: 12px; }
+.skip:focus { top: 22px; }
 
 /* The diamond knot. */
 .knot {
   display: inline-block; flex-shrink: 0;
   width: 10px; height: 10px;
-  border: 1.5px solid var(--for); background: var(--for);
+  border: 1.5px solid var(--ink); background: var(--ink);
   transform: rotate(45deg);
   transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
@@ -98,248 +101,265 @@ a { color: inherit; }
   display: inline-flex; align-items: center; justify-content: center;
   padding: 12px 20px;
   border: 1px solid transparent; border-radius: 4px;
-  font: 600 15px/1.25 var(--body);
+  font: 600 16px/1.25 var(--body);
   text-decoration: none; white-space: nowrap; cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.btn-primary { background: var(--for); border-color: var(--for); color: var(--ink-on-accent); }
-.btn-primary:hover { background: #2be3bd; border-color: #2be3bd; }
-.btn-quiet { background: transparent; border-color: var(--line-2); color: var(--text); }
-.btn-quiet:hover { border-color: var(--text-2); background: rgba(255, 255, 255, 0.03); }
-.text-link { color: var(--for); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--ink-hover); border-color: var(--ink-hover); }
+.btn-quiet { background: transparent; border-color: var(--line-3); color: var(--ink); }
+.btn-quiet:hover { background: rgba(12, 32, 68, 0.05); border-color: var(--ink); }
+.text-link { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .text-link:hover { text-decoration-thickness: 2px; }
 
-/* ─── Nav ─── */
+/* ─── Nav, with the tibeb along its top edge ─── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(10, 10, 12, 0.72);
-  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  padding-top: 12px;
+  background: rgba(251, 240, 212, 0.94);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s;
 }
-.nav.scrolled { border-bottom-color: var(--line); background: rgba(10, 10, 12, 0.9); }
+.nav::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 12px;
+  background: var(--tibeb) repeat-x left top / auto 12px;
+}
+.nav.scrolled { border-bottom-color: var(--line-2); }
 .nav-in {
   max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter);
-  height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
-.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-weight: 600; font-size: 15px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.brand-emblem { display: block; height: 42px; width: auto; }
+.brand-lockup { display: flex; flex-direction: column; gap: 5px; }
+.brand-name { font: 500 26px/1 var(--display); letter-spacing: 0.005em; }
+.brand-sub { font: 500 10.5px/1 var(--display); letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
 .nav-links { display: flex; align-items: center; gap: 4px; }
-.nav-links a { padding: 8px 12px; font-size: 14.5px; color: var(--text-2); text-decoration: none; border-radius: 4px; transition: color 0.15s; }
-.nav-links a:hover { color: var(--text); }
-.nav-links .btn { margin-left: 10px; padding: 9px 16px; font-size: 14px; color: var(--ink-on-accent); }
-.nav-links .btn:hover { color: var(--ink-on-accent); }
+.nav-links a { padding: 8px 12px; font-size: 16px; color: var(--ink-2); text-decoration: none; border-radius: 4px; transition: color 0.15s; }
+.nav-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.nav-links .btn { margin-left: 10px; padding: 9px 16px; font-size: 15px; color: var(--paper); }
+.nav-links .btn:hover { color: var(--paper); text-decoration: none; }
 .nav-burger {
-  display: none; width: 40px; height: 40px;
+  display: none; width: 44px; height: 44px;
   align-items: center; justify-content: center;
-  background: transparent; border: 1px solid var(--line-2); border-radius: 4px; color: var(--text); cursor: pointer;
+  background: transparent; border: 1px solid var(--line-3); border-radius: 4px; color: var(--ink); cursor: pointer;
 }
 
 /* ─── Hero ─── */
-.hero { position: relative; z-index: 1; padding: 112px 0 80px; }
+.hero { position: relative; padding: 168px 0 88px; }
 .hero-top {
-  display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 56px; align-items: end;
 }
 .hero h1 {
-  font: italic 400 clamp(64px, 10.6vw, 152px)/0.88 var(--display);
+  font: 400 clamp(54px, 7.2vw, 104px)/1 var(--display);
   letter-spacing: -0.02em;
-  margin-left: -0.03em;
-  color: #fff;
+  margin-left: -0.04em;
+  color: var(--ink);
 }
-.hero-lede { font-size: 18px; line-height: 1.6; color: var(--text-2); max-width: 44ch; }
-.hero-lede strong { color: var(--text); font-weight: 600; }
+.hero-lede { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 44ch; }
+.hero-lede strong { color: var(--ink); font-weight: 600; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-.hero-note { margin-top: 14px; font-size: 14px; color: var(--text-3); }
+.hero-note { margin-top: 14px; font-size: 15px; color: var(--ink-3); }
 
 /* The path: four knots on one thread, each with what that step leaves you
-   holding. On load the thread fills from left to right. */
+   holding. On load the thread is woven, left to right. */
 .path {
   list-style: none;
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 32px;
-  margin-top: 60px;
+  margin-top: 64px;
 }
-.rail { display: flex; align-items: center; height: 16px; margin-bottom: 16px; }
+.rail { display: flex; align-items: center; height: 16px; margin-bottom: 18px; }
 .rail .knot { width: 12px; height: 12px; margin-left: 2px; }
-.link { position: relative; flex: 1; height: 1px; margin: 0 -20px 0 12px; background: var(--line-2); }
-.link::after {                    /* 2px, so it stays teal wherever it lands between pixels */
-  content: ''; position: absolute; inset: -0.5px 0; background: var(--for);
-  transform-origin: left center; transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.2, 1);
+.link {
+  position: relative; flex: 1; height: 10px; margin: 0 -20px 0 12px;
+  background: linear-gradient(var(--line-2), var(--line-2)) left center / 100% 1px no-repeat;
+}
+.link::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--tibeb) repeat-x left center / auto 10px;
+  transform-origin: left center; transition: transform 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
 }
 .step:last-child .link { display: none; }
-.step-name { font: 600 16px/1.3 var(--body); color: var(--text); }
-.step-what { margin-top: 4px; font-size: 14.5px; line-height: 1.5; color: var(--text-2); min-height: 66px; }
+.step-name { font: 600 18px/1.3 var(--body); color: var(--ink); }
+.step-what { margin-top: 4px; font-size: 15.5px; line-height: 1.5; color: var(--ink-2); min-height: 70px; }
 .mini { margin-top: 16px; transition: opacity 0.5s; }
-.mini-foot { margin-top: 10px; font-size: 13px; color: var(--text-3); }
-.mini-foot b { font: 500 13px var(--mono); color: var(--for); }
+.mini-foot { margin-top: 10px; font-size: 14px; color: var(--ink-3); }
+.mini-foot b { font-weight: 700; color: var(--green); }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
 .chip {
   padding: 3px 10px; border: 1px solid var(--line-2); border-radius: 999px;
-  font-size: 12.5px; line-height: 1.5; color: var(--text-2);
+  font-size: 13.5px; line-height: 1.5; color: var(--ink-2);
   transition: border-color 0.3s, color 0.3s, background 0.3s;
 }
-.chip.pick { border-color: var(--for); color: var(--for); background: rgba(0, 212, 170, 0.07); }
+.chip.pick { border-color: var(--ink); color: var(--paper); background: var(--ink); }
 
-.thesis-card { border-left: 2px solid var(--for); padding: 2px 0 2px 14px; }
-.thesis-tag { font-size: 12.5px; color: var(--text-3); }
-.thesis-q { margin-top: 4px; font: 400 21px/1.22 var(--display); color: var(--text); }
-.thesis-by { margin-top: 10px; font-size: 13px; color: var(--text-2); }
-.thesis-by b { font: 500 13px var(--mono); color: var(--text); }
+.thesis-card { border-left: 3px solid var(--ink); padding: 2px 0 2px 14px; }
+.thesis-tag { font-size: 13.5px; color: var(--ink-3); }
+.thesis-q { margin-top: 6px; font: 400 18px/1.4 var(--display); color: var(--ink); }
+.thesis-by { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+.thesis-by b { font-weight: 600; color: var(--ink); }
 
 .checks { list-style: none; }
-.check { position: relative; padding: 0 0 6px 24px; font-size: 13.5px; line-height: 1.45; color: var(--text); transition: color 0.3s; }
+.check { position: relative; padding: 0 0 6px 24px; font-size: 14.5px; line-height: 1.45; color: var(--ink); transition: color 0.3s; }
 .check::before {
   content: ''; position: absolute; left: 6px; top: 15px; bottom: -4px; width: 1px;
-  background: var(--for); transition: background 0.3s;
+  background: var(--green); transition: background 0.3s;
 }
 .check:last-child { padding-bottom: 0; }
 .check:last-child::before { display: none; }
-.check .knot { position: absolute; left: 2px; top: 5px; width: 9px; height: 9px; }
+.check .knot { position: absolute; left: 2px; top: 6px; width: 9px; height: 9px; background: var(--green); border-color: var(--green); }
 
-.slots { list-style: none; border-top: 1px solid var(--line); }
+.slots { list-style: none; border-top: 1px solid var(--line-2); }
 .slot {
-  display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; gap: 12px; align-items: center;
-  padding: 8px 0; border-bottom: 1px solid var(--line);
-  font-size: 13.5px; line-height: 1.3;
+  display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; gap: 12px; align-items: center;
+  padding: 8px 0; border-bottom: 1px solid var(--line-2);
+  font-size: 14.5px; line-height: 1.3;
 }
 .sym {
-  height: 23px; display: grid; place-items: center;
-  border: 1px solid rgba(0, 212, 170, 0.5);
-  font: 500 12px/1 var(--mono); letter-spacing: 0.03em; color: var(--for);
+  height: 24px; display: grid; place-items: center;
+  border: 1px solid var(--ink);
+  font: 600 12.5px/1 var(--display); letter-spacing: 0.04em; color: var(--ink);
   transition: color 0.35s, border-color 0.35s, background 0.35s;
 }
-.role { color: var(--text); transition: color 0.35s; }
-.side { font-size: 12.5px; color: var(--for); transition: opacity 0.35s; }
-.slot.hurt .sym { color: var(--against); border-color: rgba(255, 92, 122, 0.55); }
-.slot.hurt .side { color: var(--against); }
-.when-locked { display: none; color: var(--pending); }
-.when-open { color: var(--for); }
+.role { color: var(--ink); transition: color 0.35s; }
+.side { font-size: 13.5px; font-weight: 600; color: var(--green); transition: opacity 0.35s; }
+.slot.hurt .sym { color: var(--red); border-color: var(--red); }
+.slot.hurt .side { color: var(--red); }
+.when-locked { display: none; color: var(--ochre-ink); }
+.when-open { color: var(--green); font-weight: 600; }
 
 .replay {
-  display: none; margin-top: 22px;
+  display: none; margin-top: 24px;
   background: transparent; border: 0; padding: 4px 0;
-  font: 500 14px var(--body); color: var(--text-3);
+  font: 500 15px var(--body); color: var(--ink-3);
   text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; cursor: pointer;
 }
-.replay:hover { color: var(--text); }
+.replay:hover { color: var(--ink); }
 
 /* Before the sequence reaches a step. */
 .anim .replay { display: inline-block; }
-.anim .step:not(.on) .rail .knot { background: var(--ink); border-color: var(--text-3); }
-.anim .step-tickers:not(.on) .rail .knot { border-color: var(--pending); box-shadow: 0 0 0 3px rgba(255, 170, 51, 0.14); }
+.anim .step:not(.on) .rail .knot { background: var(--paper); border-color: var(--ink-3); }
+.anim .step-exposure:not(.on) .rail .knot { border-color: var(--ochre); box-shadow: 0 0 0 3px rgba(171, 155, 59, 0.22); }
 .anim .step:not(.go) .link::after { transform: scaleX(0); }
-.anim .chip.pick:not(.on) { border-color: var(--line-2); color: var(--text-2); background: transparent; }
-.anim .step-thesis:not(.on) .mini { opacity: 0.22; }
-.anim .check:not(.on) { color: var(--text-3); }
+.anim .chip.pick:not(.on) { border-color: var(--line-2); color: var(--ink-2); background: transparent; }
+.anim .step-thesis:not(.on) .mini { opacity: 0.25; }
+.anim .check:not(.on) { color: var(--ink-3); }
 .anim .check:not(.on)::before { background: var(--line-2); }
-.anim .check:not(.on) .knot { background: var(--ink); border-color: var(--text-3); }
-.anim .slot:not(.on) .sym {
-  color: transparent; border-color: var(--line-2);
-  background:                       /* a symbol, woven shut */
-    repeating-linear-gradient(45deg, rgba(0, 212, 170, 0.32) 0 2px, transparent 2px 7px),
-    repeating-linear-gradient(-45deg, rgba(255, 170, 51, 0.26) 0 2px, transparent 2px 7px),
-    var(--ink-3);
+.anim .check:not(.on) .knot { background: var(--paper); border-color: var(--ink-3); }
+.anim .slot:not(.on) .sym {                   /* a symbol, woven shut */
+  color: transparent; border-color: var(--ink);
+  background: var(--tibeb) repeat-x left center / auto 24px;
 }
-.anim .slot:not(.on) .role { color: var(--text-3); }
+.anim .slot:not(.on) .role { color: var(--ink-3); }
 .anim .slot:not(.on) .side { opacity: 0; }
-.anim .step-tickers:not(.on) .when-locked { display: inline; }
-.anim .step-tickers:not(.on) .when-open { display: none; }
+.anim .step-exposure:not(.on) .when-locked { display: inline; }
+.anim .step-exposure:not(.on) .when-open { display: none; }
 
-/* ─── The thread between sections ─── */
-.thread-rule { position: relative; z-index: 1; height: 13px; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+/* ─── The rule between sections: a hairline and one knot ─── */
+.thread-rule { position: relative; height: 13px; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 .thread-rule::before { content: ''; position: absolute; left: var(--gutter); right: var(--gutter); top: 6px; height: 1px; background: var(--line-2); }
 .thread-rule::after {
   content: ''; position: absolute; left: var(--gutter); top: 2px; margin-left: 2px;
   width: 9px; height: 9px; transform: rotate(45deg);
-  border: 1.5px solid var(--text-3); background: var(--ink);
+  border: 1.5px solid var(--ink); background: var(--paper);
 }
 
 /* ─── Sections ─── */
-.section { position: relative; z-index: 1; padding: 88px 0 96px; }
+.section { position: relative; padding: 88px 0 96px; }
 .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: end; margin-bottom: 48px; }
-.section-title { font: italic 400 clamp(38px, 4.6vw, 60px)/1.02 var(--display); letter-spacing: -0.01em; color: #fff; }
-.section-lede { font-size: 17px; color: var(--text-2); max-width: 52ch; }
+.section-title { font: 400 clamp(34px, 3.8vw, 50px)/1.12 var(--display); letter-spacing: -0.015em; color: var(--ink); }
+.section-lede { font-size: 18px; color: var(--ink-2); max-width: 52ch; }
 
 /* The gate: eight checks, in the order they are worked through. */
-.gate { list-style: none; border-top: 1px solid var(--line); }
+.gate { list-style: none; border-top: 1px solid var(--line-2); }
 .gate-row {
   position: relative;
   display: grid; grid-template-columns: 30px minmax(0, 0.9fr) minmax(0, 1.25fr) minmax(0, 1.1fr); gap: 0 28px;
-  padding: 20px 0; border-bottom: 1px solid var(--line);
+  padding: 20px 0; border-bottom: 1px solid var(--line-2);
   align-items: start;
 }
-.gate-row .knot { margin: 8px 0 0 3px; }
+.gate-row .knot { margin: 9px 0 0 3px; background: var(--green); border-color: var(--green); }
 .gate-row::before {                /* the thread, knot to knot */
-  content: ''; position: absolute; left: 8px; top: 40px; bottom: -28px; width: 1px; background: var(--for); opacity: 0.55;
+  content: ''; position: absolute; left: 8px; top: 40px; bottom: -28px; width: 1px; background: var(--green); opacity: 0.6;
 }
 .gate-row:last-child::before { display: none; }
-.gate-name { font: 600 17px/1.4 var(--body); color: var(--text); }
-.gate-takes { font-size: 16px; line-height: 1.55; color: var(--text); }
-.gate-takes .num { font: 500 15px var(--mono); color: var(--for); }
-.gate-why { font-size: 15px; line-height: 1.55; color: var(--text-2); }
+.gate-name { font: 600 18px/1.4 var(--body); color: var(--ink); }
+.gate-takes { font-size: 17px; line-height: 1.55; color: var(--ink); }
+.gate-takes .num { font-weight: 700; color: var(--ink); }
+.gate-why { font-size: 16px; line-height: 1.55; color: var(--ink-2); }
 .gate-cols {
   display: grid; grid-template-columns: 30px minmax(0, 0.9fr) minmax(0, 1.25fr) minmax(0, 1.1fr); gap: 0 28px;
-  padding-bottom: 10px; font-size: 13.5px; color: var(--text-3);
+  padding-bottom: 10px; font-size: 14.5px; font-weight: 600; color: var(--ink-3);
 }
-.gate-after { margin-top: 28px; font-size: 16px; color: var(--text-2); max-width: 64ch; }
+.gate-after { margin-top: 28px; font-size: 17px; color: var(--ink-2); max-width: 64ch; }
 
 /* It stops at research. */
 .stops { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: end; }
-.stops p { margin-top: 22px; font-size: 17px; color: var(--text-2); max-width: 46ch; }
+.stops p { margin-top: 22px; font-size: 18px; color: var(--ink-2); max-width: 46ch; }
 .stops p + p { margin-top: 14px; }
-.stops p.small { font-size: 14.5px; color: var(--text-3); }
-.not-list { list-style: none; border-top: 1px solid var(--line); }
-.not-list li { display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; color: var(--text); }
-.not-list .no { font: 500 13px var(--mono); color: var(--against); min-width: 28px; }
+.stops p.small { font-size: 15.5px; color: var(--ink-3); }
+.not-list { list-style: none; border-top: 1px solid var(--line-2); }
+.not-list li { display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line-2); font-size: 18px; color: var(--ink); }
+.not-list .no { font-size: 14px; font-weight: 700; color: var(--red); min-width: 28px; }
 
 /* The letter. */
-.posts { list-style: none; border-top: 1px solid var(--line); }
+.posts { list-style: none; border-top: 1px solid var(--line-2); }
 .post a {
   display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 28px; align-items: baseline;
-  padding: 24px 0; border-bottom: 1px solid var(--line);
+  padding: 24px 0; border-bottom: 1px solid var(--line-2);
   text-decoration: none;
 }
-.post-kind { font-size: 14px; color: var(--text-3); }
-.post-title { font: italic 400 28px/1.15 var(--display); color: var(--text); transition: color 0.15s; }
-.post-desc { grid-column: 2; font-size: 15.5px; line-height: 1.55; color: var(--text-2); max-width: 62ch; }
-.post-go { grid-row: 1; grid-column: 3; font-size: 14.5px; font-weight: 600; color: var(--for); white-space: nowrap; }
-.post a:hover .post-title { color: var(--for); }
+.post-kind { font-size: 15px; color: var(--ink-3); }
+.post-title { font: 400 25px/1.25 var(--display); color: var(--ink); transition: color 0.15s; }
+.post-desc { grid-column: 2; font-size: 16.5px; line-height: 1.55; color: var(--ink-2); max-width: 62ch; }
+.post-go { grid-row: 1; grid-column: 3; font-size: 15.5px; font-weight: 600; color: var(--ink); white-space: nowrap; text-decoration: underline; text-underline-offset: 3px; }
+.post a:hover .post-title { color: var(--ink-hover); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 .letter-bar { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; justify-content: space-between; }
-.letter-bar p { font-size: 16px; color: var(--text-2); }
+.letter-bar p { font-size: 17px; color: var(--ink-2); }
 .letter-bar .btns { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* Contact. */
 .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; }
 .contact > div { padding-top: 10px; }
-.contact p { font-size: 17px; color: var(--text-2); max-width: 50ch; }
+.contact p { font-size: 18px; color: var(--ink-2); max-width: 50ch; }
 .contact .hero-cta { margin-top: 22px; }
-.mail { display: inline-block; margin-top: 14px; padding: 8px 0; font: 500 15px var(--mono); color: var(--text); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 5px; overflow-wrap: anywhere; }
-.mail:hover { text-decoration-color: var(--for); color: var(--for); }
+.mail { display: inline-block; margin-top: 14px; padding: 8px 0; font: 600 16px var(--body); color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-3); text-underline-offset: 5px; overflow-wrap: anywhere; }
+.mail:hover { text-decoration-color: var(--ink); }
 
-/* Footer. */
-.footer { position: relative; z-index: 1; border-top: 1px solid var(--line); }
+/* Footer: the tibeb again, as a hem. */
+.footer { position: relative; border-top: 1px solid var(--line-2); }
+.footer::after {
+  content: ''; display: block; height: 12px;
+  background: var(--tibeb) repeat-x left top / auto 12px;
+}
 .footer-in {
-  max-width: var(--wrap); margin: 0 auto; padding: 28px var(--gutter) 40px;
+  max-width: var(--wrap); margin: 0 auto; padding: 28px var(--gutter) 36px;
   display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; align-items: baseline;
-  font-size: 13.5px; color: var(--text-3);
+  font-size: 15px; color: var(--ink-3);
 }
 .footer-links { display: flex; gap: 22px; }
-.footer-links a { padding: 6px 0; text-decoration: none; color: var(--text-2); }
-.footer-links a:hover { color: var(--text); }
+.footer-links a { padding: 6px 0; text-decoration: none; color: var(--ink-2); }
+.footer-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 .footer-note { flex-basis: 100%; max-width: 78ch; }
 
 /* ─── Narrower screens ─── */
 @media (max-width: 1080px) {
-  .hero-top { grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
+  .hero-top { grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
   .hero-lede { max-width: 56ch; }
   /* The thread turns and runs down the page. */
-  .path { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 64px; }
+  .path { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 56px; }
   .step { display: grid; grid-template-columns: 16px minmax(0, 1fr); column-gap: 20px; padding-bottom: 34px; }
   .step:last-child { padding-bottom: 0; }
-  .rail { grid-column: 1; grid-row: 1 / span 3; flex-direction: column; height: auto; margin: 4px 0 -34px; }
+  .rail { grid-column: 1; grid-row: 1 / span 3; flex-direction: column; height: auto; margin: 6px 0 -34px; }
   .rail .knot { margin-left: 0; }
-  .link { flex: 1; width: 1px; height: auto; margin: 10px 0 6px; }
-  .link::after { inset: 0 -0.5px; transform-origin: center top; }
+  .link {
+    flex: 1; width: 10px; height: auto; margin: 10px 0 6px;
+    background: linear-gradient(var(--line-2), var(--line-2)) center top / 1px 100% no-repeat;
+  }
+  .link::after { background: var(--tibeb-v) repeat-y center top / 10px auto; transform-origin: center top; }
   .anim .step:not(.go) .link::after { transform: scaleY(0); }
   .step-name, .step-what, .mini { grid-column: 2; }
   .step-what { min-height: 0; max-width: 52ch; }
@@ -355,30 +375,33 @@ a { color: inherit; }
   .gate-why { margin-top: 2px; }
 }
 @media (max-width: 860px) {
-  :root { --gutter: 22px; }
-  body { font-size: 16px; }
+  :root { --gutter: 20px; }
+  body { font-size: 17px; }
+  .nav-in { height: 64px; }
+  .brand-emblem { height: 36px; }
   .nav-burger { display: inline-flex; }
   .nav-links {
     display: none;
     position: absolute; top: 100%; left: 12px; right: 12px; margin-top: 6px;
     flex-direction: column; align-items: stretch; gap: 2px;
-    padding: 8px; background: var(--ink-2); border: 1px solid var(--line-2); border-radius: 6px;
+    padding: 8px; background: var(--raised); border: 1px solid var(--line-2); border-radius: 6px;
+    box-shadow: 0 12px 30px rgba(12, 32, 68, 0.1);
   }
   .nav-links.open { display: flex; }
-  .nav-links a { padding: 12px; font-size: 16px; }
-  .nav-links .btn { margin: 6px 0 0; padding: 12px; font-size: 16px; }
-  .hero { padding: 112px 0 64px; }
+  .nav-links a { padding: 12px; font-size: 17px; }
+  .nav-links .btn { margin: 6px 0 0; padding: 12px; font-size: 17px; }
+  .hero { padding: 132px 0 64px; }
   .section { padding: 64px 0 72px; }
   .post a { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 22px 0; }
   .post-desc, .post-go { grid-column: 1; grid-row: auto; }
   .post-go { order: 2; margin-top: 4px; }
-  .post-title { font-size: 26px; }
-  .footer-in { padding-bottom: 32px; }
+  .post-title { font-size: 23px; }
+  .footer-in { padding-bottom: 30px; }
 }
 @media (max-width: 420px) {
-  .hero h1 { font-size: 58px; }
+  .hero h1 { font-size: 46px; }
   .hero-cta .btn { flex: 1 1 100%; }
-  .slot { grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; }
+  .slot { grid-template-columns: 58px minmax(0, 1fr) auto; gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -391,7 +414,7 @@ a { color: inherit; }
 
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#" class="brand"><span class="knot" aria-hidden="true"></span>Habesha Market Research</a>
+    <a href="#" class="brand" aria-label="Habesha Market Research"><img class="brand-emblem" src="/assets/emblem.png" alt="" width="30" height="42"/><span class="brand-lockup" aria-hidden="true"><span class="brand-name">Habesha</span><span class="brand-sub">Market Research</span></span></a>
     <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2.5 5h13M2.5 9h13M2.5 13h13"/></svg>
     </button>
@@ -411,12 +434,12 @@ a { color: inherit; }
 <section class="hero" id="tibeb">
   <div class="wrap">
     <div class="hero-top">
-      <h1>Tickers<br>come last.</h1>
+      <h1>Companies<br>come last.</h1>
       <div>
         <p class="hero-lede">
           <strong>Tibeb</strong> is an AI research terminal for new technology. Follow what changed this week,
           write a thesis that can be proven wrong, and put it through the diligence an investment committee
-          would ask for. Ticker ideas open only for a thesis that holds up.
+          would ask for. Only a thesis that holds up gets to the companies exposed to it.
         </p>
         <div class="hero-cta">
           <a href="https://www.tibeb.trade/login.html" class="btn btn-primary">Sign in to Tibeb</a>
@@ -426,7 +449,7 @@ a { color: inherit; }
       </div>
     </div>
 
-    <ol class="path" id="path" aria-label="From a new development to a ticker, in four steps">
+    <ol class="path" id="path" aria-label="From a new development to the companies it reaches, in four steps">
       <li class="step step-discover">
         <div class="rail" aria-hidden="true"><span class="knot"></span><span class="link"></span></div>
         <h2 class="step-name">Discover</h2>
@@ -478,10 +501,10 @@ a { color: inherit; }
         </div>
       </li>
 
-      <li class="step step-tickers">
+      <li class="step step-exposure">
         <div class="rail" aria-hidden="true"><span class="knot"></span></div>
-        <h2 class="step-name">Tickers</h2>
-        <p class="step-what">The companies the evidence points to, each with its role and the sources behind it.</p>
+        <h2 class="step-name">Exposure</h2>
+        <p class="step-what">The companies the evidence shows are exposed, how, and how much of each business turns on the thesis.</p>
         <div class="mini">
           <ul class="slots">
             <li class="slot"><span class="sym" aria-hidden="true">TKR1</span><span class="role">Direct exposure</span><span class="side">Benefits</span></li>
@@ -558,11 +581,11 @@ a { color: inherit; }
         <span class="knot" aria-hidden="true"></span>
         <h3 class="gate-name">Verdict on file</h3>
         <p class="gate-takes">One probability that the thesis resolves yes, with a range around it.</p>
-        <p class="gate-why">The tickers follow from the verdict, and each one has to cite sources from your ledger.</p>
+        <p class="gate-why">The companies named after it follow from the verdict, and each one has to cite sources from your ledger.</p>
       </li>
     </ol>
     <p class="gate-after">
-      Change the question and the review, the verdict and the tickers go stale. They have to be earned again
+      Change the question and the review, the verdict and the exposure go stale. They have to be earned again
       for the thesis you are actually holding.
     </p>
   </div>
@@ -577,15 +600,16 @@ a { color: inherit; }
       <div>
         <h2 class="section-title">It stops at research</h2>
         <p>
-          The terminal ends at a short list of tickers and the reason each one is there. They are leads to
-          investigate. What you do with them is your call.
+          The terminal ends at the companies exposed to the thesis: how it reaches each one, in which
+          direction, and how much of the business turns on it, with the sources behind every line. What you
+          do with that is your call.
         </p>
         <p class="small">Nothing on this site or in Tibeb is investment advice.</p>
       </div>
       <ul class="not-list">
         <li><span class="no" aria-hidden="true">No</span>orders placed</li>
         <li><span class="no" aria-hidden="true">No</span>position sizing</li>
-        <li><span class="no" aria-hidden="true">No</span>portfolio to manage</li>
+        <li><span class="no" aria-hidden="true">No</span>buy or sell calls</li>
       </ul>
     </div>
   </div>
@@ -687,7 +711,7 @@ a { color: inherit; }
   links.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
-  // ── The path, played once: discover → thesis → eight checks → tickers ──
+  // ── The path, played once: discover → thesis → eight checks → exposure ──
   if (!document.documentElement.classList.contains('anim')) return;
   var path = document.getElementById('path');
   var steps = [].slice.call(path.querySelectorAll('.step'));
@@ -738,7 +762,7 @@ a { color: inherit; }
       at(t, function () { on(steps[2]); });
       at(t += 250, function () { on(steps[2], 'go'); });
       at(t += 450, done);
-    } else {                             // Tickers: the slots open
+    } else {                             // Exposure: the slots open
       at(t += 150, function () { on(steps[3]); });
       slots.forEach(function (sl, k) { at(t + 200 + k * 150, function () { on(sl); }); });
       at(t + 200 + slots.length * 150, done);
