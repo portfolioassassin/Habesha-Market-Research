@@ -1,6 +1,6 @@
 # habeshamarketresearch.com — static-site server for Railway.
 #
-# Why this exists: the repo is two HTML files (index.html, login.html). With
+# Why this exists: the repo is two HTML files (index.html, login.html) and their assets. With
 # no Procfile / package.json / requirements.txt, Railway's Nixpacks builder
 # has nothing to detect, so the service never starts and Railway returns its
 # fallback 502 ("Application failed to respond"). A Dockerfile gives Railway
@@ -15,8 +15,10 @@ FROM python:3.12-alpine
 WORKDIR /site
 
 # Copy only what we serve. Keeps the image small and avoids leaking .git
-# or editor junk into the running container.
-COPY index.html login.html ./
+# or editor junk into the running container. assets/ holds the logo's
+# emblem, the favicons and the social-preview image.
+COPY index.html login.html favicon.ico ./
+COPY assets ./assets
 
 # Railway injects $PORT at runtime; 8080 is a sane fallback for local
 # `docker run` so the same image works for smoke-testing.
