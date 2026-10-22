@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>About · Habesha Market Research</title>
+<meta name="description" content="Habesha Market Research is run by Nathaniel Asefa, who studied engineering at Rutgers, writes the letter and builds Tibeb."/>
+<meta property="og:title" content="About · Habesha Market Research"/>
+<meta property="og:description" content="Who is behind Habesha Market Research: Nathaniel Asefa, who studied engineering at Rutgers, writes the letter and builds Tibeb."/>
+<meta property="og:image" content="https://www.habeshamarketresearch.com/assets/og-logo.png"/>
+<meta property="og:type" content="profile"/>
+<meta property="og:url" content="https://www.habeshamarketresearch.com/about/"/>
+<link rel="canonical" href="https://www.habeshamarketresearch.com/about/"/>
+<meta name="theme-color" content="#FBF0D4"/>
+<link rel="icon" href="/favicon.ico" sizes="48x48"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
+<style>
+/* The About page. Same paper, ink and tibeb as the home page; a reading
+   page, so one column of prose with the facts set beside it. */
+:root {
+  --paper:     #FBF0D4;
+  --raised:    #FFF8E8;
+  --line-2:    #CDBA8C;
+  --line-3:    #8C7F5C;
+  --ink:       #0C2044;
+  --ink-2:     #3B4763;
+  --ink-3:     #5A637A;
+  --ink-hover: #22407A;
+  --display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --body:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --tibeb:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%230C2044'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23BB2B2D'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23FBF0D4'/%3E%3Crect y='5.6' width='24' height='1' fill='%23AB9B3B'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23BB2B2D'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%2311654E'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%235C2530'/%3E%3C/svg%3E");
+  --gutter: 40px;
+  --wrap:   1200px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--body); font-size: 18px; line-height: 1.6;
+  background: var(--paper); color: var(--ink);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+::selection { background: rgba(12, 32, 68, 0.16); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 200;
+  padding: 10px 14px; background: var(--ink); color: var(--paper);
+  font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 4px;
+}
+.skip:focus { top: 22px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 12px 20px; border: 1px solid transparent; border-radius: 4px;
+  font: 600 16px/1.25 var(--body); text-decoration: none; white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--ink-hover); border-color: var(--ink-hover); }
+.btn-quiet { background: transparent; border-color: var(--line-3); color: var(--ink); }
+.btn-quiet:hover { background: rgba(12, 32, 68, 0.05); border-color: var(--ink); }
+
+/* Nav, with the tibeb along its top edge. */
+.nav { position: relative; padding-top: 12px; border-bottom: 1px solid var(--line-2); }
+.nav::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 12px;
+  background: var(--tibeb) repeat-x left top / auto 12px;
+}
+.nav-in {
+  max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter);
+  height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.brand-emblem { display: block; height: 42px; width: auto; }
+.brand-lockup { display: flex; flex-direction: column; gap: 5px; }
+.brand-name { font: 500 26px/1 var(--display); }
+.brand-sub { font: 500 10.5px/1 var(--display); letter-spacing: 0.26em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a { padding: 8px 12px; font-size: 16px; color: var(--ink-2); text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* The page. */
+.about { padding: 96px 0 104px; }
+.about-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.kicker { font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+h1 {
+  margin-top: 14px;
+  font: 400 clamp(38px, 5vw, 66px)/1.1 var(--display); letter-spacing: -0.02em; color: var(--ink);
+}
+.lede { margin-top: 26px; font-size: 21px; line-height: 1.55; color: var(--ink); max-width: 40ch; }
+.prose { margin-top: 30px; max-width: 62ch; }
+.prose p { color: var(--ink-2); }
+.prose p + p { margin-top: 18px; }
+.prose h2 { margin: 44px 0 14px; font: 400 26px/1.25 var(--display); color: var(--ink); }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
+
+.facts { border-top: 1px solid var(--line-2); margin-top: 12px; }
+.fact { padding: 18px 0; border-bottom: 1px solid var(--line-2); }
+.fact dt { font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.fact dd { margin-top: 4px; font-size: 17px; color: var(--ink); }
+.fact a { text-decoration: underline; text-decoration-color: var(--line-3); text-underline-offset: 4px; overflow-wrap: anywhere; }
+.fact a:hover { text-decoration-color: var(--ink); }
+
+/* Footer: the tibeb again, as a hem. */
+.footer { border-top: 1px solid var(--line-2); }
+.footer::after { content: ''; display: block; height: 12px; background: var(--tibeb) repeat-x left top / auto 12px; }
+.footer-in {
+  max-width: var(--wrap); margin: 0 auto; padding: 28px var(--gutter) 36px;
+  display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; align-items: baseline;
+  font-size: 15px; color: var(--ink-3);
+}
+.footer-links { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.footer-links a { padding: 6px 0; text-decoration: none; color: var(--ink-2); }
+.footer-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.footer-note { flex-basis: 100%; max-width: 78ch; }
+
+@media (max-width: 960px) {
+  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+}
+@media (max-width: 720px) {
+  :root { --gutter: 16px; }
+  body { font-size: 17px; }
+  .nav-in { height: 64px; }
+  .brand-emblem { height: 36px; }
+  .brand-name { font-size: 22px; }
+  .nav-links .hide-sm { display: none; }
+  .nav-links a { padding: 8px 8px; }
+  .about { padding: 56px 0 72px; }
+  .lede { font-size: 19px; }
+  .cta .btn { flex: 1 1 100%; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="nav">
+  <div class="nav-in">
+    <a href="/" class="brand" aria-label="Habesha Market Research, home"><img class="brand-emblem" src="/assets/emblem.png" alt="" width="30" height="42"/><span class="brand-lockup" aria-hidden="true"><span class="brand-name">Habesha</span><span class="brand-sub">Market Research</span></span></a>
+    <nav class="nav-links" aria-label="Site">
+      <a href="/#tibeb" class="hide-sm">Tibeb</a>
+      <a href="/#reports" class="hide-sm">The letter</a>
+      <a href="/about/" aria-current="page">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="about">
+  <div class="wrap about-grid">
+    <article>
+      <p class="kicker">About</p>
+      <h1>Nathaniel Asefa</h1>
+      <p class="lede">
+        Founder of Habesha Market Research. I studied engineering, worked in supply-chain planning, and have
+        traded my own account since 2023. Now I write the letter and build Tibeb.
+      </p>
+
+      <div class="prose">
+        <p>
+          I studied engineering at Rutgers. I never worked as an engineer, but the degree changed how I look at a
+          market: as a machine, with parts, costs, and things that have to be true for it to work. Most market
+          commentary starts with the share price. The letter starts with the hardware, the power, the supply
+          chain, and the physics, and gets to companies only once the industry makes sense.
+        </p>
+        <p>
+          At Rutgers I worked as a research assistant on a study of how remote instruction changed STEM tutoring,
+          and co-authored a paper presented to the American Society for Engineering Education. After school I
+          was a materials planner at Robertet, keeping production of flavor compounds supplied. That job is where
+          I learned that a product ships only as fast as its slowest input, which is most of what the letter is
+          about. Since 2023 I have traded my own account, and I built Tibeb because I wanted a thesis to prove
+          itself before I put money behind it.
+        </p>
+        <p>
+          Habesha is the name Ethiopians and Eritreans use for ourselves. The letter is written by a Habesha, for
+          Habeshas, and for anyone who would rather understand an industry than be handed a tip. The woven border
+          along the top of this page is the tibeb, the pattern on Ethiopian cloth, and it is where the terminal
+          gets its name.
+        </p>
+
+        <h2>What I make</h2>
+        <p>
+          <strong>The letter</strong> is long-form research on the engineering behind the markets, from AI power
+          and memory chips to optics and batteries. It carries no ticker symbols and no recommendations.
+        </p>
+        <p>
+          <strong>Tibeb</strong> is a research terminal for new technology. It makes a thesis prove itself, through
+          eight checks on the question and the evidence behind it, before it names a single company. It stops at
+          research: it places no orders and makes no buy or sell calls.
+        </p>
+      </div>
+
+      <div class="cta">
+        <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Read the letter</a>
+        <a href="mailto:nateasefa@habeshamarketresearch.com" class="btn btn-quiet">Write to me</a>
+      </div>
+    </article>
+
+    <aside aria-label="At a glance">
+      <dl class="facts">
+        <div class="fact"><dt>Role</dt><dd>Founder, Habesha Market Research</dd></div>
+        <div class="fact"><dt>Education</dt><dd>Engineering, Rutgers University</dd></div>
+        <div class="fact"><dt>Before</dt><dd>Materials planner, Robertet</dd></div>
+        <div class="fact"><dt>Writes</dt><dd><a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">The Habesha Investor on Substack</a></dd></div>
+        <div class="fact"><dt>Builds</dt><dd><a href="https://www.tibeb.trade">Tibeb</a>, invite-only for now</dd></div>
+        <div class="fact"><dt>On X</dt><dd><a href="https://x.com/HabeshaMarketRe" target="_blank" rel="noopener">@HabeshaMarketRe</a></dd></div>
+        <div class="fact"><dt>Email</dt><dd><a href="mailto:nateasefa@habeshamarketresearch.com">nateasefa@habeshamarketresearch.com</a></dd></div>
+      </dl>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div>© 2026 Habesha Market Research. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://www.tibeb.trade">Tibeb</a>
+      <a href="mailto:nateasefa@habeshamarketresearch.com">Contact</a>
+    </div>
+    <p class="footer-note">Habesha Market Research publishes research, not advice. It is for research and education, and nothing here is investment advice or a recommendation to buy or sell any security.</p>
+  </div>
+</footer>
+</body>
+</html>

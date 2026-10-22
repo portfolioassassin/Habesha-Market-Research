@@ -19,6 +19,8 @@ WORKDIR /site
 # emblem, the favicons and the social-preview image.
 COPY index.html login.html favicon.ico ./
 COPY assets ./assets
+# The About page, served at /about/ (nathanielasefa.com forwards here).
+COPY about ./about
 
 # Railway injects $PORT at runtime; 8080 is a sane fallback for local
 # `docker run` so the same image works for smoke-testing.
