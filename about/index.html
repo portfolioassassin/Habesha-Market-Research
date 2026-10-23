@@ -71,11 +71,7 @@ a { color: inherit; }
 .btn-quiet:hover { background: rgba(235, 217, 174, 0.08); border-color: var(--ink); }
 
 /* Nav, with the tibeb along its top edge. */
-.nav { position: relative; padding-top: 12px; border-bottom: 1px solid var(--line-2); }
-.nav::before {
-  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 12px;
-  background: var(--tibeb) repeat-x left top / auto 12px;
-}
+.nav { position: relative; border-bottom: 1px solid var(--line-2); }
 .nav-in {
   max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter);
   height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -111,9 +107,8 @@ h1 {
 .fact a { text-decoration: underline; text-decoration-color: var(--line-3); text-underline-offset: 4px; overflow-wrap: anywhere; }
 .fact a:hover { text-decoration-color: var(--ink); }
 
-/* Footer: the tibeb again, as a hem. */
+/* Footer. */
 .footer { border-top: 1px solid var(--line-2); }
-.footer::after { content: ''; display: block; height: 12px; background: var(--tibeb) repeat-x left top / auto 12px; }
 .footer-in {
   max-width: var(--wrap); margin: 0 auto; padding: 28px var(--gutter) 36px;
   display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; align-items: baseline;
@@ -185,9 +180,8 @@ h1 {
         </p>
         <p>
           Habesha is the name Ethiopians and Eritreans use for ourselves. The letter is written by Habeshas, for
-          the world: for anyone who would rather understand an industry than be handed a tip. The woven border
-          along the top of this page is the tibeb, the pattern on Ethiopian cloth, and it is where the terminal
-          gets its name.
+          the world: for anyone who would rather understand an industry than be handed a tip. The tibeb, the woven
+          border on Ethiopian cloth, is where the terminal gets its name.
         </p>
 
         <h2>What I make</h2>
