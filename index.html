@@ -9,7 +9,7 @@
 <meta property="og:description" content="Research on the engineering behind the markets. A letter with no ticker symbols and no recommendations, and Tibeb, a research terminal that tests a thesis before it names a company."/>
 <meta property="og:image" content="https://www.habeshamarketresearch.com/assets/og-logo.png"/>
 <meta property="og:type" content="website"/>
-<meta name="theme-color" content="#FBF0D4"/>
+<meta name="theme-color" content="#0C2044"/>
 <link rel="icon" href="/favicon.ico" sizes="48x48"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
@@ -28,35 +28,37 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
 /* ══════════════════════════════════════════════════════════════════════
    Habesha Market Research
 
-   The Habesha Market Research logo, as a page: cream paper, navy ink, the
-   wordmark's serif, and the tibeb — the woven border on Ethiopian cloth
+   The Habesha Market Research brand, as a page: navy ground, ivory ink,
+   champagne accents from the Aksum coin, the wordmark's serif, and the tibeb — the woven border on Ethiopian cloth
    that Tibeb is named for. The tibeb appears twice: along the top edge,
    and as the thread of the four steps, which weaves itself as the path
    plays. Colour means something and nothing else: green is for / passed,
-   red is against / hurt, ochre is open. Navy is for words and actions.
+   red is against / hurt, ochre is open. Ivory is for words, champagne for actions.
    Same system as the terminal itself.
    ══════════════════════════════════════════════════════════════════════ */
 :root {
-  --paper:     #FBF0D4;   /* the logo's ground */
-  --raised:    #FFF8E8;
-  --inset:     #F3E4BE;
-  --line:      #E2D2A9;
-  --line-2:    #CDBA8C;
-  --line-3:    #8C7F5C;   /* control outlines, 3:1 on paper */
-  --ink:       #0C2044;   /* the wordmark's navy */
-  --ink-2:     #3B4763;
-  --ink-3:     #5A637A;
-  --ink-hover: #22407A;
-  --green:     #11654E;
-  --red:       #BB2B2D;
-  --ochre:     #AB9B3B;
-  --ochre-ink: #705E0C;
+  --paper:     #0C2044;   /* the logo's ground */
+  --raised:    #12295A;
+  --inset:     #0A1A38;
+  --line:      #1E3566;
+  --line-2:    #2C467E;
+  --line-3:    #8C7347;   /* control outlines, 3:1 on paper */
+  --ink:       #F6EEDC;   /* the wordmark's navy */
+  --ink-2:     #CBD2E0;
+  --ink-3:     #9EAAC2;
+  --ink-hover: #EBD9AE;
+  --accent:    #EBD9AE;   /* champagne, the coin's rim */
+  --accent-2:  #D2B886;
+  --green:     #5CBF98;
+  --red:       #E8746E;
+  --ochre:     #D2B886;
+  --ochre-ink: #E3CC92;
 
   --display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
   --body:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --tibeb:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%230C2044'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23BB2B2D'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23FBF0D4'/%3E%3Crect y='5.6' width='24' height='1' fill='%23AB9B3B'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23BB2B2D'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%2311654E'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%235C2530'/%3E%3C/svg%3E");
-  --tibeb-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24' viewBox='0 0 16 24'%3E%3Cg transform='translate%2816 0%29 rotate%2890%29'%3E%3Crect width='24' height='16' fill='%230C2044'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23BB2B2D'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23FBF0D4'/%3E%3Crect y='5.6' width='24' height='1' fill='%23AB9B3B'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23BB2B2D'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%2311654E'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%235C2530'/%3E%3C/g%3E%3C/svg%3E");
+  --tibeb:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%23081833'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23D2B886'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23EBD9AE'/%3E%3Crect y='5.6' width='24' height='1' fill='%238C7347'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23EBD9AE'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%23B89B62'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%238C7347'/%3E%3C/svg%3E");
+  --tibeb-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='24' viewBox='0 0 16 24'%3E%3Cg transform='translate%2816 0%29 rotate%2890%29'%3E%3Crect width='24' height='16' fill='%23081833'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23D2B886'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23EBD9AE'/%3E%3Crect y='5.6' width='24' height='1' fill='%238C7347'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23EBD9AE'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%23B89B62'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%238C7347'/%3E%3C/g%3E%3C/svg%3E");
 
   --gutter: 40px;
   --wrap:   1200px;
@@ -76,7 +78,7 @@ body {
   overflow-x: hidden;
 }
 a { color: inherit; }
-::selection { background: rgba(12, 32, 68, 0.16); }
+::selection { background: rgba(235, 217, 174, 0.28); }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
 .wrap { position: relative; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
@@ -91,7 +93,7 @@ a { color: inherit; }
 .knot {
   display: inline-block; flex-shrink: 0;
   width: 10px; height: 10px;
-  border: 1.5px solid var(--ink); background: var(--ink);
+  border: 1.5px solid var(--accent); background: var(--accent);
   transform: rotate(45deg);
   transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
@@ -105,10 +107,10 @@ a { color: inherit; }
   text-decoration: none; white-space: nowrap; cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.btn-primary:hover { background: var(--ink-hover); border-color: var(--ink-hover); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn-primary:hover { background: var(--ink); border-color: var(--ink); }
 .btn-quiet { background: transparent; border-color: var(--line-3); color: var(--ink); }
-.btn-quiet:hover { background: rgba(12, 32, 68, 0.05); border-color: var(--ink); }
+.btn-quiet:hover { background: rgba(235, 217, 174, 0.08); border-color: var(--ink); }
 .text-link { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .text-link:hover { text-decoration-thickness: 2px; }
 
@@ -116,7 +118,7 @@ a { color: inherit; }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding-top: 12px;
-  background: rgba(251, 240, 212, 0.94);
+  background: rgba(12, 32, 68, 0.94);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s;
@@ -134,7 +136,7 @@ a { color: inherit; }
 .brand-emblem { display: block; height: 42px; width: auto; }
 .brand-lockup { display: flex; flex-direction: column; gap: 5px; }
 .brand-name { font: 500 26px/1 var(--display); letter-spacing: 0.005em; }
-.brand-sub { font: 500 10.5px/1 var(--display); letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
+.brand-sub { font: 500 10.5px/1 var(--display); letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent); }
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-links a { padding: 8px 12px; font-size: 16px; color: var(--ink-2); text-decoration: none; border-radius: 4px; transition: color 0.15s; }
 .nav-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
@@ -148,6 +150,8 @@ a { color: inherit; }
 
 /* ─── Hero ─── */
 .hero { position: relative; padding: 168px 0 88px; }
+/* The Aksum coin, beside the statement on wide screens. */
+.hero-coin { position: absolute; right: var(--gutter); top: -28px; width: 240px; height: 240px; filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)); }
 /* The statement: what the firm does, in two lines. */
 .hero h1 {
   font: 400 clamp(40px, 5.6vw, 80px)/1.08 var(--display);
@@ -244,7 +248,7 @@ a { color: inherit; }
 /* Before the sequence reaches a step. */
 .anim .replay { display: inline-block; }
 .anim .step:not(.on) .rail .knot { background: var(--paper); border-color: var(--ink-3); }
-.anim .step-exposure:not(.on) .rail .knot { border-color: var(--ochre); box-shadow: 0 0 0 3px rgba(171, 155, 59, 0.22); }
+.anim .step-exposure:not(.on) .rail .knot { border-color: var(--ochre); box-shadow: 0 0 0 3px rgba(210, 184, 134, 0.25); }
 .anim .step:not(.go) .link::after { transform: scaleX(0); }
 .anim .chip.pick:not(.on) { border-color: var(--line-2); color: var(--ink-2); background: transparent; }
 .anim .step-thesis:not(.on) .mini { opacity: 0.25; }
@@ -350,6 +354,7 @@ a { color: inherit; }
 /* ─── Narrower screens ─── */
 @media (max-width: 1080px) {
   .doors { gap: 0 40px; margin-top: 32px; }
+  .hero-coin { display: none; }
   /* The thread turns and runs down the page. */
   .path { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 56px; }
   .step { display: grid; grid-template-columns: 16px minmax(0, 1fr); column-gap: 20px; padding-bottom: 34px; }
@@ -386,7 +391,7 @@ a { color: inherit; }
     position: absolute; top: 100%; left: 12px; right: 12px; margin-top: 6px;
     flex-direction: column; align-items: stretch; gap: 2px;
     padding: 8px; background: var(--raised); border: 1px solid var(--line-2); border-radius: 6px;
-    box-shadow: 0 12px 30px rgba(12, 32, 68, 0.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 12px; font-size: 17px; }
@@ -421,7 +426,7 @@ a { color: inherit; }
 
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#" class="brand" aria-label="Habesha Market Research"><img class="brand-emblem" src="/assets/emblem.png" alt="" width="30" height="42"/><span class="brand-lockup" aria-hidden="true"><span class="brand-name">Habesha</span><span class="brand-sub">Market Research</span></span></a>
+    <a href="#" class="brand" aria-label="Habesha Market Research"><img class="brand-emblem" src="/assets/emblem.svg" alt="" width="42" height="42"/><span class="brand-lockup" aria-hidden="true"><span class="brand-name">Habesha</span><span class="brand-sub">Market Research</span></span></a>
     <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2.5 5h13M2.5 9h13M2.5 13h13"/></svg>
     </button>
@@ -441,6 +446,7 @@ a { color: inherit; }
 <!-- ════════════ Hero: what the firm does, its two doors, then Tibeb's path, played once ════════════ -->
 <section class="hero" id="tibeb">
   <div class="wrap">
+    <img class="hero-coin" src="/assets/coin.svg" alt="The Habesha Market Research coin: three Aksum stelae inside a champagne-gold rim" width="240" height="240"/>
     <h1>The engineering<br>behind the markets.</h1>
     <div class="doors">
       <div class="door">
