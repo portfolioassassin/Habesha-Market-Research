@@ -599,7 +599,7 @@ a { color: inherit; }
         <h3 class="offer-title">What business to start in Ethiopia</h3>
         <p class="offer-what">Which businesses make sense to start in Ethiopia today, and why.</p>
         <div class="offer-cta">
-          <a class="btn btn-primary report-buy" data-buy="ethiopiaBusinessUrl" role="link" aria-disabled="true">Pre-order opens soon</a>
+          <a class="btn btn-primary report-buy" data-buy="ethiopiaBusinessUrl" href="https://buy.stripe.com/00w8wQ7W9bNj9m90Gb97G00" target="_blank" rel="noopener">Pre-order the report · $100</a>
         </div>
       </article>
       <article class="offer">
@@ -607,7 +607,7 @@ a { color: inherit; }
         <h3 class="offer-title">Ethiopia's real estate market</h3>
         <p class="offer-what">What the real estate market in Ethiopia is doing.</p>
         <div class="offer-cta">
-          <a class="btn btn-primary report-buy" data-buy="ethiopiaRealEstateUrl" role="link" aria-disabled="true">Pre-order opens soon</a>
+          <a class="btn btn-primary report-buy" data-buy="ethiopiaRealEstateUrl" href="https://buy.stripe.com/8x29AUekxeZvdCp1Kf97G01" target="_blank" rel="noopener">Pre-order the report · $100</a>
         </div>
       </article>
     </div>
@@ -753,7 +753,7 @@ a { color: inherit; }
     })
     .catch(function () { /* keep the letters baked into the page */ });
 
-  // ── Stripe Payment Links: the deposit link and the report pre-orders, set in Railway ──
+  // ── Stripe Payment Links: the report pre-orders are in the page; a Railway variable overrides them ──
   fetch('/api/config').then(function (r) { return r.ok ? r.json() : null; }).then(function (cfg) {
     if (!cfg) return;
     [].forEach.call(document.querySelectorAll('[data-buy]'), function (a) {
@@ -761,7 +761,6 @@ a { color: inherit; }
       if (url && /^https:\/\//.test(url)) {
         a.href = url; a.target = '_blank'; a.rel = 'noopener';
         a.removeAttribute('aria-disabled'); a.removeAttribute('role');
-        a.textContent = 'Pre-order the report';
       }
     });
     [].forEach.call(document.querySelectorAll('[data-deposit]'), function (a) {
