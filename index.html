@@ -144,8 +144,6 @@ a { color: inherit; }
 
 /* ─── Hero ─── */
 .hero { position: relative; padding: 168px 0 88px; }
-/* The Aksum coin, beside the statement on wide screens. */
-.hero-coin { position: absolute; right: var(--gutter); top: -28px; width: 240px; height: 240px; filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)); }
 /* The statement: what the firm does, in two lines. */
 .hero h1 {
   font: 400 clamp(40px, 5.6vw, 80px)/1.08 var(--display);
@@ -344,7 +342,6 @@ a { color: inherit; }
 /* ─── Narrower screens ─── */
 @media (max-width: 1080px) {
   .doors { gap: 0 40px; margin-top: 32px; }
-  .hero-coin { display: none; }
   /* The thread turns and runs down the page. */
   .path { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 56px; }
   .step { display: grid; grid-template-columns: 16px minmax(0, 1fr); column-gap: 20px; padding-bottom: 34px; }
@@ -409,6 +406,59 @@ a { color: inherit; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* ─── The home page, focused on the letter (Oct 2026) ─── */
+.hero-lede-wide { max-width: 60ch; margin-top: 32px; }
+.hero .hero-cta { margin-top: 28px; }
+.hero-coin { position: absolute; right: var(--gutter); top: -28px; width: 240px; height: 240px; filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)); }
+.section-tight { padding: 56px 0 64px; }
+.offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.offer {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 28px 28px 26px; background: var(--raised);
+  border: 1px solid var(--line-2); border-radius: 6px;
+}
+.offer-tag { font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.offer-title { font: 400 25px/1.25 var(--display); color: var(--ink); }
+.offer-what { font-size: 16.5px; line-height: 1.55; color: var(--ink-2); }
+.offer-terms { display: flex; align-items: center; gap: 12px; font-size: 15.5px; font-weight: 600; color: var(--ink); }
+.offer-terms .knot { width: 9px; height: 9px; margin-left: 2px; }
+.offer-cta { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.offer-cta .text-link { font-size: 15px; }
+.tibeb-box {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap;
+  padding: 28px 30px; border: 1px solid var(--line-2); border-radius: 6px; background: var(--raised);
+}
+.tibeb-box > div { max-width: 62ch; display: flex; flex-direction: column; gap: 8px; }
+.tibeb-title { font: 400 26px/1.2 var(--display); color: var(--ink); }
+.tibeb-what { font-size: 16.5px; line-height: 1.55; color: var(--ink-2); }
+.request-note { margin-top: 18px; font-size: 17px; color: var(--ink-2); max-width: 46ch; }
+.request { display: flex; flex-direction: column; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.field-row[hidden], .field[hidden] { display: none; }
+.field label { font-size: 14.5px; font-weight: 600; color: var(--ink); }
+.field .opt { font-weight: 400; color: var(--ink-3); }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 12px 14px; border-radius: 4px;
+  background: var(--inset); color: var(--ink); border: 1px solid var(--line-3);
+  font: 400 16px/1.4 var(--body);
+}
+.field textarea { resize: vertical; min-height: 120px; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.field select option { background: var(--paper); color: var(--ink); }
+.request .btn { align-self: flex-start; min-width: 180px; }
+.request .btn:disabled { opacity: 0.6; cursor: wait; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { min-height: 1.4em; font-size: 15px; color: var(--ink-2); }
+.form-status.ok { color: var(--green); }
+.form-status.err { color: var(--red); }
+@media (max-width: 1080px) { .hero-coin { display: none; } }
+@media (max-width: 860px) {
+  .offers, .field-row { grid-template-columns: minmax(0, 1fr); }
+  .offer { padding: 24px 20px 22px; }
+  .tibeb-box { padding: 24px 20px; }
+}
 </style>
 </head>
 <body>
@@ -421,255 +471,74 @@ a { color: inherit; }
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2.5 5h13M2.5 9h13M2.5 13h13"/></svg>
     </button>
     <nav class="nav-links" id="navLinks" aria-label="Sections">
-      <a href="#tibeb">Tibeb</a>
-      <a href="#research">The gate</a>
-      <a href="#reports">The letter</a>
+      <a href="#letter">The letter</a>
+      <a href="#work">Work with us</a>
+      <a href="#ethiopia">Ethiopia reports</a>
+      <a href="https://www.tibeb.trade/landing.html">Tibeb</a>
       <a href="/about/">About</a>
-      <a href="#contact">Contact</a>
-      <a href="https://www.tibeb.trade/login.html" class="btn btn-primary">Sign in</a>
+      <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
 
-<!-- ════════════ Hero: what the firm does, its two doors, then Tibeb's path, played once ════════════ -->
-<section class="hero" id="tibeb">
+<!-- ════════════ Hero: the letter ════════════ -->
+<section class="hero">
   <div class="wrap">
     <img class="hero-coin" src="/assets/coin.svg" alt="The Habesha Market Research coin: three Aksum stelae inside a champagne-gold rim" width="240" height="240"/>
     <h1>The engineering<br>behind the markets.</h1>
-    <div class="doors">
-      <div class="door">
-        <p class="hero-lede">
-          <strong>The letter</strong> is written by an engineering graduate with a broad grounding in science, not a fund manager. It covers how a machine
-          works, what it costs to build, and what has to be true for a company's plan to happen. No ticker
-          symbols and no recommendations.
-        </p>
-        <div class="hero-cta">
-          <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Read the letter</a>
-        </div>
-        <!-- The newest letter: change this line when the next one goes out. -->
-        <p class="hero-note">Latest: <a class="text-link" href="https://thehabeshainvestor.substack.com/p/the-fastest-megawatt-wins" target="_blank" rel="noopener">The Fastest Megawatt Wins</a></p>
-      </div>
-      <div class="door">
-        <p class="hero-lede">
-          <strong>Tibeb</strong> is an AI research terminal for new technology. Follow what changed, write a
-          thesis that can be proven wrong, and put it through eight checks. Only then does it name a company.
-        </p>
-        <div class="hero-cta">
-          <a href="https://www.tibeb.trade/login.html" class="btn btn-primary">Sign in to Tibeb</a>
-        </div>
-        <p class="hero-note">Tibeb is invite-only for now. <a class="text-link" href="mailto:nateasefa@habeshamarketresearch.com?subject=Tibeb%20invite">Ask for an invite</a></p>
-      </div>
-    </div>
-
-    <ol class="path" id="path" aria-label="From a new development to the companies it reaches, in four steps">
-      <li class="step step-discover">
-        <div class="rail" aria-hidden="true"><span class="knot"></span><span class="link"></span></div>
-        <h2 class="step-name">Discover</h2>
-        <p class="step-what">New papers, news and what builders are arguing about across thirty-two themes, from AI memory and lasers to nuclear and neo banks, and the narratives moving the market: who made the claim, how far the shares moved, who answered.</p>
-        <div class="mini">
-          <ul class="chips" aria-label="Some of the themes">
-            <li class="chip">AI hyperscalers</li>
-            <li class="chip">AI memory</li>
-            <li class="chip pick">Photonics</li>
-            <li class="chip">Lasers</li>
-            <li class="chip">Neo cloud</li>
-            <li class="chip">Cybersecurity</li>
-            <li class="chip">AV &amp; robotics</li>
-            <li class="chip">Nuclear</li>
-            <li class="chip">Space tech</li>
-            <li class="chip">Crypto</li>
-            <li class="chip">Healthcare tech</li>
-            <li class="chip">Macro</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="step step-thesis">
-        <div class="rail" aria-hidden="true"><span class="knot"></span><span class="link"></span></div>
-        <h2 class="step-name">Thesis</h2>
-        <p class="step-what">One yes-or-no question with a date, and what you would expect to see either way.</p>
-        <div class="mini">
-          <div class="thesis-card">
-            <p class="thesis-tag">An example</p>
-            <p class="thesis-q">Will a merchant switch ship with co-packaged optics in volume by the end of 2027?</p>
-            <p class="thesis-by">Resolves by <b>2027-12-31</b></p>
-          </div>
-        </div>
-      </li>
-
-      <li class="step step-diligence">
-        <div class="rail" aria-hidden="true"><span class="knot"></span><span class="link"></span></div>
-        <h2 class="step-name">Diligence</h2>
-        <p class="step-what">Eight checks on the thesis and on the sources behind it.</p>
-        <div class="mini">
-          <ul class="checks">
-            <li class="check"><span class="knot" aria-hidden="true"></span>Falsifiable thesis</li>
-            <li class="check"><span class="knot" aria-hidden="true"></span>Evidence depth</li>
-            <li class="check"><span class="knot" aria-hidden="true"></span>Argued both ways</li>
-            <li class="check"><span class="knot" aria-hidden="true"></span>Sources verified</li>
-            <li class="check"><span class="knot" aria-hidden="true"></span>Primary sources</li>
-            <li class="check"><span class="knot" aria-hidden="true"></span>Catalyst on the calendar</li>
-            <li class="check"><span class="knot" aria-hidden="true"></span>Committee review</li>
-            <li class="check"><span class="knot" aria-hidden="true"></span>Verdict on file</li>
-          </ul>
-          <p class="mini-foot" aria-hidden="true"><b id="passed">8</b> of 8 passed</p>
-        </div>
-      </li>
-
-      <li class="step step-exposure">
-        <div class="rail" aria-hidden="true"><span class="knot"></span></div>
-        <h2 class="step-name">Exposure</h2>
-        <p class="step-what">The companies the evidence shows are exposed, how, and how much of each business turns on the thesis.</p>
-        <div class="mini">
-          <ul class="slots">
-            <li class="slot"><span class="sym" aria-hidden="true">TKR1</span><span class="role">Direct exposure</span><span class="side">Benefits</span></li>
-            <li class="slot"><span class="sym" aria-hidden="true">TKR2</span><span class="role">Supplier or bottleneck</span><span class="side">Benefits</span></li>
-            <li class="slot"><span class="sym" aria-hidden="true">TKR3</span><span class="role">Second-order</span><span class="side">Benefits</span></li>
-            <li class="slot hurt"><span class="sym" aria-hidden="true">TKR4</span><span class="role">At risk</span><span class="side">Hurt</span></li>
-          </ul>
-          <p class="mini-foot" aria-hidden="true"><span class="when-locked">Locked until all eight pass</span><span class="when-open">Open</span></p>
-        </div>
-      </li>
-    </ol>
-    <button class="replay" id="replay" type="button">Play it again</button>
-  </div>
-</section>
-
-<div class="thread-rule" aria-hidden="true"></div>
-
-<!-- ════════════ The gate ════════════ -->
-<section class="section" id="research">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 class="section-title">What a thesis has to get through</h2>
-      <p class="section-lede">
-        Before Tibeb names a single company, the thesis and its evidence pass eight checks. They are the same
-        for everyone, and you can see where yours stands at every step.
-      </p>
-    </div>
-
-    <div class="gate-cols" aria-hidden="true"><span></span><span>The check</span><span>What it takes</span><span>Why it is there</span></div>
-    <ol class="gate">
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Falsifiable thesis</h3>
-        <p class="gate-takes">A yes-or-no question, a resolve-by date, and what you would expect to see if it is true and if it is false.</p>
-        <p class="gate-why">If nothing could prove it wrong, there is nothing to research.</p>
-      </li>
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Evidence depth</h3>
-        <p class="gate-takes">At least <span class="num">20</span> sources from <span class="num">6</span> or more independent origins — a wire copy of a press release is not one, and no publisher counts more than four times.</p>
-        <p class="gate-why">An outlet counts at most four times, and a wire copy of a release is not a voice of its own.</p>
-      </li>
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Argued both ways</h3>
-        <p class="gate-takes">At least <span class="num">5</span> sources for the thesis and <span class="num">5</span> against it.</p>
-        <p class="gate-why">The case against is gathered on purpose, not left to chance.</p>
-      </li>
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Sources verified</h3>
-        <p class="gate-takes">At least <span class="num">80%</span> of the sources carry a link that was checked.</p>
-        <p class="gate-why">Deep research keeps a source only if it finds the real link. What it cannot find, it drops.</p>
-      </li>
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Primary sources</h3>
-        <p class="gate-takes">At least <span class="num">3</span> filings, datasets, papers or regulator documents.</p>
-        <p class="gate-why">The thing itself, not someone's summary of it.</p>
-      </li>
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Catalyst on the calendar</h3>
-        <p class="gate-takes">At least <span class="num">1</span> dated event that could settle the question or move it.</p>
-        <p class="gate-why">A thesis needs a day it can be wrong on.</p>
-      </li>
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Committee review</h3>
-        <p class="gate-takes">A committee of AI analysts argues the thesis from the evidence on file, and a chair writes the memo.</p>
-        <p class="gate-why">Each analyst commits to a probability. None of them recommends a trade.</p>
-      </li>
-      <li class="gate-row">
-        <span class="knot" aria-hidden="true"></span>
-        <h3 class="gate-name">Verdict on file</h3>
-        <p class="gate-takes">One probability that the thesis resolves yes. A committee that is split gives none.</p>
-        <p class="gate-why">The companies named after it follow from the verdict, and each one has to cite sources from your ledger.</p>
-      </li>
-    </ol>
-    <p class="gate-after">
-      Change the question and the review, the verdict and the exposure go stale. They have to be earned again
-      for the thesis you are actually holding.
+    <p class="hero-lede hero-lede-wide">
+      <strong>The letter</strong> is written by an engineering graduate with a broad grounding in science, not a fund manager. It covers how a machine
+      works, what it costs to build, and what has to be true for a company's plan to happen. No ticker
+      symbols and no recommendations.
     </p>
-  </div>
-</section>
-
-<div class="thread-rule" aria-hidden="true"></div>
-
-<!-- ════════════ Where it stops ════════════ -->
-<section class="section" id="scope">
-  <div class="wrap">
-    <div class="stops">
-      <div>
-        <h2 class="section-title">It stops at research</h2>
-        <p>
-          The terminal ends at the companies exposed to the thesis: how it reaches each one, in which
-          direction, and how much of the business turns on it, with the sources behind every line. What you
-          do with that is your call.
-        </p>
-        <p class="small">Nothing on this site or in Tibeb is investment advice.</p>
-      </div>
-      <ul class="not-list">
-        <li><span class="no" aria-hidden="true">No</span>orders placed</li>
-        <li><span class="no" aria-hidden="true">No</span>position sizing</li>
-        <li><span class="no" aria-hidden="true">No</span>buy or sell calls</li>
-      </ul>
+    <div class="hero-cta">
+      <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe on Substack</a>
+      <a href="#letter" class="btn btn-quiet">Read the latest letters</a>
     </div>
+    <p class="hero-note" id="latestNote">Latest: <a class="text-link" id="latestLink" href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">የኢንቨስትመንት መግቢያ</a></p>
   </div>
 </section>
 
 <div class="thread-rule" aria-hidden="true"></div>
 
-<!-- ════════════ The letter ════════════ -->
-<section class="section" id="reports">
+<!-- ════════════ The letter: the newest three, from the Substack feed ════════════ -->
+<section class="section" id="letter">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title">The letter</h2>
+      <h2 class="section-title">The latest letters</h2>
       <p class="section-lede">
         Each letter starts with a framework instead of a prediction. Companies are named to explain how an
         industry works, not to tell you what to buy. The rest is your judgment, which is the point.
       </p>
     </div>
 
-    <!-- The letters as published on thehabeshainvestor.substack.com, newest first.
-         Titles, dates and links are the real ones: add a row here when a new letter goes out. -->
-    <ul class="posts">
+    <!-- Filled from /api/posts (the Substack RSS feed, newest first). The rows below
+         are only the fallback for when the feed can't be reached. -->
+    <ul class="posts" id="posts">
       <li class="post">
-        <a href="https://thehabeshainvestor.substack.com/p/the-fastest-megawatt-wins" target="_blank" rel="noopener">
-          <time class="post-kind" datetime="2026-10-08">October 8, 2026</time>
-          <span class="post-title">The Fastest Megawatt Wins</span>
+        <a href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">
+          <time class="post-kind" datetime="2026-10-21">October 21, 2026</time>
+          <span class="post-title">የኢንቨስትመንት መግቢያ</span>
           <span class="post-go">Read on Substack</span>
-          <span class="post-desc">Why AI runs on engines and fuel cells first, and nuclear later. Gas engines rank first, fuel cells second, gas turbines third. Whoever makes the slowest part gets paid on every path. A long read, about 90 minutes.</span>
+          <span class="post-desc">Intro to Investing, in Amharic.</span>
         </a>
       </li>
       <li class="post">
-        <a href="https://thehabeshainvestor.substack.com/p/koreas-third-bull-market-rally-already" target="_blank" rel="noopener">
-          <time class="post-kind" datetime="2025-12-20">December 20, 2025</time>
-          <span class="post-title">Korea's Third Bull Market Rally Already Started</span>
+        <a href="https://thehabeshainvestor.substack.com/p/globalfoundries-light-not-litho" target="_blank" rel="noopener">
+          <time class="post-kind" datetime="2026-10-20">October 20, 2026</time>
+          <span class="post-title">GlobalFoundries: Light, Not Litho</span>
           <span class="post-go">Read on Substack</span>
-          <span class="post-desc">Korea's market seen through three forces: the memory chip cycle, falling oil prices and expectations of a weaker dollar. Set against the two long bull markets before it, 1986 to 1989 and 2004 to 2007.</span>
+          <span class="post-desc">The foundry that quit the shrink race is now the one Washington and Tokyo picked to build.</span>
         </a>
       </li>
       <li class="post">
-        <a href="https://thehabeshainvestor.substack.com/p/intro-to-investing" target="_blank" rel="noopener">
-          <time class="post-kind" datetime="2025-12-13">December 13, 2025</time>
-          <span class="post-title">Intro to Investing</span>
+        <a href="https://thehabeshainvestor.substack.com/p/umc-is-betting-on-lithium-niobate" target="_blank" rel="noopener">
+          <time class="post-kind" datetime="2026-10-19">October 19, 2026</time>
+          <span class="post-title">UMC: Betting on Lithium Niobate.</span>
           <span class="post-go">Read on Substack</span>
-          <span class="post-desc">The first letter: Charlie Munger's way of thinking, how the Federal Reserve works, debt versus equity, and how to write an investment thesis around your own life.</span>
+          <span class="post-desc">400G per lane is a modulator problem.</span>
         </a>
       </li>
     </ul>
@@ -686,23 +555,146 @@ a { color: inherit; }
 
 <div class="thread-rule" aria-hidden="true"></div>
 
-<!-- ════════════ Contact ════════════ -->
-<section class="section" id="contact">
+<!-- ════════════ Work with us: research and articles, 50% upfront ════════════ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Work with us</h2>
+      <p class="section-lede">
+        The same research behind the letter, done for you. Tell us what you need; we agree the scope and the
+        price before anything is paid.
+      </p>
+    </div>
+    <div class="offers">
+      <article class="offer">
+        <h3 class="offer-title">Personal market research</h3>
+        <p class="offer-what">Research on a market, an industry or a technology you care about, written for you alone: how it works, what it costs, who is exposed and what has to be true.</p>
+        <p class="offer-terms"><span class="knot" aria-hidden="true"></span>50% upfront, 50% on delivery</p>
+        <div class="offer-cta">
+          <a href="#request" class="btn btn-primary" data-kind="research">Request research</a>
+          <a href="#" class="text-link deposit-link" data-deposit="researchDepositUrl" hidden>Scope agreed? Pay the deposit</a>
+        </div>
+      </article>
+      <article class="offer">
+        <h3 class="offer-title">Articles written for you</h3>
+        <p class="offer-what">A researched, long-form article on your topic, written in the letter's voice for your newsletter, publication or company.</p>
+        <p class="offer-terms"><span class="knot" aria-hidden="true"></span>50% upfront, 50% on delivery</p>
+        <div class="offer-cta">
+          <a href="#request" class="btn btn-primary" data-kind="article">Request an article</a>
+          <a href="#" class="text-link deposit-link" data-deposit="articleDepositUrl" hidden>Scope agreed? Pay the deposit</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="thread-rule" aria-hidden="true"></div>
+
+<!-- ════════════ Ethiopia reports: coming soon ════════════ -->
+<section class="section" id="ethiopia">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Ethiopia reports</h2>
+      <p class="section-lede">
+        Reports on the Ethiopian market, for anyone deciding where to build or invest at home. The first ones are
+        being finished now; join the list and we'll write when they're ready.
+      </p>
+    </div>
+    <div class="offers">
+      <article class="offer">
+        <p class="offer-tag">Coming soon</p>
+        <h3 class="offer-title">What business to start in Ethiopia</h3>
+        <p class="offer-what">Which businesses make sense to start in Ethiopia today, and why.</p>
+        <div class="offer-cta">
+          <a href="#request" class="btn btn-quiet" data-kind="report" data-report="What business to start in Ethiopia">Join the waitlist</a>
+        </div>
+      </article>
+      <article class="offer">
+        <p class="offer-tag">Coming soon</p>
+        <h3 class="offer-title">Ethiopia's real estate market</h3>
+        <p class="offer-what">What the real estate market in Ethiopia is doing.</p>
+        <div class="offer-cta">
+          <a href="#request" class="btn btn-quiet" data-kind="report" data-report="Ethiopia's real estate market">Join the waitlist</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="thread-rule" aria-hidden="true"></div>
+
+<!-- ════════════ Tibeb, in brief: the full story is on tibeb.trade ════════════ -->
+<section class="section section-tight" id="tibeb">
+  <div class="wrap">
+    <div class="tibeb-box">
+      <div>
+        <p class="offer-tag">Also from Habesha</p>
+        <h2 class="tibeb-title">Tibeb, the research terminal</h2>
+        <p class="tibeb-what">An AI research terminal for new technology. Follow what changed, write a thesis that can be proven wrong, and put it through eight checks before it names a company. Invite-only for now.</p>
+      </div>
+      <a href="https://www.tibeb.trade/landing.html" class="btn btn-quiet">See Tibeb</a>
+    </div>
+  </div>
+</section>
+
+<div class="thread-rule" aria-hidden="true"></div>
+
+<!-- ════════════ The request form ════════════ -->
+<section class="section" id="request">
   <div class="wrap">
     <div class="contact">
-      <h2 class="section-title">Read the letter. Ask for an invite.</h2>
       <div>
-        <p>
-          The letter is open to everyone. Tibeb is invite-only for now. Write for an invite or a partnership,
-          or to say where the research is wrong. Disagreement that comes with a source is the most useful
-          kind.
+        <h2 class="section-title">Make a request</h2>
+        <p class="request-note">
+          Research and articles: we reply with the scope and a price. Work starts once the 50% deposit is paid,
+          and the other 50% is due on delivery. Reports: you'll hear from us when they're ready.
         </p>
-        <div class="hero-cta">
-          <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe on Substack</a>
-          <a href="https://www.tibeb.trade/login.html" class="btn btn-quiet">Sign in to Tibeb</a>
-        </div>
         <a href="mailto:nateasefa@habeshamarketresearch.com" class="mail">nateasefa@habeshamarketresearch.com</a>
       </div>
+      <form class="request" id="requestForm" novalidate>
+        <div class="field">
+          <label for="rqName">Name</label>
+          <input id="rqName" name="name" type="text" autocomplete="name" required maxlength="120"/>
+        </div>
+        <div class="field">
+          <label for="rqEmail">Email</label>
+          <input id="rqEmail" name="email" type="email" autocomplete="email" required maxlength="200"/>
+        </div>
+        <div class="field">
+          <label for="rqKind">What you need</label>
+          <select id="rqKind" name="kind" required>
+            <option value="research">Personal market research</option>
+            <option value="article">An article written for you</option>
+            <option value="report">An Ethiopia report (waitlist)</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="field" id="rqReportField" hidden>
+          <label for="rqReport">Which report</label>
+          <select id="rqReport" name="report">
+            <option>What business to start in Ethiopia</option>
+            <option>Ethiopia's real estate market</option>
+            <option>Both</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rqTopic" id="rqTopicLabel">The topic</label>
+          <textarea id="rqTopic" name="topic" rows="5" maxlength="4000" placeholder="The market, industry or question, and what you want to come away with."></textarea>
+        </div>
+        <div class="field-row" id="rqDetails">
+          <div class="field">
+            <label for="rqDeadline">Deadline <span class="opt">(optional)</span></label>
+            <input id="rqDeadline" name="deadline" type="text" maxlength="120"/>
+          </div>
+          <div class="field">
+            <label for="rqBudget">Budget <span class="opt">(optional)</span></label>
+            <input id="rqBudget" name="budget" type="text" maxlength="120"/>
+          </div>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="rqWebsite">Website</label><input id="rqWebsite" name="website" type="text" tabindex="-1" autocomplete="off"/></div>
+        <button class="btn btn-primary" type="submit" id="rqSubmit">Send request</button>
+        <p class="form-status" id="rqStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -715,7 +707,7 @@ a { color: inherit; }
     <div class="footer-links">
       <a href="/about/">About</a>
       <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener">Substack</a>
-      <a href="https://www.tibeb.trade">Tibeb</a>
+      <a href="https://www.tibeb.trade/landing.html">Tibeb</a>
       <a href="mailto:nateasefa@habeshamarketresearch.com">Contact</a>
     </div>
     <p class="footer-note">Habesha Market Research publishes research, not advice. It is for research and education, and nothing here is investment advice or a recommendation to buy or sell any security.</p>
@@ -740,93 +732,129 @@ a { color: inherit; }
   links.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
-  // ── The path, played once: discover → thesis → eight checks → exposure ──
-  if (!document.documentElement.classList.contains('anim')) return;
-  var path = document.getElementById('path');
-  var steps = [].slice.call(path.querySelectorAll('.step'));
-  var checks = [].slice.call(path.querySelectorAll('.check'));
-  var slots = [].slice.call(path.querySelectorAll('.slot'));
-  var pick = path.querySelector('.chip.pick');
-  var passed = document.getElementById('passed');
-  var replay = document.getElementById('replay');
-  var timers = [];
-  var at = function (ms, fn) { timers.push(setTimeout(fn, ms)); };
-  var on = function (el, cls) { el.classList.add(cls || 'on'); };
-
-  var seen = steps.map(function () { return false; });
-  var next = 0;          // the step that plays next
-  var busy = false;
-  var straight = false;  // "play it again": run through without waiting to be seen
-
-  function clear() { timers.forEach(clearTimeout); timers = []; }
-  function reset() {
-    clear();
-    steps.concat(checks, slots, [pick]).forEach(function (el) { el.classList.remove('on', 'go'); });
-    passed.textContent = '0';
-    next = 0; busy = false;
+  // ── The newest three letters, from the Substack feed (newest first) ──
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function longDate(iso) {
+    var p = (iso || '').split('-');
+    return p.length === 3 ? MONTHS[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0] : '';
   }
-  function finish() {
-    clear();
-    steps.forEach(function (el) { on(el); on(el, 'go'); });
-    checks.concat(slots, [pick]).forEach(function (el) { on(el); });
-    passed.textContent = String(checks.length);
-    next = steps.length; busy = false;
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
   }
-  function playStep(i, done) {
-    var t = 0;
-    if (i === 0) {                       // Discover: a theme gets picked
-      at(t += 250, function () { on(steps[0]); on(pick); });
-      at(t += 600, function () { on(steps[0], 'go'); });
-      at(t += 450, done);
-    } else if (i === 1) {                // Thesis: the question is written
-      at(t += 150, function () { on(steps[1]); });
-      at(t += 650, function () { on(steps[1], 'go'); });
-      at(t += 450, done);
-    } else if (i === 2) {                // Diligence: the eight checks, one by one
-      t += 150;
-      checks.forEach(function (c, k) {
-        at(t + k * 230, function () { on(c); passed.textContent = String(k + 1); });
+  fetch('/api/posts', { headers: { 'Accept': 'application/json' } })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var posts = data && data.posts;
+      if (!posts || !posts.length) return;
+      var list = document.getElementById('posts');
+      list.textContent = '';
+      posts.forEach(function (p) {
+        if (!/^https:\/\//.test(p.link)) return;
+        var li = el('li', 'post');
+        var a = el('a');
+        a.href = p.link; a.target = '_blank'; a.rel = 'noopener';
+        var t = el('time', 'post-kind', longDate(p.date));
+        t.setAttribute('datetime', p.date || '');
+        a.appendChild(t);
+        a.appendChild(el('span', 'post-title', p.title));
+        a.appendChild(el('span', 'post-go', 'Read on Substack'));
+        if (p.description) a.appendChild(el('span', 'post-desc', p.description));
+        li.appendChild(a);
+        list.appendChild(li);
       });
-      t += checks.length * 230;
-      at(t, function () { on(steps[2]); });
-      at(t += 250, function () { on(steps[2], 'go'); });
-      at(t += 450, done);
-    } else {                             // Exposure: the slots open
-      at(t += 150, function () { on(steps[3]); });
-      slots.forEach(function (sl, k) { at(t + 200 + k * 150, function () { on(sl); }); });
-      at(t + 200 + slots.length * 150, done);
-    }
+      var latest = document.getElementById('latestLink');
+      if (latest && /^https:\/\//.test(posts[0].link)) { latest.href = posts[0].link; latest.textContent = posts[0].title; }
+    })
+    .catch(function () { /* keep the letters baked into the page */ });
+
+  // ── Deposit links: shown only once the Stripe Payment Links are set ──
+  fetch('/api/config').then(function (r) { return r.ok ? r.json() : null; }).then(function (cfg) {
+    if (!cfg) return;
+    [].forEach.call(document.querySelectorAll('[data-deposit]'), function (a) {
+      var url = cfg[a.getAttribute('data-deposit')];
+      if (url && /^https:\/\//.test(url)) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.hidden = false; }
+    });
+  }).catch(function () {});
+
+  // ── The request form ──
+  var form = document.getElementById('requestForm');
+  var kind = document.getElementById('rqKind');
+  var reportField = document.getElementById('rqReportField');
+  var report = document.getElementById('rqReport');
+  var topicLabel = document.getElementById('rqTopicLabel');
+  var details = document.getElementById('rqDetails');
+  var status = document.getElementById('rqStatus');
+  var submit = document.getElementById('rqSubmit');
+
+  function syncKind() {
+    var isReport = kind.value === 'report';
+    reportField.hidden = !isReport;
+    details.hidden = isReport;
+    topicLabel.textContent = isReport ? 'Anything you want the report to cover (optional)' : 'The topic';
   }
-  function advance() {
-    if (busy || next >= steps.length) return;
-    if (!straight && !seen[next]) return;
-    busy = true;
-    var i = next;
-    playStep(i, function () { busy = false; next = i + 1; advance(); });
+  kind.addEventListener('change', syncKind);
+  syncKind();
+
+  [].forEach.call(document.querySelectorAll('[data-kind]'), function (a) {
+    a.addEventListener('click', function () {
+      kind.value = a.getAttribute('data-kind');
+      var r = a.getAttribute('data-report');
+      if (r) report.value = r;
+      syncKind();
+      setTimeout(function () { document.getElementById('rqName').focus({ preventScroll: true }); }, 400);
+    });
+  });
+
+  var LABELS = { research: 'Personal market research', article: 'An article written for you', report: 'An Ethiopia report (waitlist)', other: 'Something else' };
+  function mailtoFor(f) {
+    var label = LABELS[f.kind] || 'Request';
+    var lines = ['Name: ' + f.name, 'Email: ' + f.email, 'Request: ' + label];
+    if (f.kind === 'report') lines.push('Report: ' + f.report);
+    if (f.deadline) lines.push('Deadline: ' + f.deadline);
+    if (f.budget) lines.push('Budget: ' + f.budget);
+    lines.push('', f.topic);
+    return 'mailto:nateasefa@habeshamarketresearch.com?subject=' + encodeURIComponent('Request: ' + label) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+  function say(msg, kindCls) {
+    status.textContent = msg;
+    status.className = 'form-status' + (kindCls ? ' ' + kindCls : '');
   }
 
-  passed.textContent = '0';
-  replay.addEventListener('click', function () { reset(); straight = true; advance(); });
-  // Timers stall in a background tab: show the end state rather than a
-  // half-played one when the visitor comes back.
-  document.addEventListener('visibilitychange', function () { if (document.hidden && busy) finish(); });
-
-  if ('IntersectionObserver' in window) {
-    // Side by side on a wide screen the four play as one sequence; stacked
-    // on a phone each waits until it has been scrolled into view.
-    var watcher = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        seen[steps.indexOf(e.target)] = true;
-        watcher.unobserve(e.target);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = {};
+    ['name', 'email', 'kind', 'report', 'topic', 'deadline', 'budget', 'website'].forEach(function (k) {
+      var input = form.elements[k];
+      f[k] = input ? input.value.trim() : '';
+    });
+    if (f.kind !== 'report') f.report = '';
+    if (!f.name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) { say('Please give your name and a valid email.', 'err'); return; }
+    if (f.kind !== 'report' && f.topic.length < 10) { say('Please describe the topic in a sentence or two.', 'err'); return; }
+    submit.disabled = true;
+    say('Sending…');
+    fetch('/api/request', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        submit.disabled = false;
+        if (!res.ok || !res.j.ok) { say((res.j && res.j.error) || 'Something went wrong. Please email us instead.', 'err'); return; }
+        form.reset(); syncKind();
+        if (res.j.emailed === false) {
+          // Requests aren't emailed from the server yet: hand it to the visitor's mail app.
+          say('Thanks. One more step: your mail app will open with the request filled in. Press send.', 'ok');
+          window.location.href = mailtoFor(f);
+        } else {
+          say(f.kind === 'report' ? "You're on the list. We'll write when the report is ready." : 'Thanks. We will reply with the scope and a price.', 'ok');
+        }
+      })
+      .catch(function () {
+        submit.disabled = false;
+        say('Opening your mail app instead.', 'ok');
+        window.location.href = mailtoFor(f);
       });
-      advance();
-    }, { threshold: 0.3 });
-    steps.forEach(function (el) { watcher.observe(el); });
-  } else {
-    straight = true;
-    advance();
-  }
+  });
 })();
 </script>
 </body>

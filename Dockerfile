@@ -17,7 +17,7 @@ WORKDIR /site
 # Copy only what we serve. Keeps the image small and avoids leaking .git
 # or editor junk into the running container. assets/ holds the logo's
 # emblem, the favicons and the social-preview image.
-COPY index.html login.html favicon.ico ./
+COPY index.html login.html favicon.ico server.py ./
 COPY assets ./assets
 # The About page, served at /about/ (nathanielasefa.com forwards here).
 COPY about ./about
@@ -30,4 +30,7 @@ EXPOSE 8080
 # --bind 0.0.0.0 is critical: http.server defaults to binding all interfaces
 # already in 3.12 but being explicit prevents a silent regression if the
 # default ever changes. Shell form so $PORT expands at container start.
-CMD python -m http.server "$PORT" --bind 0.0.0.0
+# server.py serves the same files, plus /api/posts (the newest letters from
+# the Substack feed), /api/config and /api/request (the request form). It reads
+# $PORT itself and binds 0.0.0.0.
+CMD ["python", "server.py"]
