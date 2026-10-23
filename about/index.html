@@ -11,7 +11,7 @@
 <meta property="og:type" content="profile"/>
 <meta property="og:url" content="https://www.habeshamarketresearch.com/about/"/>
 <link rel="canonical" href="https://www.habeshamarketresearch.com/about/"/>
-<meta name="theme-color" content="#FBF0D4"/>
+<meta name="theme-color" content="#0C2044"/>
 <link rel="icon" href="/favicon.ico" sizes="48x48"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
@@ -23,17 +23,19 @@
 /* The About page. Same paper, ink and tibeb as the home page; a reading
    page, so one column of prose with the facts set beside it. */
 :root {
-  --paper:     #FBF0D4;
-  --raised:    #FFF8E8;
-  --line-2:    #CDBA8C;
-  --line-3:    #8C7F5C;
-  --ink:       #0C2044;
-  --ink-2:     #3B4763;
-  --ink-3:     #5A637A;
-  --ink-hover: #22407A;
+  --paper:     #0C2044;
+  --raised:    #12295A;
+  --line-2:    #2C467E;
+  --line-3:    #8C7347;
+  --ink:       #F6EEDC;
+  --ink-2:     #CBD2E0;
+  --ink-3:     #9EAAC2;
+  --ink-hover: #EBD9AE;
+  --accent:    #EBD9AE;   /* champagne, the coin's rim */
+  --accent-2:  #D2B886;
   --display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
   --body:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --tibeb:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%230C2044'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23BB2B2D'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23FBF0D4'/%3E%3Crect y='5.6' width='24' height='1' fill='%23AB9B3B'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23BB2B2D'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%2311654E'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%235C2530'/%3E%3C/svg%3E");
+  --tibeb:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%23081833'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23D2B886'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23EBD9AE'/%3E%3Crect y='5.6' width='24' height='1' fill='%238C7347'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23EBD9AE'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%23B89B62'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%238C7347'/%3E%3C/svg%3E");
   --gutter: 40px;
   --wrap:   1200px;
 }
@@ -47,7 +49,7 @@ body {
   overflow-x: hidden;
 }
 a { color: inherit; }
-::selection { background: rgba(12, 32, 68, 0.16); }
+::selection { background: rgba(235, 217, 174, 0.28); }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 .skip {
@@ -63,10 +65,10 @@ a { color: inherit; }
   font: 600 16px/1.25 var(--body); text-decoration: none; white-space: nowrap;
   transition: background 0.15s, border-color 0.15s;
 }
-.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.btn-primary:hover { background: var(--ink-hover); border-color: var(--ink-hover); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn-primary:hover { background: var(--ink); border-color: var(--ink); }
 .btn-quiet { background: transparent; border-color: var(--line-3); color: var(--ink); }
-.btn-quiet:hover { background: rgba(12, 32, 68, 0.05); border-color: var(--ink); }
+.btn-quiet:hover { background: rgba(235, 217, 174, 0.08); border-color: var(--ink); }
 
 /* Nav, with the tibeb along its top edge. */
 .nav { position: relative; padding-top: 12px; border-bottom: 1px solid var(--line-2); }
@@ -144,7 +146,7 @@ h1 {
 
 <header class="nav">
   <div class="nav-in">
-    <a href="/" class="brand" aria-label="Habesha Market Research, home"><img class="brand-emblem" src="/assets/emblem.png" alt="" width="30" height="42"/><span class="brand-lockup" aria-hidden="true"><span class="brand-name">Habesha</span><span class="brand-sub">Market Research</span></span></a>
+    <a href="/" class="brand" aria-label="Habesha Market Research, home"><img class="brand-emblem" src="/assets/emblem.svg" alt="" width="42" height="42"/><span class="brand-lockup" aria-hidden="true"><span class="brand-name">Habesha</span><span class="brand-sub">Market Research</span></span></a>
     <nav class="nav-links" aria-label="Site">
       <a href="/#tibeb" class="hide-sm">Tibeb</a>
       <a href="/#reports" class="hide-sm">The letter</a>
