@@ -413,6 +413,8 @@ a { color: inherit; }
 .hero-coin { position: absolute; right: var(--gutter); top: -28px; width: 240px; height: 240px; filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)); }
 .section-tight { padding: 56px 0 64px; }
 .offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.offers-one { grid-template-columns: minmax(0, 760px); }
+.report-buy[aria-disabled="true"] { opacity: 0.55; cursor: default; pointer-events: none; }
 .offer {
   display: flex; flex-direction: column; gap: 12px;
   padding: 28px 28px 26px; background: var(--raised);
@@ -555,17 +557,17 @@ a { color: inherit; }
 
 <div class="thread-rule" aria-hidden="true"></div>
 
-<!-- ════════════ Work with us: research and articles, 50% upfront ════════════ -->
+<!-- ════════════ Work with us: personal market research, 50% upfront ════════════ -->
 <section class="section" id="work">
   <div class="wrap">
     <div class="section-head">
       <h2 class="section-title">Work with us</h2>
       <p class="section-lede">
-        The same research behind the letter, done for you. Tell us what you need; we agree the scope and the
-        price before anything is paid.
+        The same research behind the letter, done for you on the market you care about. Tell us what you
+        need; we agree the scope and the price before anything is paid.
       </p>
     </div>
-    <div class="offers">
+    <div class="offers offers-one">
       <article class="offer">
         <h3 class="offer-title">Personal market research</h3>
         <p class="offer-what">Research on a market, an industry or a technology you care about, written for you alone: how it works, what it costs, who is exposed and what has to be true.</p>
@@ -575,46 +577,37 @@ a { color: inherit; }
           <a href="#" class="text-link deposit-link" data-deposit="researchDepositUrl" hidden>Scope agreed? Pay the deposit</a>
         </div>
       </article>
-      <article class="offer">
-        <h3 class="offer-title">Articles written for you</h3>
-        <p class="offer-what">A researched, long-form article on your topic, written in the letter's voice for your newsletter, publication or company.</p>
-        <p class="offer-terms"><span class="knot" aria-hidden="true"></span>50% upfront, 50% on delivery</p>
-        <div class="offer-cta">
-          <a href="#request" class="btn btn-primary" data-kind="article">Request an article</a>
-          <a href="#" class="text-link deposit-link" data-deposit="articleDepositUrl" hidden>Scope agreed? Pay the deposit</a>
-        </div>
-      </article>
     </div>
   </div>
 </section>
 
 <div class="thread-rule" aria-hidden="true"></div>
 
-<!-- ════════════ Ethiopia reports: coming soon ════════════ -->
+<!-- ════════════ Ethiopia reports: pre-order through Stripe ════════════ -->
 <section class="section" id="ethiopia">
   <div class="wrap">
     <div class="section-head">
       <h2 class="section-title">Ethiopia reports</h2>
       <p class="section-lede">
         Reports on the Ethiopian market, for anyone deciding where to build or invest at home. The first ones are
-        being finished now; join the list and we'll write when they're ready.
+        being drafted now: pre-order and the report is yours the day it's published.
       </p>
     </div>
     <div class="offers">
       <article class="offer">
-        <p class="offer-tag">Coming soon</p>
+        <p class="offer-tag">In progress · pre-order</p>
         <h3 class="offer-title">What business to start in Ethiopia</h3>
         <p class="offer-what">Which businesses make sense to start in Ethiopia today, and why.</p>
         <div class="offer-cta">
-          <a href="#request" class="btn btn-quiet" data-kind="report" data-report="What business to start in Ethiopia">Join the waitlist</a>
+          <a class="btn btn-primary report-buy" data-buy="ethiopiaBusinessUrl" role="link" aria-disabled="true">Pre-order opens soon</a>
         </div>
       </article>
       <article class="offer">
-        <p class="offer-tag">Coming soon</p>
+        <p class="offer-tag">In progress · pre-order</p>
         <h3 class="offer-title">Ethiopia's real estate market</h3>
         <p class="offer-what">What the real estate market in Ethiopia is doing.</p>
         <div class="offer-cta">
-          <a href="#request" class="btn btn-quiet" data-kind="report" data-report="Ethiopia's real estate market">Join the waitlist</a>
+          <a class="btn btn-primary report-buy" data-buy="ethiopiaRealEstateUrl" role="link" aria-disabled="true">Pre-order opens soon</a>
         </div>
       </article>
     </div>
@@ -646,8 +639,8 @@ a { color: inherit; }
       <div>
         <h2 class="section-title">Make a request</h2>
         <p class="request-note">
-          Research and articles: we reply with the scope and a price. Work starts once the 50% deposit is paid,
-          and the other 50% is due on delivery. Reports: you'll hear from us when they're ready.
+          Personal market research: we reply with the scope and a price. Work starts once the 50% deposit is
+          paid, and the other 50% is due on delivery.
         </p>
         <a href="mailto:nateasefa@habeshamarketresearch.com" class="mail">nateasefa@habeshamarketresearch.com</a>
       </div>
@@ -664,17 +657,7 @@ a { color: inherit; }
           <label for="rqKind">What you need</label>
           <select id="rqKind" name="kind" required>
             <option value="research">Personal market research</option>
-            <option value="article">An article written for you</option>
-            <option value="report">An Ethiopia report (waitlist)</option>
             <option value="other">Something else</option>
-          </select>
-        </div>
-        <div class="field" id="rqReportField" hidden>
-          <label for="rqReport">Which report</label>
-          <select id="rqReport" name="report">
-            <option>What business to start in Ethiopia</option>
-            <option>Ethiopia's real estate market</option>
-            <option>Both</option>
           </select>
         </div>
         <div class="field">
@@ -770,9 +753,17 @@ a { color: inherit; }
     })
     .catch(function () { /* keep the letters baked into the page */ });
 
-  // ── Deposit links: shown only once the Stripe Payment Links are set ──
+  // ── Stripe Payment Links: the deposit link and the report pre-orders, set in Railway ──
   fetch('/api/config').then(function (r) { return r.ok ? r.json() : null; }).then(function (cfg) {
     if (!cfg) return;
+    [].forEach.call(document.querySelectorAll('[data-buy]'), function (a) {
+      var url = cfg[a.getAttribute('data-buy')];
+      if (url && /^https:\/\//.test(url)) {
+        a.href = url; a.target = '_blank'; a.rel = 'noopener';
+        a.removeAttribute('aria-disabled'); a.removeAttribute('role');
+        a.textContent = 'Pre-order the report';
+      }
+    });
     [].forEach.call(document.querySelectorAll('[data-deposit]'), function (a) {
       var url = cfg[a.getAttribute('data-deposit')];
       if (url && /^https:\/\//.test(url)) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.hidden = false; }
@@ -782,37 +773,24 @@ a { color: inherit; }
   // ── The request form ──
   var form = document.getElementById('requestForm');
   var kind = document.getElementById('rqKind');
-  var reportField = document.getElementById('rqReportField');
-  var report = document.getElementById('rqReport');
   var topicLabel = document.getElementById('rqTopicLabel');
   var details = document.getElementById('rqDetails');
   var status = document.getElementById('rqStatus');
   var submit = document.getElementById('rqSubmit');
 
-  function syncKind() {
-    var isReport = kind.value === 'report';
-    reportField.hidden = !isReport;
-    details.hidden = isReport;
-    topicLabel.textContent = isReport ? 'Anything you want the report to cover (optional)' : 'The topic';
-  }
-  kind.addEventListener('change', syncKind);
-  syncKind();
+  function syncKind() {}
 
   [].forEach.call(document.querySelectorAll('[data-kind]'), function (a) {
     a.addEventListener('click', function () {
       kind.value = a.getAttribute('data-kind');
-      var r = a.getAttribute('data-report');
-      if (r) report.value = r;
-      syncKind();
       setTimeout(function () { document.getElementById('rqName').focus({ preventScroll: true }); }, 400);
     });
   });
 
-  var LABELS = { research: 'Personal market research', article: 'An article written for you', report: 'An Ethiopia report (waitlist)', other: 'Something else' };
+  var LABELS = { research: 'Personal market research', other: 'Something else' };
   function mailtoFor(f) {
     var label = LABELS[f.kind] || 'Request';
     var lines = ['Name: ' + f.name, 'Email: ' + f.email, 'Request: ' + label];
-    if (f.kind === 'report') lines.push('Report: ' + f.report);
     if (f.deadline) lines.push('Deadline: ' + f.deadline);
     if (f.budget) lines.push('Budget: ' + f.budget);
     lines.push('', f.topic);
@@ -826,13 +804,12 @@ a { color: inherit; }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var f = {};
-    ['name', 'email', 'kind', 'report', 'topic', 'deadline', 'budget', 'website'].forEach(function (k) {
+    ['name', 'email', 'kind', 'topic', 'deadline', 'budget', 'website'].forEach(function (k) {
       var input = form.elements[k];
       f[k] = input ? input.value.trim() : '';
     });
-    if (f.kind !== 'report') f.report = '';
     if (!f.name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) { say('Please give your name and a valid email.', 'err'); return; }
-    if (f.kind !== 'report' && f.topic.length < 10) { say('Please describe the topic in a sentence or two.', 'err'); return; }
+    if (f.topic.length < 10) { say('Please describe the topic in a sentence or two.', 'err'); return; }
     submit.disabled = true;
     say('Sending…');
     fetch('/api/request', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) })
@@ -846,7 +823,7 @@ a { color: inherit; }
           say('Thanks. One more step: your mail app will open with the request filled in. Press send.', 'ok');
           window.location.href = mailtoFor(f);
         } else {
-          say(f.kind === 'report' ? "You're on the list. We'll write when the report is ready." : 'Thanks. We will reply with the scope and a price.', 'ok');
+          say('Thanks. We will reply with the scope and a price.', 'ok');
         }
       })
       .catch(function () {

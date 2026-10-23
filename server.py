@@ -5,10 +5,11 @@ GET  /api/posts    The newest three letters from the Substack RSS feed, newest
                    minutes; if Substack can't be reached the last good copy is
                    served, and the page falls back to the letters baked into
                    index.html.
-GET  /api/config   The Stripe Payment Links, read from the environment, so the
-                   deposit buttons can be switched on in Railway without a
-                   code change.
-POST /api/request  A research, article or report request from the form on the
+GET  /api/config   The Stripe Payment Links (the research deposit and the
+                   Ethiopia report pre-orders), read from the environment, so
+                   the buttons can be switched on in Railway without a code
+                   change.
+POST /api/request  A personal market research request from the form on the
                    home page. Emailed to REQUEST_TO over SMTP when SMTP_* is
                    set, and always written to the service log.
 
@@ -41,11 +42,9 @@ _cache_lock = threading.Lock()
 # A request carries these fields; anything else is ignored.
 REQUEST_KINDS = {
     "research": "Personal market research",
-    "article": "An article written for you",
-    "report": "Ethiopia report (waitlist)",
     "other": "Something else",
 }
-FIELD_LIMITS = {"name": 120, "email": 200, "kind": 20, "topic": 4000, "deadline": 120, "budget": 120, "report": 200}
+FIELD_LIMITS = {"name": 120, "email": 200, "kind": 20, "topic": 4000, "deadline": 120, "budget": 120}
 _EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 _last_post_by_ip = {}
 
@@ -117,7 +116,7 @@ def send_request_email(fields):
     msg["From"] = user
     msg["To"] = to
     msg["Reply-To"] = fields.get("email", user)
-    lines = [f"{k}: {fields[k]}" for k in ("name", "email", "kind", "report", "deadline", "budget") if fields.get(k)]
+    lines = [f"{k}: {fields[k]}" for k in ("name", "email", "kind", "deadline", "budget") if fields.get(k)]
     lines += ["", fields.get("topic", "")]
     msg.set_content("\n".join(lines))
     port = int(os.environ.get("SMTP_PORT", "465"))
@@ -156,7 +155,8 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/api/config":
             return self._json(200, {
                 "researchDepositUrl": os.environ.get("STRIPE_RESEARCH_DEPOSIT_URL", ""),
-                "articleDepositUrl": os.environ.get("STRIPE_ARTICLE_DEPOSIT_URL", ""),
+                "ethiopiaBusinessUrl": os.environ.get("STRIPE_ETHIOPIA_BUSINESS_URL", ""),
+                "ethiopiaRealEstateUrl": os.environ.get("STRIPE_ETHIOPIA_REAL_ESTATE_URL", ""),
                 "requestsByEmail": bool(os.environ.get("SMTP_HOST")),
             })
         # Only the public files are served.
@@ -184,7 +184,7 @@ class Handler(SimpleHTTPRequestHandler):
         fields = {k: str(data.get(k, "")).strip()[:n] for k, n in FIELD_LIMITS.items()}
         if not fields["name"] or not _EMAIL_RE.match(fields["email"]) or fields["kind"] not in REQUEST_KINDS:
             return self._json(400, {"ok": False, "error": "Please give your name, a valid email and what you need."})
-        if fields["kind"] != "report" and len(fields["topic"]) < 10:
+        if len(fields["topic"]) < 10:
             return self._json(400, {"ok": False, "error": "Please describe the topic in a sentence or two."})
         ip = self.headers.get("X-Forwarded-For", self.client_address[0]).split(",")[0].strip()
         now = time.time()
