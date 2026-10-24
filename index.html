@@ -488,6 +488,40 @@ a { color: inherit; }
   .offer { padding: 24px 20px 22px; }
   .tibeb-box { padding: 24px 20px; }
 }
+
+/* ─── Sign up for the letter here, in the hero (Oct 2026) ─── */
+.signup { margin-top: 28px; max-width: 760px; }
+.signup[hidden], .signup-done[hidden] { display: none; }
+.signup-label { display: block; margin-bottom: 10px; font-size: 16px; font-weight: 600; color: var(--ink); }
+.signup-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.signup-email {
+  flex: 1 1 260px; min-width: 0;
+  padding: 12px 14px; border-radius: 4px;
+  background: var(--inset); color: var(--ink); border: 1px solid var(--line-3);
+  font: 400 16px/1.25 var(--body);
+}
+.signup-email::placeholder { color: var(--ink-3); opacity: 1; }
+.signup-email:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.signup-email[aria-invalid="true"] { border-color: var(--red); }
+.signup .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.signup .form-status { margin-top: 10px; }
+.signup .form-status:empty { min-height: 0; margin-top: 0; }
+.signup-fine { margin-top: 10px; font-size: 14.5px; color: var(--ink-3); }
+.signup-done {
+  margin-top: 28px; max-width: 760px; padding: 22px 24px;
+  background: var(--raised); border: 1px solid var(--line-2); border-left: 3px solid var(--green); border-radius: 6px;
+  font-size: 16.5px; color: var(--ink-2);
+}
+.signup-done:focus { outline: none; }
+.signup-done:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.signup-done-head { margin-bottom: 6px; font: 400 24px/1.25 var(--display); color: var(--ink); }
+.signup-done p + p { margin-top: 6px; }
+.signup-done b { color: var(--ink); font-weight: 600; overflow-wrap: anywhere; }
+.signup-done .hero-cta { margin-top: 18px; }
+@media (max-width: 520px) {
+  .signup-row > * { flex: 1 1 100%; }
+  .signup-done { padding: 20px 18px; }
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Habesha Market Research","url":"https://www.habeshamarketresearch.com","email":"nateasefa@habeshamarketresearch.com","address":{"@type":"PostalAddress","streetAddress":"140 Broad Street, Suite 200","addressLocality":"Red Bank","addressRegion":"NJ","postalCode":"07701","addressCountry":"US"}}
@@ -508,7 +542,7 @@ a { color: inherit; }
       <a href="#ethiopia">Ethiopia reports</a>
       <a href="https://www.tibeb.trade/landing.html">Tibeb</a>
       <a href="/about/">About</a>
-      <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe</a>
+      <a href="#subscribe" class="btn btn-primary" data-subscribe>Subscribe</a>
     </nav>
   </div>
 </header>
@@ -525,9 +559,29 @@ a { color: inherit; }
       works, what it costs to build, and what has to be true for a company's plan to happen. No ticker
       symbols and no recommendations.
     </p>
-    <div class="hero-cta">
-      <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe on Substack</a>
-      <a href="#letter" class="btn btn-quiet">Read the latest letters</a>
+    <!-- Sign up here, not on Substack's pages: /api/subscribe keeps the address, then the
+         reader's browser hands it to Substack (which sends the letter) as Substack's own
+         embed form does. Without JavaScript the form posts straight to Substack. -->
+    <form class="signup" id="subscribe" action="https://thehabeshainvestor.substack.com/api/v1/free?nojs=true" method="post" novalidate>
+      <label class="signup-label" for="sbEmail">Get each new letter by email. It's free.</label>
+      <div class="signup-row">
+        <input class="signup-email" id="sbEmail" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" placeholder="you@example.com" aria-describedby="sbStatus"/>
+        <button class="btn btn-primary" type="submit" id="sbSubmit">Subscribe</button>
+        <a href="#letter" class="btn btn-quiet">Read the latest letters</a>
+      </div>
+      <input type="hidden" name="source" value="embed"/>
+      <div class="hp" aria-hidden="true"><label for="sbWebsite">Website</label><input id="sbWebsite" name="website" type="text" tabindex="-1" autocomplete="off"/></div>
+      <p class="form-status" id="sbStatus" role="status" aria-live="polite"></p>
+      <p class="signup-fine">No account or password needed. The letter is sent through Substack; unsubscribe any time.</p>
+    </form>
+    <div class="signup-done" id="sbDone" tabindex="-1" hidden>
+      <p class="signup-done-head">You're subscribed.</p>
+      <p>New letters will come to <b id="sbDoneEmail"></b>, sent through Substack. If Substack asks you to confirm, open its email and press the button.</p>
+      <p>You don't need an account or a password to read. Start now:</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" id="sbRead" href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">Read the latest letter</a>
+        <a href="#letter" class="btn btn-quiet">See the latest letters</a>
+      </div>
     </div>
     <p class="hero-note" id="latestNote">Latest: <a class="text-link" id="latestLink" href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">የኢንቨስትመንት መግቢያ</a></p>
   </div>
@@ -578,7 +632,7 @@ a { color: inherit; }
     <div class="letter-bar">
       <p>Written by Habeshas, for the world: for anyone who would rather understand an industry than be handed a tip.</p>
       <div class="btns">
-        <a href="https://thehabeshainvestor.substack.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe on Substack</a>
+        <a href="#subscribe" class="btn btn-primary" data-subscribe>Subscribe</a>
         <a href="https://thehabeshainvestor.substack.com/archive" target="_blank" rel="noopener" class="btn btn-quiet">View the archive</a>
       </div>
     </div>
@@ -817,6 +871,138 @@ a { color: inherit; }
       if (url && /^https:\/\//.test(url)) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.hidden = false; }
     });
   }).catch(function () {});
+
+  // ── Sign up for the letter, here. /api/subscribe keeps the address, then this browser hands
+  //    it to Substack (which sends the letter) as Substack's own embed form does, so nobody has
+  //    to go through Substack's sign-up or sign-in pages. When the server asks a network to
+  //    wait, it says how long: the button counts down and comes back as "Try again". ──
+  var sbForm = document.getElementById('subscribe');
+  var sbEmail = document.getElementById('sbEmail');
+  var sbSubmit = document.getElementById('sbSubmit');
+  var sbStatus = document.getElementById('sbStatus');
+  var sbDone = document.getElementById('sbDone');
+  var SB_LABEL = sbSubmit.textContent;
+  var sbTimer = null;
+
+  function sbSay(msg, cls) {
+    sbStatus.textContent = msg || '';
+    sbStatus.className = 'form-status' + (cls ? ' ' + cls : '');
+  }
+  function sbClock(s) {
+    var m = Math.floor(s / 60), r = s % 60;
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+  function sbWait(seconds, msg) {
+    var until = Date.now() + seconds * 1000;
+    clearInterval(sbTimer);
+    sbSay(msg, 'err');
+    sbSubmit.disabled = true;
+    function tick() {
+      var left = Math.ceil((until - Date.now()) / 1000);
+      if (left > 0) { sbSubmit.textContent = 'Try again in ' + sbClock(left); return; }
+      clearInterval(sbTimer);
+      sbTimer = null;
+      sbSubmit.disabled = false;
+      sbSubmit.textContent = 'Try again';
+      sbSay('You can try again now.', '');
+    }
+    tick();
+    sbTimer = setInterval(tick, 1000);
+  }
+  // Into a hidden frame, the way the no-script version of Substack's embed form posts it;
+  // nothing here waits on Substack's answer, and the address is kept on our side either way.
+  function sbToSubstack(address) {
+    var frame = document.getElementById('sbFrame');
+    if (!frame) {
+      frame = document.createElement('iframe');
+      frame.name = frame.id = 'sbFrame';
+      frame.title = 'Substack sign-up';
+      frame.hidden = true;
+      frame.tabIndex = -1;
+      frame.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(frame);
+    }
+    var f = document.createElement('form');
+    f.method = 'post';
+    f.action = sbForm.getAttribute('action');
+    f.target = 'sbFrame';
+    f.hidden = true;
+    var here = location.origin + location.pathname;
+    [['email', address], ['source', 'embed'], ['first_url', here], ['current_url', here]].forEach(function (kv) {
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = kv[0];
+      input.value = kv[1];
+      f.appendChild(input);
+    });
+    document.body.appendChild(f);
+    try { f.submit(); } catch (e) { /* kept on our side */ }
+    setTimeout(function () { f.remove(); }, 5000);  // after the browser has sent it
+  }
+  function sbShowDone(address) {
+    clearInterval(sbTimer);
+    document.getElementById('sbDoneEmail').textContent = address;
+    var latest = document.getElementById('latestLink');
+    if (latest && /^https:\/\//.test(latest.href)) document.getElementById('sbRead').href = latest.href;
+    sbForm.hidden = true;
+    sbDone.hidden = false;
+    // Its top below the fixed bar, where the reader can see it.
+    var top = sbDone.getBoundingClientRect().top;
+    if (top < nav.offsetHeight + 8 || top > window.innerHeight - 160) sbDone.scrollIntoView({ block: 'start' });
+    sbDone.focus({ preventScroll: true });
+  }
+
+  sbForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (sbSubmit.disabled) return;
+    var address = sbEmail.value.trim();
+    if (address.length > 200 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(address)) {
+      sbEmail.setAttribute('aria-invalid', 'true');
+      sbSay('Please enter a valid email address, like name@example.com.', 'err');
+      sbEmail.focus();
+      return;
+    }
+    sbEmail.removeAttribute('aria-invalid');
+    var trap = sbForm.elements.website ? sbForm.elements.website.value : '';
+    sbSubmit.disabled = true;
+    sbSubmit.textContent = 'Subscribing…';
+    sbSay('');
+    fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: address, website: trap }) })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          return { status: r.status, j: j || {}, after: r.headers.get('Retry-After') };
+        });
+      })
+      .then(function (res) {
+        if (res.status === 429) {
+          var wait = parseInt(res.j.retry_after || res.after, 10);
+          sbWait(wait > 0 ? wait : 60, res.j.error || 'Too many sign-ups from your network just now.');
+          return;
+        }
+        if (res.status === 400) {
+          sbSubmit.disabled = false;
+          sbSubmit.textContent = SB_LABEL;
+          sbEmail.setAttribute('aria-invalid', 'true');
+          sbSay(res.j.error || 'Please enter a valid email address, like name@example.com.', 'err');
+          sbEmail.focus();
+          return;
+        }
+        // Kept here, or our server couldn't answer: Substack gets it from this browser either way.
+        if (!trap) sbToSubstack(address);
+        sbShowDone(address);
+      })
+      .catch(function () {
+        if (!trap) sbToSubstack(address);
+        sbShowDone(address);
+      });
+  });
+
+  // The other Subscribe buttons bring the reader to the form, ready to type.
+  [].forEach.call(document.querySelectorAll('[data-subscribe]'), function (a) {
+    a.addEventListener('click', function () {
+      setTimeout(function () { (sbForm.hidden ? sbDone : sbEmail).focus({ preventScroll: true }); }, 400);
+    });
+  });
 
   // ── The request form ──
   var form = document.getElementById('requestForm');
