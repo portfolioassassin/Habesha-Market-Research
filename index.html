@@ -427,6 +427,27 @@ a { color: inherit; }
 .offer-terms .knot { width: 9px; height: 9px; margin-left: 2px; }
 .offer-cta { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
 .offer-cta .text-link { font-size: 15px; }
+.offer.offer-wide { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 0; padding: 0; overflow: hidden; }
+.offer-main { display: flex; flex-direction: column; gap: 14px; padding: 40px 44px 38px; }
+.offer-title-lg { font-size: clamp(28px, 2.6vw, 34px); }
+.offer-gets { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; }
+.offer-gets li { position: relative; padding-left: 26px; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+.offer-gets li::before { content: ""; position: absolute; left: 3px; top: 0.55em; width: 8px; height: 8px; background: var(--accent); transform: rotate(45deg); }
+.offer-main .offer-cta { padding-top: 18px; }
+.offer-side { padding: 40px 44px 38px; background: var(--inset, #0A1A38); border-left: 1px solid var(--line-2); }
+.offer-side-h { font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 22px; }
+.offer-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.offer-steps li { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 16px; padding-bottom: 24px; }
+.offer-steps li:last-child { padding-bottom: 0; }
+.offer-steps li:not(:last-child)::after { content: ""; position: absolute; left: 16px; top: 36px; bottom: 4px; width: 1px; background: var(--line-3); }
+.step-n { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--accent); color: var(--accent); display: grid; place-items: center; font: 400 15px var(--display); }
+.offer-steps b { display: block; font-size: 16.5px; font-weight: 600; color: var(--ink); margin-top: 5px; }
+.offer-steps div span { display: block; font-size: 15px; line-height: 1.5; color: var(--ink-3); margin-top: 3px; }
+@media (max-width: 860px) {
+  .offer.offer-wide { grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .offer-main, .offer-side { padding: 28px 22px 26px; }
+  .offer-side { border-left: 0; border-top: 1px solid var(--line-2); }
+}
 .tibeb-box {
   display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap;
   padding: 28px 30px; border: 1px solid var(--line-2); border-radius: 6px; background: var(--raised);
@@ -567,17 +588,31 @@ a { color: inherit; }
         need; we agree the scope and the price before anything is paid.
       </p>
     </div>
-    <div class="offers offers-one">
-      <article class="offer">
-        <h3 class="offer-title">Personal market research</h3>
+    <article class="offer offer-wide">
+      <div class="offer-main">
+        <p class="offer-tag">For individuals, founders and funds</p>
+        <h3 class="offer-title offer-title-lg">Personal market research</h3>
         <p class="offer-what">Research on a market, an industry or a technology you care about, written for you alone: how it works, what it costs, who is exposed and what has to be true.</p>
-        <p class="offer-terms"><span class="knot" aria-hidden="true"></span>50% upfront, 50% on delivery</p>
+        <ul class="offer-gets">
+          <li>A written report, sourced to filings, data and primary documents</li>
+          <li>The players, the economics and the risks, laid out plainly</li>
+          <li>A call to walk through what we found</li>
+        </ul>
         <div class="offer-cta">
           <a href="#request" class="btn btn-primary" data-kind="research">Request research</a>
           <a href="#" class="text-link deposit-link" data-deposit="researchDepositUrl" hidden>Scope agreed? Pay the deposit</a>
         </div>
-      </article>
-    </div>
+      </div>
+      <div class="offer-side">
+        <p class="offer-side-h">How it works</p>
+        <ol class="offer-steps">
+          <li><span class="step-n">1</span><div><b>Tell us what you need</b><span>The market, the question and when you need it.</span></div></li>
+          <li><span class="step-n">2</span><div><b>Agree the scope and price</b><span>Nothing is paid until we both agree.</span></div></li>
+          <li><span class="step-n">3</span><div><b>50% upfront</b><span>Research starts once the deposit is in.</span></div></li>
+          <li><span class="step-n">4</span><div><b>50% on delivery</b><span>You get the report and the walkthrough.</span></div></li>
+        </ol>
+      </div>
+    </article>
   </div>
 </section>
 
