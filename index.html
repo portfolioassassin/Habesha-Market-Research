@@ -326,6 +326,7 @@ a { color: inherit; }
 .contact .hero-cta { margin-top: 22px; }
 .mail { display: inline-block; margin-top: 14px; padding: 8px 0; font: 600 16px var(--body); color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-3); text-underline-offset: 5px; overflow-wrap: anywhere; }
 .mail:hover { text-decoration-color: var(--ink); }
+.request-addr { margin-top: 18px; font-style: normal; font-size: 16px; line-height: 1.55; color: var(--ink-3); }
 
 /* Footer. */
 .footer { position: relative; border-top: 1px solid var(--line-2); }
@@ -338,6 +339,7 @@ a { color: inherit; }
 .footer-links a { padding: 6px 0; text-decoration: none; color: var(--ink-2); }
 .footer-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 .footer-note { flex-basis: 100%; max-width: 78ch; }
+.footer-addr { flex-basis: 100%; font-style: normal; color: var(--ink-3); }
 
 /* ─── Narrower screens ─── */
 @media (max-width: 1080px) {
@@ -483,6 +485,9 @@ a { color: inherit; }
   .tibeb-box { padding: 24px 20px; }
 }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Habesha Market Research","url":"https://www.habeshamarketresearch.com","email":"nateasefa@habeshamarketresearch.com","address":{"@type":"PostalAddress","streetAddress":"971 US Highway 202 N, Ste R","addressLocality":"Branchburg","addressRegion":"NJ","postalCode":"08876","addressCountry":"US"}}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
@@ -678,6 +683,7 @@ a { color: inherit; }
           paid, and the other 50% is due on delivery.
         </p>
         <a href="mailto:nateasefa@habeshamarketresearch.com" class="mail">nateasefa@habeshamarketresearch.com</a>
+        <address class="request-addr">971 US Highway 202 N, Ste R<br/>Branchburg, NJ 08876, US</address>
       </div>
       <form class="request" id="requestForm" novalidate>
         <div class="field">
@@ -728,6 +734,7 @@ a { color: inherit; }
       <a href="https://www.tibeb.trade/landing.html">Tibeb</a>
       <a href="mailto:nateasefa@habeshamarketresearch.com">Contact</a>
     </div>
+    <address class="footer-addr">Habesha Market Research · 971 US Highway 202 N, Ste R, Branchburg, NJ 08876, US</address>
     <p class="footer-note">Habesha Market Research publishes research, not advice. It is for research and education, and nothing here is investment advice or a recommendation to buy or sell any security.</p>
   </div>
 </footer>
