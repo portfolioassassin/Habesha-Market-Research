@@ -72,10 +72,10 @@ class EndpointTest(unittest.TestCase):
         self.httpd.server_close()
         server.SIGNUPS = self.saved
 
-    def post(self, path, body, raw=None):
+    def post(self, path, body, raw=None, headers=None):
         conn = http.client.HTTPConnection("127.0.0.1", self.httpd.server_address[1], timeout=10)
         data = raw if raw is not None else json.dumps(body).encode()
-        conn.request("POST", path, data, {"Content-Type": "application/json"})
+        conn.request("POST", path, data, {"Content-Type": "application/json", **(headers or {})})
         resp = conn.getresponse()
         payload = json.loads(resp.read() or b"{}")
         conn.close()
@@ -106,6 +106,21 @@ class EndpointTest(unittest.TestCase):
         self.assertGreater(body["retry_after"], 0)
         self.assertEqual(headers["Retry-After"], str(body["retry_after"]))
         self.assertIn("try again in", body["error"])
+
+    def test_the_limit_keys_on_the_address_the_edge_saw(self):
+        # Railway's X-Real-IP, whatever the client put first in X-Forwarded-For.
+        for i in range(2):
+            r = self.post("/api/subscribe", {"email": f"r{i}@example.com"},
+                          headers={"X-Real-IP": "9.9.9.9", "X-Forwarded-For": f"10.0.0.{i}, 9.9.9.9"})
+            self.assertEqual(r[0], 200)
+        r = self.post("/api/subscribe", {"email": "r3@example.com"},
+                      headers={"X-Real-IP": "9.9.9.9", "X-Forwarded-For": "10.0.0.7, 9.9.9.9"})
+        self.assertEqual(r[0], 429)
+        # Without X-Real-IP, the last hop (the one the edge added) is the key.
+        r = self.post("/api/subscribe", {"email": "r4@example.com"}, headers={"X-Forwarded-For": "1.2.3.4, 9.9.9.9"})
+        self.assertEqual(r[0], 429)
+        r = self.post("/api/subscribe", {"email": "r5@example.com"}, headers={"X-Forwarded-For": "9.9.9.9, 5.5.5.5"})
+        self.assertEqual(r[0], 200)
 
     def test_the_request_form_is_unchanged(self):
         status, _, body = self.post("/api/request", {

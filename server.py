@@ -284,7 +284,13 @@ class Handler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def _client_ip(self):
-        return self.headers.get("X-Forwarded-For", self.client_address[0]).split(",")[0].strip()
+        """The address Railway's edge saw: X-Real-IP, else the last X-Forwarded-For entry (the
+        first ones are whatever the client sent, so they can't key a limit), else the socket's."""
+        real = (self.headers.get("X-Real-IP") or "").strip()
+        if real:
+            return real
+        hops = [h.strip() for h in (self.headers.get("X-Forwarded-For") or "").split(",") if h.strip()]
+        return hops[-1] if hops else self.client_address[0]
 
     def _read_json(self, limit):
         """The JSON body as a dict, or None after answering 400."""
