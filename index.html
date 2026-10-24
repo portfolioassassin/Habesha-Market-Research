@@ -937,7 +937,7 @@ a { color: inherit; }
     });
     document.body.appendChild(f);
     try { f.submit(); } catch (e) { /* kept on our side */ }
-    setTimeout(function () { f.remove(); }, 0);
+    setTimeout(function () { f.remove(); }, 5000);  // after the browser has sent it
   }
   function sbShowDone(address) {
     clearInterval(sbTimer);
