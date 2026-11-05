@@ -494,13 +494,29 @@ a { color: inherit; }
    typed into its embed. Its card is the coin's ivory, which is our --ink. The frame is as tall
    as the card at each width (logo to terms: 416px from 400px wide, 438 at 360, 478 at 300 to
    335, 500 at 280), with room above and below; if it is ever taller, it scrolls, never clips. */
-.signup { margin-top: 28px; max-width: 480px; }
-.signup-label { margin-bottom: 10px; font-size: 16px; font-weight: 600; color: var(--ink); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 64px; align-items: center; }
+.hero-copy .hero-lede-wide { max-width: 54ch; }
+.hero-points { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 12px; }
+.hero-points li { position: relative; padding-left: 28px; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
+.hero-points li::before { content: ""; position: absolute; left: 4px; top: 0.55em; width: 9px; height: 9px; background: var(--accent); transform: rotate(45deg); }
+.hero-copy .hero-cta { margin-top: 30px; }
+.signup {
+  position: relative; padding: 30px 30px 24px; border-radius: 10px;
+  background: var(--raised); border: 1px solid var(--line-3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(235, 217, 174, 0.12);
+}
+.signup::before { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(235, 217, 174, 0.14); border-radius: 6px; pointer-events: none; }
+.signup-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); text-align: center; }
+.signup-title { margin: 8px 0 20px; font: 400 30px/1.2 var(--display); color: var(--ink); text-align: center; }
 .signup-frame { border-radius: 6px; overflow: hidden; background: var(--ink); }
-.signup-frame iframe { display: block; width: 100%; height: 470px; border: 0; background: var(--ink); }
-.signup-fine { margin-top: 10px; font-size: 14.5px; color: var(--ink-3); }
+.signup-frame iframe { display: block; width: 100%; height: 440px; border: 0; background: var(--ink); }
+.signup-fine { margin-top: 14px; font-size: 14px; line-height: 1.5; color: var(--ink-3); text-align: center; }
 .signup-fine a { color: var(--ink-2); text-underline-offset: 3px; }
-.signup .hero-cta { margin-top: 18px; }
+@media (max-width: 1080px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; }
+  .signup { max-width: 520px; width: 100%; margin: 0 auto; }
+}
+@media (max-width: 520px) { .signup { padding: 22px 14px 18px; } .signup::before { display: none; } }
 @media (max-width: 439px) { .signup-frame iframe { height: 490px; } }
 @media (max-width: 399px) { .signup-frame iframe { height: 530px; } }
 @media (max-width: 339px) { .signup-frame iframe { height: 550px; } }
@@ -534,27 +550,36 @@ a { color: inherit; }
 <!-- ════════════ Hero: the letter ════════════ -->
 <section class="hero">
   <div class="wrap">
-    <img class="hero-coin" src="/assets/coin.svg" alt="The Habesha Market Research coin: three Aksum stelae inside a champagne-gold rim" width="240" height="240"/>
-    <h1>The engineering<br>behind the markets.</h1>
-    <p class="hero-lede hero-lede-wide">
-      <strong>The letter</strong> is written by an engineering graduate with a broad grounding in science, not a fund manager. It covers how a machine
-      works, what it costs to build, and what has to be true for a company's plan to happen. No ticker
-      symbols and no recommendations.
-    </p>
-    <!-- Sign up with Substack's own box (its official embed), on this page. Substack checks
-         each sign-up in its own page (a captcha among others), so the address has to be typed
-         into its form: an address handed to it from ours was turned away. -->
-    <div class="signup" id="subscribe">
-      <p class="signup-label">Get each new letter by email. It's free.</p>
-      <div class="signup-frame">
-        <iframe src="https://thehabeshainvestor.substack.com/embed" title="Subscribe to the letter (Substack)"></iframe>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>The engineering<br>behind the markets.</h1>
+        <p class="hero-lede hero-lede-wide">
+          <strong>The letter</strong> is written by an engineering graduate with a broad grounding in science, not a fund manager. It covers how a machine
+          works, what it costs to build, and what has to be true for a company's plan to happen. No ticker
+          symbols and no recommendations.
+        </p>
+        <ul class="hero-points">
+          <li>How the technology works, from first principles</li>
+          <li>What it costs to build, and who pays</li>
+          <li>What has to be true for the plan to happen</li>
+        </ul>
+        <div class="hero-cta">
+          <a href="#letter" class="btn btn-quiet">Read the latest letters</a>
+        </div>
+        <p class="hero-note" id="latestNote">Latest: <a class="text-link" id="latestLink" href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">የኢንቨስትመንት መግቢያ</a></p>
       </div>
-      <p class="signup-fine">The box is Substack's, which sends the letter. No account or password is needed to read. Box not showing? <a href="https://thehabeshainvestor.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack</a>.</p>
-      <div class="hero-cta">
-        <a href="#letter" class="btn btn-quiet">Read the latest letters</a>
-      </div>
+      <!-- Sign up with Substack's own box (its official embed), on this page. Substack checks
+           each sign-up in its own page (a captcha among others), so the address has to be typed
+           into its form: an address handed to it from ours was turned away. -->
+      <aside class="signup" id="subscribe" aria-label="Subscribe to the letter">
+        <p class="signup-eyebrow">Free · by email</p>
+        <h2 class="signup-title">Get every new letter</h2>
+        <div class="signup-frame">
+          <iframe src="https://thehabeshainvestor.substack.com/embed" title="Subscribe to the letter (Substack)"></iframe>
+        </div>
+        <p class="signup-fine">Sent by Substack. No account or password needed to read. Box not showing? <a href="https://thehabeshainvestor.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack</a>.</p>
+      </aside>
     </div>
-    <p class="hero-note" id="latestNote">Latest: <a class="text-link" id="latestLink" href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">የኢንቨስትመንት መግቢያ</a></p>
   </div>
 </section>
 
