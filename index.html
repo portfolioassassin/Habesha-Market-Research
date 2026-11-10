@@ -25,8 +25,8 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
   document.documentElement.className += ' anim';
 }
 </script>
-<link rel="stylesheet" href="/assets/site.css?v=20261111"/>
-<script src="/assets/site.js?v=20261111" defer></script>
+<link rel="stylesheet" href="/assets/site.css?v=20261111b"/>
+<script src="/assets/site.js?v=20261111b" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Habesha Market Research","url":"https://www.habeshamarketresearch.com","email":"nateasefa@habeshamarketresearch.com","address":{"@type":"PostalAddress","streetAddress":"140 Broad Street, Suite 200","addressLocality":"Red Bank","addressRegion":"NJ","postalCode":"07701","addressCountry":"US"}}
 </script>
@@ -75,7 +75,7 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
         <div class="hero-cta">
           <a href="#letter" class="btn btn-quiet">Read the latest letters</a>
         </div>
-        <p class="hero-note" id="latestNote"><span class="dot" aria-hidden="true"></span><span>Latest: <a class="text-link" id="latestLink" href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">የኢንቨስትመንት መግቢያ</a></span></p>
+        <p class="hero-note" id="latestNote"><span class="dot" aria-hidden="true"></span><span>Latest: <!-- latest:start --><a class="text-link" id="latestLink" href="https://thehabeshainvestor.substack.com/p/the-optical-bottleneck-copper-isnt" target="_blank" rel="noopener">The Optical Bottleneck: Copper Isn’t Dying, It’s Being Cornered</a><!-- latest:end --></span></p>
       </div>
       <div class="hero-side">
         <!-- The coin, risen as the moon. -->
@@ -95,7 +95,7 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
     </div>
   </div>
   <!-- The skyline of stelae, drawn in by site.js so it can rise when it is seen. -->
-  <div class="skyline" data-src="/assets/skyline.svg?v=20261111" aria-hidden="true"></div>
+  <div class="skyline" data-src="/assets/skyline.svg?v=20261111b" aria-hidden="true"></div>
 </section>
 
 
@@ -111,34 +111,36 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
       </p>
     </div>
 
-    <!-- Filled from /api/posts (the Substack RSS feed, newest first). The rows below
-         are only the fallback for when the feed can't be reached. -->
-    <ul class="posts reveal" id="posts">
+    <!-- The server writes the newest three letters between the "letters" marks before the page
+         is sent (server.py, from the Substack feed). The rows here are what shows before the
+         feed has been read once, and the script below asks /api/posts again in case a browser
+         is holding an older copy of this page. -->
+    <ul class="posts reveal" id="posts"><!-- letters:start -->
       <li class="post">
-        <a href="https://thehabeshainvestor.substack.com/p/b67" target="_blank" rel="noopener">
-          <time class="post-kind" datetime="2026-10-21">October 21, 2026</time>
-          <span class="post-title">የኢንቨስትመንት መግቢያ</span>
+        <a href="https://thehabeshainvestor.substack.com/p/the-optical-bottleneck-copper-isnt" target="_blank" rel="noopener">
+          <time class="post-kind" datetime="2026-11-10">November 10, 2026</time>
+          <span class="post-title">The Optical Bottleneck: Copper Isn’t Dying, It’s Being Cornered</span>
           <span class="post-go">Read on Substack</span>
-          <span class="post-desc">Intro to Investing, in Amharic.</span>
+          <span class="post-desc">As AI chips push data faster, copper’s reach is shrinking to about a meter, and the industry is pulling light right up to the edge of the chip.</span>
         </a>
       </li>
       <li class="post">
-        <a href="https://thehabeshainvestor.substack.com/p/globalfoundries-light-not-litho" target="_blank" rel="noopener">
-          <time class="post-kind" datetime="2026-10-20">October 20, 2026</time>
-          <span class="post-title">GlobalFoundries: Light, Not Litho</span>
+        <a href="https://thehabeshainvestor.substack.com/p/fe2" target="_blank" rel="noopener">
+          <time class="post-kind" datetime="2026-11-10">November 10, 2026</time>
+          <span class="post-title">የኦፕቲካል መሰናክል፦ መዳብ እየሞተ አይደለም፣ እየተከበበ ነው</span>
           <span class="post-go">Read on Substack</span>
-          <span class="post-desc">The foundry that quit the shrink race is now the one Washington and Tokyo picked to build.</span>
+          <span class="post-desc">የAI ቺፖች ዳታን በፍጥነት ሲገፉ፣ የመዳብ ተደራሽነት ወደ አንድ ሜትር ገደማ እየጠበበ ነው፤ ኢንዱስትሪውም ብርሃንን እስከ ቺፑ ጠርዝ ድረስ እየሳበው ነው።</span>
         </a>
       </li>
       <li class="post">
-        <a href="https://thehabeshainvestor.substack.com/p/umc-is-betting-on-lithium-niobate" target="_blank" rel="noopener">
-          <time class="post-kind" datetime="2026-10-19">October 19, 2026</time>
-          <span class="post-title">UMC: Betting on Lithium Niobate.</span>
+        <a href="https://thehabeshainvestor.substack.com/p/the-14-day-ai-factory-built-in-a" target="_blank" rel="noopener">
+          <time class="post-kind" datetime="2026-11-09">November 9, 2026</time>
+          <span class="post-title">The 14-Day AI Factory: Built in a Box, Waiting on the Grid</span>
           <span class="post-go">Read on Substack</span>
-          <span class="post-desc">400G per lane is a modulator problem.</span>
+          <span class="post-desc">NVIDIA says a complete AI factory can now arrive pre-built and go live in as little as 14 days. The race has moved to power, transformers and the grid.</span>
         </a>
       </li>
-    </ul>
+      <!-- letters:end --></ul>
 
     <div class="letter-bar reveal">
       <p>Written by Habeshas, for the world: for anyone who would rather understand an industry than be handed a tip.</p>
@@ -359,6 +361,9 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
       var posts = data && data.posts;
       if (!posts || !posts.length) return;
       var list = document.getElementById('posts');
+      // The server wrote the letters into the page; redraw only if these are newer than those.
+      var shown = [].map.call(list.querySelectorAll('.post a'), function (a) { return a.getAttribute('href'); }).join(' ');
+      if (shown === posts.map(function (p) { return p.link; }).join(' ')) return;
       list.textContent = '';
       posts.forEach(function (p) {
         if (!/^https:\/\//.test(p.link)) return;
@@ -377,7 +382,7 @@ if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)')
       var latest = document.getElementById('latestLink');
       if (latest && /^https:\/\//.test(posts[0].link)) { latest.href = posts[0].link; latest.textContent = posts[0].title; }
     })
-    .catch(function () { /* keep the letters baked into the page */ });
+    .catch(function () { /* keep the letters the server wrote into the page */ });
 
   // ── Stripe Payment Links: the report pre-orders are in the page; a Railway variable overrides them ──
   fetch('/api/config').then(function (r) { return r.ok ? r.json() : null; }).then(function (cfg) {
