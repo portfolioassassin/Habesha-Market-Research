@@ -11,132 +11,24 @@
 <meta property="og:type" content="profile"/>
 <meta property="og:url" content="https://www.habeshamarketresearch.com/about/"/>
 <link rel="canonical" href="https://www.habeshamarketresearch.com/about/"/>
-<meta name="theme-color" content="#0C2044"/>
+<meta name="theme-color" content="#0A1733"/>
 <link rel="icon" href="/favicon.ico" sizes="48x48"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
-<style>
-/* The About page. Same paper, ink and tibeb as the home page; a reading
-   page, so one column of prose with the facts set beside it. */
-:root {
-  --paper:     #0C2044;
-  --raised:    #12295A;
-  --line-2:    #2C467E;
-  --line-3:    #8C7347;
-  --ink:       #F6EEDC;
-  --ink-2:     #CBD2E0;
-  --ink-3:     #9EAAC2;
-  --ink-hover: #EBD9AE;
-  --accent:    #EBD9AE;   /* champagne, the coin's rim */
-  --accent-2:  #D2B886;
-  --display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
-  --body:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --tibeb:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%23081833'/%3E%3Cpath d='M0 0h24v1.2H0z' fill='%23D2B886'/%3E%3Cpath d='M0 1.2 3 4.6 6 1.2 9 4.6 12 1.2 15 4.6 18 1.2 21 4.6 24 1.2z' fill='%23EBD9AE'/%3E%3Crect y='5.6' width='24' height='1' fill='%238C7347'/%3E%3Cpath d='M6 8 8.7 10.7 6 13.4 3.3 10.7z' fill='%23EBD9AE'/%3E%3Cpath d='M18 8 20.7 10.7 18 13.4 15.3 10.7z' fill='%23B89B62'/%3E%3Crect y='14.8' width='24' height='1.2' fill='%238C7347'/%3E%3C/svg%3E");
-  --gutter: 40px;
-  --wrap:   1200px;
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Albert+Sans:wght@400..700&family=Noto+Serif+Ethiopic:wght@400..700&display=swap" rel="stylesheet"/>
+<script>
+/* The page plays once on load, and the sky keeps moving. Without this class
+   (no script, or the visitor asked for reduced motion) every element is in
+   its finished state. The styles and what moves are in /assets/site.css. */
+if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.className += ' anim';
 }
-*, *::before, *::after { box-sizing: border-box; }
-* { margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  font-family: var(--body); font-size: 18px; line-height: 1.6;
-  background: var(--paper); color: var(--ink);
-  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-}
-a { color: inherit; }
-::selection { background: rgba(235, 217, 174, 0.28); }
-:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
-.skip {
-  position: absolute; left: 12px; top: -60px; z-index: 200;
-  padding: 10px 14px; background: var(--ink); color: var(--paper);
-  font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 4px;
-}
-.skip:focus { top: 22px; }
-
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 12px 20px; border: 1px solid transparent; border-radius: 4px;
-  font: 600 16px/1.25 var(--body); text-decoration: none; white-space: nowrap;
-  transition: background 0.15s, border-color 0.15s;
-}
-.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
-.btn-primary:hover { background: var(--ink); border-color: var(--ink); }
-.btn-quiet { background: transparent; border-color: var(--line-3); color: var(--ink); }
-.btn-quiet:hover { background: rgba(235, 217, 174, 0.08); border-color: var(--ink); }
-
-/* Nav, with the tibeb along its top edge. */
-.nav { position: relative; border-bottom: 1px solid var(--line-2); }
-.nav-in {
-  max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter);
-  height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-}
-.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
-.brand-emblem { display: block; height: 42px; width: auto; }
-.brand-lockup { display: flex; flex-direction: column; gap: 5px; }
-.brand-name { font: 500 26px/1 var(--display); }
-.brand-sub { font: 500 10.5px/1 var(--display); letter-spacing: 0.26em; text-transform: uppercase; }
-.nav-links { display: flex; align-items: center; gap: 4px; }
-.nav-links a { padding: 8px 12px; font-size: 16px; color: var(--ink-2); text-decoration: none; }
-.nav-links a:hover, .nav-links a[aria-current] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
-
-/* The page. */
-.about { padding: 96px 0 104px; }
-.about-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 72px; align-items: start; }
-.kicker { font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
-h1 {
-  margin-top: 14px;
-  font: 400 clamp(38px, 5vw, 66px)/1.1 var(--display); letter-spacing: -0.02em; color: var(--ink);
-}
-.lede { margin-top: 26px; font-size: 21px; line-height: 1.55; color: var(--ink); max-width: 40ch; }
-.prose { margin-top: 30px; max-width: 62ch; }
-.prose p { color: var(--ink-2); }
-.prose p + p { margin-top: 18px; }
-.prose h2 { margin: 44px 0 14px; font: 400 26px/1.25 var(--display); color: var(--ink); }
-.cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
-
-.facts { border-top: 1px solid var(--line-2); margin-top: 12px; }
-.fact { padding: 18px 0; border-bottom: 1px solid var(--line-2); }
-.fact dt { font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
-.fact dd { margin-top: 4px; font-size: 17px; color: var(--ink); }
-.fact a { text-decoration: underline; text-decoration-color: var(--line-3); text-underline-offset: 4px; overflow-wrap: anywhere; }
-.fact a:hover { text-decoration-color: var(--ink); }
-
-/* Footer. */
-.footer { border-top: 1px solid var(--line-2); }
-.footer-in {
-  max-width: var(--wrap); margin: 0 auto; padding: 28px var(--gutter) 36px;
-  display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; align-items: baseline;
-  font-size: 15px; color: var(--ink-3);
-}
-.footer-links { display: flex; flex-wrap: wrap; gap: 4px 22px; }
-.footer-links a { padding: 6px 0; text-decoration: none; color: var(--ink-2); }
-.footer-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
-.footer-note { flex-basis: 100%; max-width: 78ch; }
-.footer-addr { flex-basis: 100%; font-style: normal; color: var(--ink-3); }
-.footer-addr a { color: var(--ink-2); text-underline-offset: 3px; }
-
-@media (max-width: 960px) {
-  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-}
-@media (max-width: 720px) {
-  :root { --gutter: 16px; }
-  body { font-size: 17px; }
-  .nav-in { height: 64px; }
-  .brand-emblem { height: 36px; }
-  .brand-name { font-size: 22px; }
-  .nav-links .hide-sm { display: none; }
-  .nav-links a { padding: 8px 8px; }
-  .about { padding: 56px 0 72px; }
-  .lede { font-size: 19px; }
-  .cta .btn { flex: 1 1 100%; }
-}
-</style>
+</script>
+<link rel="stylesheet" href="/assets/site.css?v=20261111"/>
+<script src="/assets/site.js?v=20261111" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Habesha Market Research","url":"https://www.habeshamarketresearch.com","email":"nateasefa@habeshamarketresearch.com","address":{"@type":"PostalAddress","streetAddress":"140 Broad Street, Suite 200","addressLocality":"Red Bank","addressRegion":"NJ","postalCode":"07701","addressCountry":"US"}}
 </script>
@@ -144,28 +36,43 @@ h1 {
 <body>
 <a class="skip" href="#main">Skip to the content</a>
 
-<header class="nav">
+<header class="nav" id="nav">
   <div class="nav-in">
-    <a href="/" class="brand" aria-label="Habesha Market Research, home"><img class="brand-emblem" src="/assets/emblem.svg" alt="" width="42" height="42"/><span class="brand-lockup" aria-hidden="true"><span class="brand-name">Habesha</span><span class="brand-sub">Market Research</span></span></a>
-    <nav class="nav-links" aria-label="Site">
-      <a href="https://www.tibeb.trade/landing.html" class="hide-sm">Tibeb</a>
-      <a href="/#letter" class="hide-sm">The letter</a>
+    <a href="/" class="brand" aria-label="Habesha Market Research, home"><img class="brand-emblem" src="/assets/emblem.svg" alt="" width="44" height="44"/><span class="brand-name" aria-hidden="true">Habesha Market Research</span></a>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2.5 5h13M2.5 9h13M2.5 13h13"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Site">
+      <a href="/#letter">The letter</a>
+      <a href="/#work">Work with us</a>
+      <a href="/#ethiopia">Ethiopia reports</a>
+      <a href="https://www.tibeb.trade/landing.html">Tibeb</a>
       <a href="/about/" aria-current="page">About</a>
-      <a href="/#request">Contact</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
     </nav>
   </div>
 </header>
 
-<main id="main" class="about">
-  <div class="wrap about-grid">
-    <article>
-      <p class="kicker">About</p>
-      <h1>Nathaniel Asefa</h1>
-      <p class="lede">
-        Founder of Habesha Market Research. I studied engineering, worked in supply-chain planning, and have
-        traded my own account since 2023. Now I write the letter and build Tibeb.
-      </p>
+<main id="main">
+<section class="about-sky sky">
+  <div class="stars stars-1" aria-hidden="true"></div>
+  <div class="stars stars-2" aria-hidden="true"></div>
+  <div class="shoot" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="moon" aria-hidden="true"><div class="moon-in"><span class="moon-halo"></span><span class="moon-ring"></span><img src="/assets/emblem.svg" alt="" width="220" height="220"/></div></div>
+    <p class="kicker">About</p>
+    <h1><span class="w" style="--d:.2s">Nathaniel</span> <span class="w" style="--d:.34s">Asefa</span></h1>
+    <p class="lede">
+      Founder of Habesha Market Research. I studied engineering, worked in supply-chain planning, and have
+      traded my own account since 2023. Now I write the letter and build Tibeb.
+    </p>
+  </div>
+  <div class="skyline" data-src="/assets/skyline.svg?v=20261111" aria-hidden="true"></div>
+</section>
 
+<div class="about">
+  <div class="wrap about-grid">
+    <article class="reveal">
       <div class="prose">
         <p>
           I studied engineering at Rutgers. I never worked as an engineer, but the degree gave me a broad grounding in
@@ -207,7 +114,7 @@ h1 {
       </div>
     </article>
 
-    <aside aria-label="At a glance">
+    <aside class="reveal" aria-label="At a glance" style="--d:.15s">
       <dl class="facts">
         <div class="fact"><dt>Role</dt><dd>Founder, Habesha Market Research</dd></div>
         <div class="fact"><dt>Education</dt><dd>Engineering, Rutgers University</dd></div>
@@ -218,6 +125,7 @@ h1 {
       </dl>
     </aside>
   </div>
+</div>
 </main>
 
 <footer class="footer">
