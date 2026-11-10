@@ -100,14 +100,14 @@ a { color: inherit; }
 .brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: none; color: var(--ink); }
 .brand-emblem { display: block; height: 44px; width: 44px; transition: transform 0.8s var(--ease); }
 .brand:hover .brand-emblem { transform: rotate(360deg); }
-.brand-name { font: 400 22px/1.1 var(--display); }
+.brand-name { font: 400 22px/1.1 var(--display); white-space: nowrap; }
 .nav-links { display: flex; align-items: center; gap: 4px; }
-.nav-links a { padding: 10px 12px; font-size: 16px; color: var(--ink-2); text-decoration: none; border-radius: 8px; transition: color 0.15s; }
+.nav-links a { padding: 10px 12px; font-size: 16px; white-space: nowrap; color: var(--ink-2); text-decoration: none; border-radius: 8px; transition: color 0.15s; }
 .nav-links a:hover, .nav-links a[aria-current] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; }
 .nav-links .btn { margin-left: 10px; min-height: 44px; padding: 8px 20px; font-size: 15px; color: var(--on-gold); border-radius: 22px; }
 .nav-links .btn:hover { color: var(--on-gold); text-decoration: none; }
 .nav-burger {
-  display: none; width: 44px; height: 44px;
+  display: none; flex: none; width: 44px; height: 44px;
   align-items: center; justify-content: center;
   background: transparent; border: 1px solid var(--line-2); border-radius: 12px; color: var(--ink); cursor: pointer;
 }
@@ -439,6 +439,23 @@ a { color: inherit; }
 
 /* ─── Narrower screens ─── */
 @media (max-width: 1080px) {
+  /* One column: the words run the width of the sky, so the stars stop above them. */
+  .sky::before, .stars {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 250px, transparent 470px);
+            mask-image: linear-gradient(to bottom, #000 0, #000 250px, transparent 470px);
+  }
+  /* The row of links no longer fits beside the name: the menu folds. */
+  .nav-burger { display: inline-flex; }
+  .nav-links {
+    display: none;
+    position: absolute; top: 100%; left: 12px; right: 12px; margin-top: 6px;
+    flex-direction: column; align-items: stretch; gap: 2px;
+    padding: 8px; background: var(--card); border: 1px solid var(--line-2); border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px; font-size: 17px; }
+  .nav-links .btn { margin: 6px 0 0; padding: 12px; font-size: 17px; }
   .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; }
   .hero { padding-bottom: calc(var(--sky-h) * 0.92); }
   .hero-side { position: static; }
@@ -453,25 +470,11 @@ a { color: inherit; }
 @media (max-width: 860px) {
   :root { --gutter: 20px; }
   body { font-size: 17px; }
-  .nav-in { height: 64px; }
+  .nav-in { height: 64px; gap: 12px; }
+  .brand { gap: 10px; }
   .brand-emblem { height: 38px; width: 38px; }
   .brand-name { font-size: 19px; }
-  .nav-burger { display: inline-flex; }
-  .nav-links {
-    display: none;
-    position: absolute; top: 100%; left: 12px; right: 12px; margin-top: 6px;
-    flex-direction: column; align-items: stretch; gap: 2px;
-    padding: 8px; background: var(--card); border: 1px solid var(--line-2); border-radius: 18px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a { padding: 12px; font-size: 17px; }
-  .nav-links .btn { margin: 6px 0 0; padding: 12px; font-size: 17px; }
   .hero, .about-sky { padding-top: 112px; }
-  .sky::before, .stars {
-    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 250px, transparent 470px);
-            mask-image: linear-gradient(to bottom, #000 0, #000 250px, transparent 470px);
-  }
   .section { padding: 64px 0 72px; }
   .about { padding: 56px 0 72px; }
   .offers, .field-row { grid-template-columns: minmax(0, 1fr); }
